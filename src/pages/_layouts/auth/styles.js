@@ -12,27 +12,34 @@ export const Content = styled.div`
   width: 100%;
   max-width: 500px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 7px;
+  flex: 1;
   height: 100%;
-  margin: 0 10px;
 
   img {
     width: 150px;
   }
 
-  div {
+  > div {
     background: #fff;
-    border-radius: 10px;
+    border-radius: 10px 10px 0 0;
     padding-top: 15px;
+    height: 100%;
 
     h1 {
       color: #22d6bc;
       font-size: 34px;
+      margin-top: 10px;
     }
 
     div {
       margin-bottom: 20px;
       margin-left: 30px;
       margin-right: 30px;
+      margin-top: 10px;
 
       span {
         color: rgba(0, 0, 0, 0.3);
@@ -65,7 +72,7 @@ export const Content = styled.div`
         color: #fff;
         border: 0;
         border-radius: 15px;
-        font-size: 16px;
+        font-size: 20px;
         transition: background 0.2s;
 
         &:hover {
