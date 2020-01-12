@@ -28,10 +28,11 @@ export const Content = styled.div`
     border-radius: 10px 10px 0 0;
     padding-top: 15px;
     height: 100%;
+    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.6);
 
     h1 {
       color: #22d6bc;
-      font-size: 34px;
+      font-size: 30px;
       margin-top: 10px;
     }
 
