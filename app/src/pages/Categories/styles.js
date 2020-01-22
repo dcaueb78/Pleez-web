@@ -6,6 +6,16 @@ export const Wrapper = styled.div`
   background: #ee4162;
   display: flex;
   justify-content: center;
+
+
+  #cart {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 120px;
+    background: #ee4162;
+    border-radius: 24px 24px 0 0;
+  }
 `;
 
 export const Content = styled.div`

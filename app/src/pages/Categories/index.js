@@ -20,6 +20,9 @@ export default function Categories() {
           <FoodCard name="DRINKS" alt="drinks" />
         </div>
       </Content>
+      <div id="cart">
+        testei
+      </div>
     </Wrapper>
   );
 }
