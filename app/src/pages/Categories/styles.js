@@ -1,4 +1,7 @@
 import styled from 'styled-components';
+import PerfectScrollbar from 'react-perfect-scrollbar';
+import 'react-perfect-scrollbar/dist/css/styles.css';
+
 import { darken } from 'polished';
 
 export const Wrapper = styled.div`
@@ -6,7 +9,13 @@ export const Wrapper = styled.div`
   background: #ee4162;
   display: flex;
   justify-content: center;
+`;
 
+export const Scroll = styled(PerfectScrollbar)`
+  width: 100%;
+  max-height: 90%;
+  padding-right: 28px;
+  margin-bottom: 100px;
 `;
 
 export const Content = styled.div`
@@ -25,10 +34,6 @@ export const Content = styled.div`
     width: 50px;
   }
 
-  .items {
-    width: 100%;
-  }
-
   > div {
     img {
       width: 250px;
@@ -44,7 +49,7 @@ export const Content = styled.div`
     div {
       margin-bottom: 20px;
       margin-left: 30px;
-      margin-right: 30px;
+      margin-right: 2px;
       margin-top: 10px;
     }
 

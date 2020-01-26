@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Wrapper, Content } from './styles';
+import { Wrapper, Content, Scroll } from './styles';
 import FoodCard from '~/components/FoodCard';
 import CartFooter from '~/components/CartFooter';
 
@@ -13,13 +13,16 @@ export default function Categories() {
       <Content>
         <img src={logo} alt="Pleez" />
 
-        <div className="items">
+        <Scroll>
           <img src={unclejoe} alt="Restaurante" />
           <FoodCard name="BURGUERS" alt="burguer" />
           <FoodCard name="SIDES" alt="sides" />
           <FoodCard name="DRINKS" alt="drinks" />
           <FoodCard name="DRINKS" alt="drinks" />
-        </div>
+          <FoodCard name="DRINKS" alt="drinks" />
+          <FoodCard name="DRINKS" alt="drinks" />
+          <FoodCard name="DRINKS" alt="drinks" />
+        </Scroll>
       </Content>
       <CartFooter />
     </Wrapper>
