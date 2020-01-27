@@ -3,7 +3,6 @@ import QrReader from 'react-qr-reader';
 
 import { Wrapper, Content, Scroll } from './styles';
 import logo from '~/assets/logo.png';
-import CartFooter from '~/components/CartFooter';
 
 export default function Infos() {
   const [result, setResult] = useState('No result');
@@ -42,8 +41,8 @@ export default function Infos() {
             className="QRcodeScaner"
           />
         </Scroll>
+        {result}
       </Content>
-      {/* <CartFooter /> */}
     </Wrapper>
   );
 }
