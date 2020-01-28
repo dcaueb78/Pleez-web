@@ -46,7 +46,7 @@ module.exports = {
       professional_account_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'professional_account',
+          model: 'professional_accounts',
           key: 'id'
         },
         onUpdate: 'CASCADE',
