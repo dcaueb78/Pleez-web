@@ -17,9 +17,24 @@ export default function Routes() {
       <Route path="/" exact component={SignIn} />
       <Route path="/registro" component={SignUp} />
 
-      <Route path="/categorias/:id" exact component={Categories} isPrivate />
-      <Route path="/pratos/:id/:categoria" exact component={Dish} isPrivate />
-      <Route path="/detalhes/:id/:prato" exact component={Details} isPrivate />
+      <Route
+        path="/categorias/:restaurant/"
+        exact
+        component={Categories}
+        isPrivate
+      />
+      <Route
+        path="/pratos/:restaurant/:categoria"
+        exact
+        component={Dish}
+        isPrivate
+      />
+      <Route
+        path="/detalhes/:restaurant/:prato"
+        exact
+        component={Details}
+        isPrivate
+      />
       <Route path="/basket/" exact component={Basket} isPrivate />
       <Route path="/informacoes/" exact component={Infos} isPrivate />
 
