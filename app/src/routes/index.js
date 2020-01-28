@@ -18,7 +18,7 @@ export default function Routes() {
       <Route path="/registro" component={SignUp} />
 
       <Route
-        path="/categorias/:restaurant/"
+        path="/categorias/:restaurant/:chair"
         exact
         component={Categories}
         isPrivate

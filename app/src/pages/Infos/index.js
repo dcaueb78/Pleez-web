@@ -13,7 +13,9 @@ export default function Infos() {
   function handleScan(QRCodeScannedStringifyObject) {
     if (QRCodeScannedStringifyObject) {
       const QRCodeParsedObject = JSON.parse(QRCodeScannedStringifyObject);
-      history.push(`/categorias/${QRCodeParsedObject.chair}`);
+      history.push(
+        `/categorias/${QRCodeParsedObject.restaurant}/${QRCodeParsedObject.chair}`
+      );
     }
   }
 
