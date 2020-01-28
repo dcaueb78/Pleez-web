@@ -1,6 +1,6 @@
 import React from 'react';
 import QrReader from 'react-qr-reader';
-import toast from 'react-toastify';
+import { toast } from 'react-toastify';
 
 import history from '~/services/history';
 
