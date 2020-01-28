@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
 import QrReader from 'react-qr-reader';
 
+import history from '~/services/history';
+
 import { Wrapper, Content, Scroll } from './styles';
 import logo from '~/assets/logo.png';
 
 export default function Infos() {
-  const [result, setResult] = useState('No result');
-  const [delay, setDelay] = useState(1);
+  const [delay, setDelay] = useState(500);
 
-  function handleScan(data) {
-    if (data) {
-      setResult(data);
+  function handleScan(QRCodeScannedStringifyObject) {
+    if (QRCodeScannedStringifyObject) {
+      const QRCodeParsedObject = JSON.parse(QRCodeScannedStringifyObject);
+      history.push(
+        `/categorias/${QRCodeParsedObject.restaurant}/${QRCodeParsedObject.chair}`
+      );
     }
   }
 
@@ -41,7 +45,6 @@ export default function Infos() {
             className="QRcodeScaner"
           />
         </Scroll>
-        {result}
       </Content>
     </Wrapper>
   );
