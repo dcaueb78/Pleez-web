@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import QrReader from 'react-qr-reader';
+import toast from 'react-toastify';
 
 import history from '~/services/history';
 
@@ -7,19 +8,19 @@ import { Wrapper, Content, Scroll } from './styles';
 import logo from '~/assets/logo.png';
 
 export default function Infos() {
-  const [delay, setDelay] = useState(500);
+  const QRCodeDelay = 500;
 
   function handleScan(QRCodeScannedStringifyObject) {
     if (QRCodeScannedStringifyObject) {
       const QRCodeParsedObject = JSON.parse(QRCodeScannedStringifyObject);
-      history.push(
-        `/categorias/${QRCodeParsedObject.restaurant}/${QRCodeParsedObject.chair}`
-      );
+      history.push(`/categorias/${QRCodeParsedObject.chair}`);
     }
   }
 
-  function handleError(err) {
-    console.error(err);
+  function handleQRCodeScanError() {
+    toast.error(
+      'Houve um problema na leitura do código QR, poderia tentar novamente?'
+    );
   }
 
   const previewStyle = {
@@ -38,9 +39,9 @@ export default function Infos() {
           <QrReader
             resolution={1920}
             facingMode="environment"
-            delay={delay}
+            delay={QRCodeDelay}
             style={previewStyle}
-            onError={handleError}
+            onError={handleQRCodeScanError}
             onScan={handleScan}
             className="QRcodeScaner"
           />
