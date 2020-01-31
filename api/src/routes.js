@@ -3,7 +3,7 @@ import { Router } from 'express';
 import UserController from './app/controllers/UserController';
 import SessionController from './app/controllers/SessionController';
 import ProfessionalAccount from './app/controllers/ProfessionalAccountController';
-import Restaurant from './app/controllers/RestaurantControllerController';
+import Restaurant from './app/controllers/RestaurantController';
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -16,7 +16,7 @@ routes.post('/professional-account', ProfessionalAccount.store);
 
 routes.use(authMiddleware);
 
-routes.post('/restaurant', restaurant.store);
+routes.post('/restaurant', Restaurant.store);
 
 routes.put('/users', UserController.update);
 
