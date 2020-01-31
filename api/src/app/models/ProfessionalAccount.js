@@ -9,7 +9,7 @@ class ProfessionalAccount extends Model {
         email: Sequelize.STRING,
         password: Sequelize.VIRTUAL,
         password_hash: Sequelize.STRING,
-        cnpj: Sequelize.INTEGER,
+        cnpj: Sequelize.INTEGER
       },
       {
         sequelize

@@ -1,6 +1,6 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('restaurant', {
+    return queryInterface.createTable('restaurants', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -20,7 +20,7 @@ module.exports = {
         allowNull: false
       },
       cep: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         allowNull: false
       },
       city: {
@@ -51,7 +51,7 @@ module.exports = {
         },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
-        allowNull: true,
+        allowNull: false
       },
       created_at: {
         type: Sequelize.DATE,
@@ -65,6 +65,6 @@ module.exports = {
   },
 
   down: queryInterface => {
-    return queryInterface.dropTable('restaurant');
+    return queryInterface.dropTable('restaurants');
   }
 };
