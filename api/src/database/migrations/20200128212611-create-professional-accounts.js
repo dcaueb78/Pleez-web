@@ -17,7 +17,7 @@ module.exports = {
         unique: true
       },
       cnpj: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.BIGINT,
         allowNull: false
       },
       password_hash: {
