@@ -16,15 +16,13 @@ class ProfessionalAccountController {
     });
 
     if (!(await schema.isValid(req.body))) {
-
-      console.log(req.body);
       return res.status(400).json({ error: 'Falha de validação!' });
     }
-    const ProfessionalAccontExists = await ProfessionalAccont.findOne({
+    const professionalAccontExists = await ProfessionalAccont.findOne({
       where: { email: req.body.email }
     });
 
-    if (ProfessionalAccontExists) {
+    if (professionalAccontExists) {
       return res.status(400).json({ error: 'Email já cadastrado.' });
     }
 
