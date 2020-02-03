@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 import authConfig from '../../config/auth';
 import User from '../models/User';
 
-class SessionController {
+class ClientSessionController {
   async store(req, res) {
     const schema = Yup.object().shape({
       email: Yup.string()
@@ -44,4 +44,4 @@ class SessionController {
   }
 }
 
-export default new SessionController();
+export default new ClientSessionController();
