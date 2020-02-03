@@ -2,22 +2,32 @@ import { Router } from 'express';
 
 import UserController from './app/controllers/UserController';
 import ClientSessionController from './app/controllers/ClientSessionController';
-import ProfessionalAccount from './app/controllers/ProfessionalAccountController';
-import Restaurant from './app/controllers/RestaurantController';
+import ProfessionalAccountController from './app/controllers/ProfessionalAccountController';
+import ProfessionalAccountSessionController from './app/controllers/ProfessionalAccountSessionController';
+import RestaurantController from './app/controllers/RestaurantController';
 
-import authMiddleware from './app/middlewares/auth';
+import UserAuthMiddleware from './app/middlewares/authUser';
+import ProfessionalAccountAuthMiddleware from './app/middlewares/authProfessionalAccount';
 
 const routes = new Router();
 
 routes.post('/users', UserController.store);
 routes.post('/sessions', ClientSessionController.store);
 
-routes.post('/professional-account', ProfessionalAccount.store);
+routes.post('/professional-account', ProfessionalAccountController.store);
+routes.post(
+  '/professional-account/session',
+  ProfessionalAccountSessionController.store
+);
 
-routes.use(authMiddleware);
+routes.put('/users', UserAuthMiddleware, UserController.update);
 
-routes.post('/restaurant', Restaurant.store);
+routes.post(
+  '/restaurant',
+  ProfessionalAccountAuthMiddleware,
+  RestaurantController.store
+);
 
-routes.put('/users', UserController.update);
+routes.use(UserAuthMiddleware);
 
 export default routes;
