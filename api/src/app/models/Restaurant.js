@@ -6,13 +6,13 @@ class Restaurant extends Model {
       {
         social_reason: Sequelize.STRING,
         name: Sequelize.STRING,
-        telephone: Sequelize.INTEGER,
-        cep: Sequelize.INTEGER,
+        telephone: Sequelize.BIGINT,
+        cep: Sequelize.BIGINT,
         city: Sequelize.STRING,
         state: Sequelize.STRING,
         neighborhood: Sequelize.STRING,
         addres: Sequelize.STRING,
-        number: Sequelize.INTEGER
+        number: Sequelize.BIGINT
       },
       {
         sequelize
