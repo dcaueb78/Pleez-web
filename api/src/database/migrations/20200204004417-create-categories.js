@@ -16,7 +16,7 @@ module.exports = {
         allowNull: false
       },
       price: {
-        type: Sequelize.BOOLEAN,
+        type: Sequelize.DOUBLE,
         allowNull: false
       },
       restaurant_id: {

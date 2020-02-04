@@ -2,9 +2,10 @@ import { Router } from 'express';
 
 import UserController from './app/controllers/UserController';
 import ClientSessionController from './app/controllers/ClientSessionController';
-import ProfessionalAccountController from './app/controllers/ProfessionalAccountController';
 import ProfessionalAccountSessionController from './app/controllers/ProfessionalAccountSessionController';
+import ProfessionalAccountController from './app/controllers/ProfessionalAccountController';
 import RestaurantController from './app/controllers/RestaurantController';
+import CategoryController from './app/controllers/CategoryController';
 
 import UserAuthMiddleware from './app/middlewares/authUser';
 import ProfessionalAccountAuthMiddleware from './app/middlewares/authProfessionalAccount';
@@ -27,8 +28,16 @@ routes.post(
   ProfessionalAccountAuthMiddleware,
   RestaurantController.store
 );
-
-routes.get('/restaurant', ProfessionalAccountAuthMiddleware, RestaurantController.index);
+routes.get(
+  '/restaurant',
+  ProfessionalAccountAuthMiddleware,
+  RestaurantController.index
+);
+routes.post(
+  '/category',
+  ProfessionalAccountAuthMiddleware,
+  CategoryController.store
+);
 
 routes.use(UserAuthMiddleware);
 
