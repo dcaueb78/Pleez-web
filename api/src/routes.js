@@ -28,6 +28,8 @@ routes.post(
   RestaurantController.store
 );
 
+routes.get('/restaurant', ProfessionalAccountAuthMiddleware, RestaurantController.index);
+
 routes.use(UserAuthMiddleware);
 
 export default routes;

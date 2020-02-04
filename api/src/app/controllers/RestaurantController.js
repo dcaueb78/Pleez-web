@@ -2,6 +2,19 @@ import * as Yup from 'yup';
 import Restaurant from '../models/Restaurant';
 
 class RestaurantController {
+  async index(req, res) {
+    const { page = 1 } = req.query;
+
+    const restaurants = await Restaurant.findAll({
+      where: { professional_account_id: req.accountId },
+      order: ['createdAt'],
+      limit: 10,
+      offset: (page - 1) * 20
+    });
+
+    return res.json(restaurants);
+  }
+
   async store(req, res) {
     const schema = Yup.object().shape({
       social_reason: Yup.string().required(),
@@ -12,7 +25,7 @@ class RestaurantController {
       state: Yup.string().required(),
       neighborhood: Yup.string().required(),
       addres: Yup.string().required(),
-      number: Yup.number(),
+      number: Yup.number()
     });
 
     if (!(await schema.isValid(req.body))) {
