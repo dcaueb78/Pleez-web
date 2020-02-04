@@ -16,11 +16,11 @@ module.exports = {
         allowNull: false
       },
       telephone: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.BIGINT,
         allowNull: false
       },
       cep: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.BIGINT,
         allowNull: false
       },
       city: {
@@ -40,7 +40,7 @@ module.exports = {
         allowNull: false
       },
       number: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.BIGINT,
         allowNull: true
       },
       professional_account_id: {
