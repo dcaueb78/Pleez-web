@@ -5,7 +5,7 @@ class Order extends Model {
     super.init(
       {
         status: Sequelize.INTEGER,
-        TotalPrice: Sequelize.DOUBLE,
+        total_price: Sequelize.DOUBLE,
         is_available: Sequelize.BOOLEAN,
       },
       {
@@ -20,12 +20,6 @@ class Order extends Model {
     this.belongsTo(models.Restaurant, {
       foreignKey: 'restaurant_id'
     });
-
-    this.belongsTo(models.Dish, {
-      foreignKey: 'dish_id'
-    })
-
-    this.hasMany(models.Dish);
   }
 }
 

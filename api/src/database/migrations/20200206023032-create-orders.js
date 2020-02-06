@@ -21,16 +21,6 @@ module.exports = {
         onDelete: 'SET NULL',
         allowNull: false
       },
-      dish_id: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'dishes',
-          key: 'id'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
-        allowNull: false,
-      },
       status: {
         type: Sequelize.INTEGER,
         allowNull: false,

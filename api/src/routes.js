@@ -7,6 +7,7 @@ import ProfessionalAccountController from './app/controllers/ProfessionalAccount
 import RestaurantController from './app/controllers/RestaurantController';
 import CategoryController from './app/controllers/CategoryController';
 import DishController from './app/controllers/DishController';
+import OrderController from './app/controllers/OrderController';
 
 import UserAuthMiddleware from './app/middlewares/authUser';
 import ProfessionalAccountAuthMiddleware from './app/middlewares/authProfessionalAccount';
@@ -55,6 +56,12 @@ routes.post(
   '/dish',
   ProfessionalAccountAuthMiddleware,
   DishController.store
+);
+
+routes.post(
+  '/order',
+  ProfessionalAccountAuthMiddleware,
+  OrderController.store
 );
 
 routes.use(UserAuthMiddleware);
