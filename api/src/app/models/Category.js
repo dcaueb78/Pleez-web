@@ -5,8 +5,7 @@ class Category extends Model {
     super.init(
       {
         name: Sequelize.STRING,
-        details: Sequelize.STRING,
-        price: Sequelize.DOUBLE
+        is_available: Sequelize.BOOLEAN,
       },
       {
         sequelize

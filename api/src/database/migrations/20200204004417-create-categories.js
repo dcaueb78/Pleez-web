@@ -11,14 +11,6 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      details: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      price: {
-        type: Sequelize.DOUBLE,
-        allowNull: false
-      },
       restaurant_id: {
         type: Sequelize.INTEGER,
         references: {
@@ -28,6 +20,10 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
         allowNull: false
+      },
+      is_available: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
       },
       created_at: {
         type: Sequelize.DATE,

@@ -9,8 +9,6 @@ class CategoryController {
   async store(req, res) {
     const schema = Yup.object().shape({
       name: Yup.string().required(),
-      details: Yup.string().required(),
-      price: Yup.number().required(),
       restaurant_id: Yup.number().required()
     });
 
@@ -19,7 +17,8 @@ class CategoryController {
     }
 
     const { id, name } = await Category.create({
-      ...req.body
+      ...req.body,
+      is_available: true
     });
 
     return res.status(200).json({ id, name });
