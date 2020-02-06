@@ -39,6 +39,12 @@ routes.post(
   ProfessionalAccountAuthMiddleware,
   CategoryController.store
 );
+
+routes.get(
+  '/dish',
+  ProfessionalAccountAuthMiddleware,
+  DishController.index
+);
 routes.post(
   '/dish',
   ProfessionalAccountAuthMiddleware,
