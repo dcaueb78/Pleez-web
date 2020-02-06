@@ -7,6 +7,7 @@ class Order extends Model {
         status: Sequelize.INTEGER,
         total_price: Sequelize.DOUBLE,
         is_available: Sequelize.BOOLEAN,
+        comment: Sequelize.TEXT,
       },
       {
         sequelize

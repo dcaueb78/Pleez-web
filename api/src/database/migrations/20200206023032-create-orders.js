@@ -21,6 +21,10 @@ module.exports = {
         onDelete: 'SET NULL',
         allowNull: false
       },
+      comment: {
+        type: Sequelize.TEXT,
+        allowNull: false,
+      },
       status: {
         type: Sequelize.INTEGER,
         allowNull: false,
