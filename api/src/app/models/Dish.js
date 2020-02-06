@@ -28,4 +28,4 @@ class Dish extends Model {
   }
 }
 
-export default Dsh;
+export default Dish;
