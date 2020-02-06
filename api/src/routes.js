@@ -34,10 +34,16 @@ routes.get(
   ProfessionalAccountAuthMiddleware,
   RestaurantController.index
 );
+
 routes.post(
   '/category',
   ProfessionalAccountAuthMiddleware,
   CategoryController.store
+);
+routes.get(
+  '/category',
+  ProfessionalAccountAuthMiddleware,
+  CategoryController.index
 );
 
 routes.get(
