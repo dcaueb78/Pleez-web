@@ -33,3 +33,13 @@ services:
       - POSTGRES_DB=pleez
       - POSTGRES_USER=pleez
       - POSTGRES_PASSWORD=pleez
+  mongodb:
+    image: mongo:latest
+    container_name: pleez_db_mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - ~/Desktop/pleez/database:/data/db
+    environment: 
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
