@@ -1,19 +1,20 @@
 import Sequelize from 'sequelize';
+import mongoose from 'mongoose';
 
 import User from '../app/models/User';
 import ProfessionalAccount from '../app/models/ProfessionalAccount';
 import Restaurant from '../app/models/Restaurant';
 import Category from '../app/models/Category';
 import Dish from '../app/models/Dish';
-import Order from '../app/models/Order';
 
 import databaseConfig from '../config/database';
 
-const models = [User, ProfessionalAccount, Restaurant, Category, Dish, Order];
+const models = [User, ProfessionalAccount, Restaurant, Category, Dish];
 
 class Database {
   constructor() {
     this.init();
+    this.mongo();
   }
 
   init() {
@@ -22,6 +23,13 @@ class Database {
     models
       .map(model => model.init(this.connection))
       .map(model => model.associate && model.associate(this.connection.models));
+  }
+
+  mongo() {
+    this.mongoConnection = mongoose.connect('mongodb://mongodb:27017/pleez', {
+      useNewUrlParser: true,
+      useFindAndModify: true
+    });
   }
 }
 

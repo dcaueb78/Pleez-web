@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import Order from '../models/Order';
+import Order from '../schemas/Order';
 
 class OrderController {
   async index(req, res) {
@@ -16,13 +16,11 @@ class OrderController {
       return res.status(400).json({ error: 'Falha de validação!' });
     }
 
-    console.log(req.body);
-    const { id, name } = await Order.create({
+    const { id, status } = await Order.create({
       ...req.body,
-      status: 0
     });
 
-    return res.status(200).json({ id, name });
+    return res.status(200).json({ id, status });
   }
 }
 
