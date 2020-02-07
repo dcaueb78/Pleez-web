@@ -33,7 +33,7 @@ routes.post(
 routes.get(
   '/restaurant',
   ProfessionalAccountAuthMiddleware,
-  RestaurantController.index
+  RestaurantController.indexAll
 );
 
 routes.post(
@@ -44,13 +44,13 @@ routes.post(
 routes.get(
   '/category',
   ProfessionalAccountAuthMiddleware,
-  CategoryController.index
+  CategoryController.indexAll
 );
 
 routes.get(
   '/dish',
   ProfessionalAccountAuthMiddleware,
-  DishController.index
+  DishController.indexAll
 );
 routes.post(
   '/dish',
@@ -62,6 +62,10 @@ routes.post(
   '/order',
   ProfessionalAccountAuthMiddleware,
   OrderController.store
+);
+routes.get(
+  '/order/:userId',
+  OrderController.index
 );
 
 routes.use(UserAuthMiddleware);

@@ -2,7 +2,7 @@ import * as Yup from 'yup';
 import Category from '../models/Category';
 
 class CategoryController {
-  async index(req, res) {
+  async indexAll(req, res) {
     const { page = 1 } = req.query;
 
     const schema = Yup.object().shape({
