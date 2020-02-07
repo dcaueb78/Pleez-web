@@ -1,6 +1,14 @@
 import mongoose from 'mongoose';
 
 const OrderSchema = new mongoose.Schema({
+  user_id: {
+    type: Number,
+    required: true,
+  },
+  restaurant_id: {
+    type: Number,
+    required: true,
+  },
   status: {
     type: Number,
     required: true,
