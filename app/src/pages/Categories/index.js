@@ -49,7 +49,7 @@ export default function Categories({ match }) {
         <Scroll>
           {/* <h1>{restaurantName}</h1> */}
           <img src={unclejoe} alt="Restaurante" />
-
+          <h2>Categorias</h2>
           {categories.length > 0 ? (
             <>
               {categories.map(category => (
@@ -62,7 +62,7 @@ export default function Categories({ match }) {
               ))}
             </>
           ) : (
-            <h1>Não possui categorias!</h1>
+            <div/>
           )}
         </Scroll>
       </Content>
