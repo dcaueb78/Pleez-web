@@ -53,7 +53,7 @@ export default function Categories({ match }) {
         <Scroll>
           {/* <h1>{restaurantName}</h1> */}
           <img src={unclejoe} alt="Restaurante" />
-          <h2>Pratos</h2>
+          <h2>Nome da categoria</h2>
           {dishes.length > 0 ? (
             <>
               {dishes.map(dish => (
