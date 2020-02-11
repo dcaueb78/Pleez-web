@@ -28,7 +28,7 @@ const OrderSchema = new mongoose.Schema({
     required: true,
   },
   dish: {
-    type: [Number],
+    type: Array,
     required: true,
   },
   chair: {
