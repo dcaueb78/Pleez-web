@@ -8,6 +8,7 @@ import api from '~/services/api';
 import history from '~/services/history';
 import { toast } from 'react-toastify';
 
+import { MdArrowBack } from 'react-icons/md';
 import logo from '~/assets/logo.png';
 import unclejoe from '~/assets/unclejoe.png';
 
@@ -45,11 +46,14 @@ export default function Categories({ match }) {
   return (
     <Wrapper>
       <Content>
+        <button onClick={history.goBack}>
+          <MdArrowBack size={32} color="white"/>
+        </button>
         <img src={logo} alt="Pleez" />
         <Scroll>
           {/* <h1>{restaurantName}</h1> */}
           <img src={unclejoe} alt="Restaurante" />
-
+          <h2>Pratos</h2>
           {dishes.length > 0 ? (
             <>
               {dishes.map(dish => (
