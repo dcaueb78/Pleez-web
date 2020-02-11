@@ -2,7 +2,7 @@ import * as Yup from 'yup';
 import Restaurant from '../models/Restaurant';
 
 class RestaurantController {
-  async indexAll(req, res) {
+  async index(req, res) {
     const { page = 1 } = req.query;
 
     const restaurants = await Restaurant.findAll({
