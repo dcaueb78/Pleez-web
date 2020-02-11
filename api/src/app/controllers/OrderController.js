@@ -26,18 +26,19 @@ class OrderController {
       dish: Yup.array().required(),
       total_price: Yup.number().required(),
       restaurant_id: Yup.number().required(),
-      user_id: Yup.number().required()
+      user_id: Yup.number().required(),
+      chair: Yup.number().required()
     });
 
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({ error: 'Falha de validação!' });
     }
 
-    const { id, status } = await Order.create({
+    const { id, status, chair } = await Order.create({
       ...req.body
     });
 
-    return res.status(200).json({ id, status });
+    return res.status(200).json({ id, status, chair });
   }
 }
 

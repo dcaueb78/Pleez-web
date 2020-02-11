@@ -30,6 +30,10 @@ const OrderSchema = new mongoose.Schema({
   dish: {
     type: [Number],
     required: true,
+  },
+  chair: {
+    type: Number,
+    required: true,
   }
 }, {
   timestamps: true,
