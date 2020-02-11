@@ -2,20 +2,20 @@ import * as Yup from 'yup';
 import Dish from '../models/Dish';
 
 class DishController {
-  async indexAll(req, res) {
+  async index(req, res) {
     const { page = 1 } = req.query;
 
     const schema = Yup.object().shape({
       category_id: Yup.number().required()
     });
 
-    if (!(await schema.isValid(req.body))) {
+    if (!(await schema.isValid(req.params))) {
       return res.status(400).json({ error: 'Falha de validação!' });
     }
 
     const dishes = await Dish.findAll({
       where: {
-        category_id: req.body.category_id
+        category_id: req.params.category_id
       },
       order: ['createdAt'],
       limit: 10,
