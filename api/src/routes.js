@@ -69,11 +69,11 @@ routes.get(
 
 routes.post(
   '/order',
-  ProfessionalAccountAuthMiddleware,
   OrderController.store
 );
 routes.get(
   '/order/:userId',
+  UserAuthMiddleware,
   OrderController.index
 );
 
