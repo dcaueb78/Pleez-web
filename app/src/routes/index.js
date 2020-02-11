@@ -24,18 +24,18 @@ export default function Routes() {
         isPrivate
       />
       <Route
-        path="/pratos/:restaurant/:categoria"
+        path="/pratos/:restaurant/:category"
         exact
         component={Dish}
         isPrivate
       />
       <Route
-        path="/detalhes/:restaurant/:prato"
+        path="/detalhes/:restaurant/:dish"
         exact
         component={Details}
         isPrivate
       />
-      <Route path="/basket/" exact component={Basket} isPrivate />
+      <Route path="/comanda/" exact component={Basket} isPrivate />
       <Route path="/informacoes/" exact component={Infos} isPrivate />
 
       <Route path="/" component={() => <h1>404</h1>} />
