@@ -5,8 +5,10 @@ import ClientSessionController from './app/controllers/ClientSessionController';
 import ProfessionalAccountSessionController from './app/controllers/ProfessionalAccountSessionController';
 import ProfessionalAccountController from './app/controllers/ProfessionalAccountController';
 import RestaurantController from './app/controllers/RestaurantController';
+import UserRestaurantController from './app/controllers/UserRestaurantController';
 import CategoryController from './app/controllers/CategoryController';
 import DishController from './app/controllers/DishController';
+import DishDetailsController from './app/controllers/DishDetailsController';
 import OrderController from './app/controllers/OrderController';
 
 import UserAuthMiddleware from './app/middlewares/authUser';
@@ -33,7 +35,12 @@ routes.post(
 routes.get(
   '/restaurant',
   ProfessionalAccountAuthMiddleware,
-  RestaurantController.indexAll
+  RestaurantController.index
+);
+
+routes.get(
+  '/restaurant/:restaurant_id',
+  UserRestaurantController.index
 );
 
 routes.post(
@@ -42,20 +49,22 @@ routes.post(
   CategoryController.store
 );
 routes.get(
-  '/category',
-  ProfessionalAccountAuthMiddleware,
-  CategoryController.indexAll
+  '/category/:restaurant_id',
+  CategoryController.index
 );
 
 routes.get(
-  '/dish',
-  ProfessionalAccountAuthMiddleware,
-  DishController.indexAll
+  '/dish/:category_id',
+  DishController.index
 );
 routes.post(
   '/dish',
   ProfessionalAccountAuthMiddleware,
   DishController.store
+);
+routes.get(
+  '/dish-details/:dish_id',
+  DishDetailsController.index
 );
 
 routes.post(
