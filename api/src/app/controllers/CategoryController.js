@@ -2,19 +2,19 @@ import * as Yup from 'yup';
 import Category from '../models/Category';
 
 class CategoryController {
-  async indexAll(req, res) {
+  async index(req, res) {
     const { page = 1 } = req.query;
 
     const schema = Yup.object().shape({
       restaurant_id: Yup.number().required()
     });
 
-    if (!(await schema.isValid(req.body))) {
+    if (!(await schema.isValid(req.params))) {
       return res.status(400).json({ error: 'Falha de validação!' });
     }
 
     const categories = await Category.findAll({
-      where: { restaurant_id: req.body.restaurant_id },
+      where: { restaurant_id: req.params.restaurant_id },
       order: ['createdAt'],
       limit: 10,
       offset: (page - 1) * 20
