@@ -39,6 +39,8 @@ export default function Details({ match }) {
           <FoodImage/>
           <h3>Descrição:</h3>
           <p>{dishDetails.details}</p>
+          <h3>Alguma observação?</h3>
+          <textarea placeholder="Ex: Sem cebola..."/>
         </Scroll>
       </Content>
       <CartFooter />

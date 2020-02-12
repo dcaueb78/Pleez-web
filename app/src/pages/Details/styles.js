@@ -60,12 +60,13 @@ export const Content = styled.div`
     h1 {
       text-align: center;
       color: #6c6c6c;
-
     }
 
     h3 {
       text-align: left;
       color: #6c6c6c;
+      margin-top: 15px;
+      margin-bottom: 15px;
     }
 
     div {
@@ -80,7 +81,18 @@ export const Content = styled.div`
       border-radius: 10px;
       padding: 10px;
       text-align: justify;
-      color: #9a9698;
+      color: #7D7979;
+    }
+
+    textarea {
+      width: 100%;
+      height: 100px;
+      resize: none;
+      padding: 10px;
+      border: #ee4162 2px solid;
+      border-radius: 10px;
+      color: #7D7979;
+
     }
   }
 `;
