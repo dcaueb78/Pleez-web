@@ -11,7 +11,8 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   color: white;
-  background-image: url('https://img.elo7.com.br/product/zoom/22565B3/adesivo-parede-prato-comida-frango-salada-restaurante-lindo-adesivo-parede.jpg');
+  background: red;
+  /* background-image: url('https://img.elo7.com.br/product/zoom/22565B3/adesivo-parede-prato-comida-frango-salada-restaurante-lindo-adesivo-parede.jpg'); */
 
   background-repeat: no-repeat;
   background-size: 100% 100%;

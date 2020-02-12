@@ -35,8 +35,10 @@ export default function Details({ match }) {
         </button>
         <img src={logo} alt="Pleez" />
         <Scroll>
-          <h2>{dishDetails.name}</h2>
+          <h1>{dishDetails.name}</h1>
           <FoodImage/>
+          <h3>Descrição:</h3>
+          <p>{dishDetails.details}</p>
         </Scroll>
       </Content>
       <CartFooter />

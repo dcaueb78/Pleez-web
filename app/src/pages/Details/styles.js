@@ -50,18 +50,37 @@ export const Content = styled.div`
   }
 
   > div {
-
     background: #fff;
     border-radius: 10px 10px 0 0;
     padding-top: 15px;
     height: 100%;
     box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.6);
+    padding-left: 30px;
+
+    h1 {
+      text-align: center;
+      color: #6c6c6c;
+
+    }
+
+    h3 {
+      text-align: left;
+      color: #6c6c6c;
+    }
 
     div {
       margin-bottom: 20px;
-      margin-left: 30px;
       margin-right: 2px;
       margin-top: 10px;
+    }
+
+    p {
+      margin-top: 10px;
+      border: #ee4162 2px solid;
+      border-radius: 10px;
+      padding: 10px;
+      text-align: justify;
+      color: #9a9698;
     }
   }
 `;
