@@ -29,7 +29,7 @@ export const Content = styled.div`
   flex: 1;
   height: 100%;
 
-  button {
+  > button {
     position: absolute;
     left: 10px;
     top: 10px;
@@ -67,6 +67,7 @@ export const Content = styled.div`
       color: #6c6c6c;
       margin-top: 15px;
       margin-bottom: 15px;
+      margin-top: 20px;
     }
 
     div {
@@ -81,7 +82,7 @@ export const Content = styled.div`
       border-radius: 10px;
       padding: 10px;
       text-align: justify;
-      color: #7D7979;
+      color: #7d7979;
     }
 
     textarea {
@@ -91,8 +92,34 @@ export const Content = styled.div`
       padding: 10px;
       border: #ee4162 2px solid;
       border-radius: 10px;
-      color: #7D7979;
+      color: #7d7979;
+    }
+    .quantity {
+      margin-top: 15px;
+      display: flex;
+      justify-content: space-around;
 
+      button {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+
+        background: none;
+        color: inherit;
+        border: #ee4162 2px solid;
+        padding: 0;
+        font: inherit;
+        cursor: pointer;
+        outline: inherit;
+      }
+
+      input {
+        background: none;
+        border: none;
+        font: inherit;
+        width: 50px;
+        text-align: center;
+      }
     }
   }
 `;
