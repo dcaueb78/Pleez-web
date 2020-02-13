@@ -50,7 +50,7 @@ export default function Details({ match }) {
   }
 
   function handleAddToCart() {
-    dispatch(addToCart({ dishId, dishQuantity }));
+    dispatch(addToCart({ dishId, dishQuantity, dishComment }));
   }
 
   return (
