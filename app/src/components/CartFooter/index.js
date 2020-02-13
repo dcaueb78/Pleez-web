@@ -1,13 +1,16 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import { Container } from './styles';
 import cartIcon from '~/assets/icons/CartIcon.png';
 
 export default function CartFooter() {
+  const cartQuantity = useSelector(state => state.cart.quantity);
+
   return (
     <Container id="cart">
       <div>
-        <h1>0</h1>
+        <h1>{cartQuantity}</h1>
       </div>
       <div>
         <div>
