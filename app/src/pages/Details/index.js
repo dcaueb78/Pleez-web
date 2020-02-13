@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { addToCart } from '~/store/modules/cart/actions';
+import { addToBasket } from '~/store/modules/basket/actions';
 import api from '~/services/api';
 import history from '~/services/history';
 import { formatPrice } from '~/utils/format';
 
-import { Wrapper, Content, Scroll, foodImageCard } from './styles';
+import { Wrapper, Content, Scroll } from './styles';
 import FoodImage from '~/components/FoodImage';
 import AddToCartFooter from '~/components/AddToCartFooter';
 
@@ -49,8 +49,8 @@ export default function Details({ match }) {
     setDishQuantity(dishQuantity + 1);
   }
 
-  function handleAddToCart() {
-    dispatch(addToCart({ dishId, dishQuantity, dishComment }));
+  function handleAddToBasket() {
+    dispatch(addToBasket({ dishId, dishQuantity, dishComment }));
   }
 
   return (
@@ -79,7 +79,7 @@ export default function Details({ match }) {
           </div>
         </Scroll>
       </Content>
-      <AddToCartFooter subTotal={subTotal} addToCart={handleAddToCart} />
+      <AddToCartFooter subTotal={subTotal} addToCart={handleAddToBasket} />
     </Wrapper>
   );
 }

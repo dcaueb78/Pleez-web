@@ -2,8 +2,6 @@ import styled from 'styled-components';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 
-import { darken } from 'polished';
-
 export const Wrapper = styled.div`
   height: 100%;
   background: #ee4162;

@@ -5,12 +5,12 @@ import { Container } from './styles';
 import cartIcon from '~/assets/icons/CartIcon.png';
 
 export default function CartFooter() {
-  const cartQuantity = useSelector(state => state.cart.quantity);
+  const basketQuantity = useSelector(state => state.basket.quantity);
 
   return (
     <Container id="cart">
       <div>
-        <h1>{cartQuantity}</h1>
+        <h1>{basketQuantity}</h1>
       </div>
       <div>
         <div>
