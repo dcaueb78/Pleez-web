@@ -4,10 +4,11 @@ import { useDispatch } from 'react-redux';
 import { addToCart } from '~/store/modules/cart/actions';
 import api from '~/services/api';
 import history from '~/services/history';
+import { formatPrice } from '~/utils/format';
 
 import { Wrapper, Content, Scroll, foodImageCard } from './styles';
 import FoodImage from '~/components/FoodImage';
-import CartFooter from '~/components/CartFooter';
+import AddToCartFooter from '~/components/AddToCartFooter';
 
 import { MdArrowBack } from 'react-icons/md';
 import logo from '~/assets/logo.png';
@@ -32,6 +33,8 @@ export default function Details({ match }) {
     findDishDetails(dish);
   }, []);
 
+  const subTotal = formatPrice(dishDetails.price * dishQuantity);
+
   function handleCommentChange(event) {
     setDishComment(event.target.value);
   }
@@ -44,6 +47,10 @@ export default function Details({ match }) {
 
   function handleDishQuantitySum() {
     setDishQuantity(dishQuantity + 1);
+  }
+
+  function handleAddToCart() {
+    dispatch(addToCart({ dishId, dishQuantity }));
   }
 
   return (
@@ -70,16 +77,9 @@ export default function Details({ match }) {
             <input type="number" placeholder={dishQuantity} disabled />
             <button onClick={handleDishQuantitySum}>+</button>
           </div>
-          <button
-            onClick={() => {
-              dispatch(addToCart({ dishId, dishQuantity }));
-            }}
-          >
-            clica
-          </button>
         </Scroll>
       </Content>
-      <CartFooter />
+      <AddToCartFooter subTotal={subTotal} addToCart={handleAddToCart} />
     </Wrapper>
   );
 }
