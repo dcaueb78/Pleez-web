@@ -79,7 +79,7 @@ export default function Details({ match }) {
           </div>
         </Scroll>
       </Content>
-      <AddToCartFooter subTotal={subTotal} addToCart={handleAddToBasket} />
+      <AddToCartFooter subTotal={subTotal} addToBasket={handleAddToBasket} />
     </Wrapper>
   );
 }
