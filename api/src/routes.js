@@ -62,7 +62,11 @@ routes.post(
   ProfessionalAccountAuthMiddleware,
   DishController.store
 );
-routes.get(
+routes.post(
+  '/dishes-details/',
+  DishDetailsController.indexAll
+);
+routes.post(
   '/dish-details/:dish_id',
   DishDetailsController.index
 );
