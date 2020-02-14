@@ -64,7 +64,7 @@ routes.post(
 );
 routes.post(
   '/dishes-details/',
-  DishDetailsController.indexAll
+  DishDetailsController.indexAllById
 );
 routes.post(
   '/dish-details/:dish_id',

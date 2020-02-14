@@ -20,7 +20,7 @@ class DishDetailsController {
     return res.json(dishDetails);
   }
 
-  async indexAll(req, res) {
+  async indexAllById(req, res) {
     const schema = Yup.object().shape({
       dishes_id: Yup.array().required()
     });
