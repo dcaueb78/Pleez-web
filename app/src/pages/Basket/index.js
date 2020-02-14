@@ -19,16 +19,16 @@ export default function Basket() {
 
   useEffect(() => {
     async function loadBasketDishInfo() {
-      const complete = await basket.map(dish => {
-        return { ...dish, name: 'oi' };
-      });
-      console.log(complete);
-      setCompleteBasket(complete);
+      const idList = await basket.map(dish => (dish.dishId));
+
+      const basketDetails = await api.post('/dishes-details', {
+        dishes_id: idList
+      })
+      setCompleteBasket(basketDetails.data);
+      console.log(basketDetails.data);
     }
     loadBasketDishInfo();
   }, [basket]);
-
-  // console.log(basket);
   return (
     <Wrapper>
       <Content>
