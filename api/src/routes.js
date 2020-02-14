@@ -66,7 +66,7 @@ routes.post(
   '/dishes-details/',
   DishDetailsController.indexAllById
 );
-routes.post(
+routes.get(
   '/dish-details/:dish_id',
   DishDetailsController.index
 );
