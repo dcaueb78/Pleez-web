@@ -57,12 +57,48 @@ export const Scroll = styled(PerfectScrollbar)`
   margin-top: 20px;
   width: 100%;
   height: 100%;
-  padding-right: 28px;
   display: flex;
   flex-direction: column;
 
   border: 2px solid #ffffff;
   border-radius: 12px;
+  padding: 15px 20px 0 20px;
+
+  > div {
+    border-bottom: 2px solid #eee;
+    > div:first-child {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      justify-content: flex-start;
+      h2 {
+        font-size: 35px;
+        font-weight: 600;
+        margin-right: 10px;
+      }
+      > p {
+        margin-left: 10px;
+        font-size: 24px;
+      }
+    }
+    p {
+      b {
+        font-size: 18px;
+        font-weight: 600;
+      }
+
+      span {
+        font-size: 18px;
+        font-weight: lighter;
+      }
+    }
+    div {
+      display: flex;
+      justify-content: flex-end;
+    }
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+  }
 `;
 
 export const Content = styled.div`

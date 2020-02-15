@@ -19,13 +19,21 @@ export default function Basket() {
 
   useEffect(() => {
     async function loadBasketDishInfo() {
-      const idList = await basket.map(dish => (dish.dishId));
+      const idList = await basket.map(dish => dish.dishId);
 
-      const basketDetails = await api.post('/dishes-details', {
-        dishes_id: idList
-      })
-      setCompleteBasket(basketDetails.data);
-      console.log(basketDetails.data);
+      const getBasketDetailsByIds = await api.post('/dishes-details', {
+        dishes_id: idList,
+      });
+
+      const getCompleteBasketDishDetailsWithQuantity = await getBasketDetailsByIds.data.map(
+        (dish, index) => ({
+          ...dish,
+          quantity: basket[index].dishQuantity,
+          comment: basket[index].dishComment
+        })
+      );
+      setCompleteBasket(getCompleteBasketDishDetailsWithQuantity);
+      console.log(basket);
     }
     loadBasketDishInfo();
   }, [basket]);
@@ -45,7 +53,26 @@ export default function Basket() {
             <img src={cartIcon} alt="Cart" />
           </div>
         </header>
-        <Scroll></Scroll>
+        <Scroll>
+          {completeBasket.map(dish => (
+            <div key={dish.id}>
+              <div>
+                <h2>{dish.quantity}x</h2>
+                <p>{dish.name}</p>
+              </div>
+              <p>
+                <b>Observação: </b>
+                <span>{dish.comment === '' ? 'Nenhuma' : dish.comment}</span>
+              </p>
+              <div>
+                <p>
+                  <span>Valor: </span>
+                  <b>R$ 24,00 </b>
+                </p>
+              </div>
+            </div>
+          ))}
+        </Scroll>
         <footer>
           <button>Fazer o pedido</button>
         </footer>
