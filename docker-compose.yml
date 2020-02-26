@@ -3,24 +3,27 @@ services:
   app:
     build:
       context: app
-      dockerfile: docker/app.Dockerfile
+      dockerfile: app.Dockerfile
     container_name: pleez_reactjs
     ports:
       - 80:3000
     volumes:
-      - ~/Desktop/pleez/app:/var/www/html/app
+      - ./app:/usr/app
     depends_on:
       - api
   api:
     build:
       context: api
-      dockerfile: docker/api.Dockerfile
+      dockerfile: api.Dockerfile
     container_name: pleez_nodejs
     ports:
       - 3333:3333
     volumes:
-      - ~/Desktop/pleez/api:/var/www/html/api
+      - ./api:/usr/app
     links:
+      - postgresql
+    depends_on:
+      - mongodb
       - postgresql
   postgresql:
     image: postgres:9.4
@@ -28,7 +31,7 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - ~/Desktop/pleez/database:/data/db
+      - ./database/postgresql:/data/db
     environment: 
       - POSTGRES_DB=pleez
       - POSTGRES_USER=pleez
@@ -39,7 +42,7 @@ services:
     ports:
       - 27017:27017
     volumes:
-      - ~/Desktop/pleez/database:/data/db
+      - ./database/mongodb:/data/db
     environment: 
       - MONGO_DATA_DIR=/data/db
       - MONGO_LOG_DIR=/dev/null
