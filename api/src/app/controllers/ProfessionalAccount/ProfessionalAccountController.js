@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import ProfessionalAccont from '../models/ProfessionalAccount';
+import ProfessionalAccont from '../../models/ProfessionalAccount';
 
 class ProfessionalAccountController {
   async store(req, res) {

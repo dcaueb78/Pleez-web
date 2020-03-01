@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import Restaurant from '../models/Restaurant';
+import Restaurant from '../../models/Restaurant';
 
 class RestaurantController {
   async index(req, res) {

@@ -1,39 +1,44 @@
 import * as Yup from 'yup';
-import Category from '../models/Category';
+import Dish from '../../models/Dish';
 
-class CategoryController {
+class DishController {
   async index(req, res) {
     const { page = 1 } = req.query;
 
     const schema = Yup.object().shape({
-      restaurant_id: Yup.number().required()
+      category_id: Yup.number().required()
     });
 
     if (!(await schema.isValid(req.params))) {
       return res.status(400).json({ error: 'Falha de validação!' });
     }
 
-    const categories = await Category.findAll({
-      where: { restaurant_id: req.params.restaurant_id },
+    const dishes = await Dish.findAll({
+      where: {
+        category_id: req.params.category_id
+      },
       order: ['createdAt'],
       limit: 10,
       offset: (page - 1) * 20
     });
 
-    return res.json(categories);
+    return res.json(dishes);
   }
 
   async store(req, res) {
     const schema = Yup.object().shape({
       name: Yup.string().required(),
-      restaurant_id: Yup.number().required()
+      details: Yup.string().required(),
+      price: Yup.number().required(),
+      restaurant_id: Yup.number().required(),
+      category_id: Yup.number().required()
     });
 
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({ error: 'Falha de validação!' });
     }
 
-    const { id, name } = await Category.create({
+    const { id, name } = await Dish.create({
       ...req.body,
       is_available: true
     });
@@ -42,4 +47,4 @@ class CategoryController {
   }
 }
 
-export default new CategoryController();
+export default new DishController();

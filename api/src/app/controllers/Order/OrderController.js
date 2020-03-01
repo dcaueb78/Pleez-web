@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import Order from '../schemas/Order';
+import Order from '../../schemas/Order';
 
 class OrderController {
   async index(req, res) {

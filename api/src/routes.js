@@ -1,15 +1,15 @@
 import { Router } from 'express';
 
-import UserController from './app/controllers/UserController';
-import ClientSessionController from './app/controllers/ClientSessionController';
-import ProfessionalAccountSessionController from './app/controllers/ProfessionalAccountSessionController';
-import ProfessionalAccountController from './app/controllers/ProfessionalAccountController';
-import RestaurantController from './app/controllers/RestaurantController';
-import UserRestaurantController from './app/controllers/UserRestaurantController';
-import CategoryController from './app/controllers/CategoryController';
-import DishController from './app/controllers/DishController';
-import DishDetailsController from './app/controllers/DishDetailsController';
-import OrderController from './app/controllers/OrderController';
+import UserController from './app/controllers/User/UserController';
+import ClientSessionController from './app/controllers/Session/ClientSessionController';
+import ProfessionalAccountSessionController from './app/controllers/Session/ProfessionalAccountSessionController';
+import ProfessionalAccountController from './app/controllers/ProfessionalAccount/ProfessionalAccountController';
+import RestaurantController from './app/controllers/Restaurant/RestaurantController';
+import RestaurantDetailsController from './app/controllers/Restaurant/RestaurantDetailsController';
+import CategoryController from './app/controllers/Category/CategoryController';
+import DishController from './app/controllers/Dish/DishController';
+import DishDetailsController from './app/controllers/Dish/DishDetailsController';
+import OrderController from './app/controllers/Order/OrderController';
 
 import UserAuthMiddleware from './app/middlewares/authUser';
 import ProfessionalAccountAuthMiddleware from './app/middlewares/authProfessionalAccount';
@@ -40,7 +40,7 @@ routes.get(
 
 routes.get(
   '/restaurant/:restaurant_id',
-  UserRestaurantController.index
+  RestaurantDetailsController.index
 );
 
 routes.post(

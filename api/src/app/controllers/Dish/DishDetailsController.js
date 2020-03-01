@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import Dish from '../models/Dish';
+import Dish from '../../models/Dish';
 
 class DishDetailsController {
   async index(req, res) {
@@ -29,13 +29,8 @@ class DishDetailsController {
       return res.status(400).json({ error: 'Falha de validação!' });
     }
 
-    const dishesDetails = await Dish.findAll({
-      where: {
-        id: req.body.dishes_id
-      }
-    });
+  }
 
-    return res.json(dishesDetails);
   }
 }
 

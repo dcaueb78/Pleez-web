@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
-import Restaurant from '../models/Restaurant';
+import Restaurant from '../../models/Restaurant';
 
-class UserRestaurantController {
+class RestaurantDetailsController {
   async index(req, res) {
 
     const schema = Yup.object().shape({
@@ -24,4 +24,4 @@ class UserRestaurantController {
   }
 }
 
-export default new UserRestaurantController();
+export default new RestaurantDetailsController();

@@ -1,8 +1,8 @@
 import jwt from 'jsonwebtoken';
 import * as Yup from 'yup';
 
-import authConfig from '../../config/auth';
-import ProfessionalAccount from '../models/ProfessionalAccount';
+import authConfig from '../../../config/auth';
+import ProfessionalAccount from '../../models/ProfessionalAccount';
 
 class ProfessionalAccountSessionController {
   async store(req, res) {
