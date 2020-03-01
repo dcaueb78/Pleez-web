@@ -4,3 +4,9 @@ export function addToBasket(dish) {
     payload: { dish }
   };
 }
+export function addChair(chair) {
+  return {
+    type: '@basket/ADD_CHAIR',
+    payload: { chair }
+  };
+}
