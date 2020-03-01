@@ -29,8 +29,19 @@ class DishDetailsController {
       return res.status(400).json({ error: 'Falha de validação!' });
     }
 
+    const dishIdList = req.body.dishes_id;
+
+    const dishesDetails = await Promise.all(dishIdList.map(async(id) => {
+      const dish = await findDishDetailsById(id);
+      return dish;
+    }));
+
+    return res.json(dishesDetails);
   }
 
+  async findDishDetailsById (id) {
+    const dishDetails = await Dish.findByPk(id);
+    return dishDetails;
   }
 }
 
