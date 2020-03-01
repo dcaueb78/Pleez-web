@@ -38,48 +38,22 @@ routes.get(
   RestaurantController.index
 );
 
-routes.get(
-  '/restaurant/:restaurant_id',
-  RestaurantDetailsController.index
-);
+routes.get('/restaurant/:restaurant_id', RestaurantDetailsController.index);
 
 routes.post(
   '/category',
   ProfessionalAccountAuthMiddleware,
   CategoryController.store
 );
-routes.get(
-  '/category/:restaurant_id',
-  CategoryController.index
-);
+routes.get('/category/:restaurant_id', CategoryController.index);
 
-routes.get(
-  '/dish/:category_id',
-  DishController.index
-);
-routes.post(
-  '/dish',
-  ProfessionalAccountAuthMiddleware,
-  DishController.store
-);
-routes.post(
-  '/dishes-details/',
-  DishDetailsController.indexAllById
-);
-routes.get(
-  '/dish-details/:dish_id',
-  DishDetailsController.index
-);
+routes.get('/dish/:category_id', DishController.index);
+routes.post('/dish', ProfessionalAccountAuthMiddleware, DishController.store);
+routes.post('/dishes-details/', DishDetailsController.indexAllById);
+routes.get('/dish-details/:dish_id', DishDetailsController.index);
 
-routes.post(
-  '/order',
-  OrderController.store
-);
-routes.get(
-  '/order/:userId',
-  UserAuthMiddleware,
-  OrderController.index
-);
+routes.post('/order', UserAuthMiddleware, OrderController.store);
+routes.get('/order/:userId', UserAuthMiddleware, OrderController.index);
 
 routes.use(UserAuthMiddleware);
 
