@@ -10,4 +10,13 @@ const useChairNumber = () => {
   return chairSelector.chair;
 };
 
-export { useChairNumber };
+const useRestaurantId = () => {
+  const restaurantIdSelector = useSelector(state => state.basket.restaurant);
+
+  if(!restaurantIdSelector) {
+    return false;
+  }
+  return restaurantIdSelector.restaurant;
+}
+
+export { useChairNumber, useRestaurantId };

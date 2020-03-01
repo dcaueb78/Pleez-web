@@ -4,6 +4,7 @@ const INITIAL_STATE = {
   basket: [],
   quantity: 0,
   chair: null,
+  restaurant: null,
 };
 
 export default function basket(state = INITIAL_STATE, action) {
@@ -16,6 +17,10 @@ export default function basket(state = INITIAL_STATE, action) {
     case '@basket/ADD_CHAIR':
       return produce(state, draft => {
         draft.chair = action.payload.chair;
+      })
+    case '@basket/ADD_RESTAURANT':
+      return produce(state, draft => {
+        draft.restaurant = action.payload.restaurant;
       })
     default:
       return state;
