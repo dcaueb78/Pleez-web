@@ -1,4 +1,3 @@
-import React from 'react';
 import { takeLatest, all } from 'redux-saga/effects';
 
 import history from '~/services/history';
