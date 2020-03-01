@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import queryString from 'query-string';
 
 import api from '~/services/api';
 import history from '~/services/history';
@@ -12,21 +13,32 @@ import { MdArrowBack } from 'react-icons/md';
 import logo from '~/assets/logo.png';
 import cartIcon from '~/assets/icons/CartIcon.png';
 
-export default function Basket() {
+export default function Basket({ location }) {
   const basket = useSelector(state => state.basket.basket);
+  const chair = useSelector(state => state.basket.chair);
   const [completeBasket, setCompleteBasket] = useState([]);
 
-  const formatDishPrice = (dish) => {
+  const formatDishPrice = dish => {
     const formattedPrice = formatPrice(dish.price * dish.quantity);
     return formattedPrice;
-  }
+  };
+
+  const handleDoAPayment = () => {
+    const restaurantId = queryString.parse(location.search);
+
+    const basketInfos = {
+      restaurantId,
+      dishes: completeBasket,
+    };
+    console.log(chair);
+  };
 
   useEffect(() => {
     async function loadBasketDishInfo() {
       const idList = await basket.map(dish => dish.dishId);
 
       const getBasketDetailsByIds = await api.post('/dishes-details', {
-        dishes_id: idList,
+        dishes_id: idList
       });
 
       const getCompleteBasketDishDetailsWithQuantity = await getBasketDetailsByIds.data.map(
@@ -37,7 +49,6 @@ export default function Basket() {
         })
       );
       setCompleteBasket(getCompleteBasketDishDetailsWithQuantity);
-      console.log(basket);
     }
     loadBasketDishInfo();
   }, [basket]);
@@ -79,7 +90,7 @@ export default function Basket() {
           ))}
         </Scroll>
         <footer>
-          <button>Fazer o pedido</button>
+          <button onClick={handleDoAPayment}>Fazer o pedido</button>
         </footer>
       </BasketContent>
     </Wrapper>
