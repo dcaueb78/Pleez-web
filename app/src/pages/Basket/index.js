@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { MdArrowBack } from 'react-icons/md';
 
 import { useChairNumber, useRestaurantId } from '~/store/hooks/basket';
+import { clearBasket } from '~/store/modules/basket/actions';
 import api from '~/config/api';
 import history from '~/services/history';
 import { formatPrice } from '~/utils/format';
@@ -25,11 +26,24 @@ export default function Basket({ location }) {
   const restaurantId = useRestaurantId();
   const [completeBasket, setCompleteBasket] = useState([]);
 
+  const dispatch = useDispatch();
+
   const ReactSwal = withReactContent(Swal);
 
   const formatDishPrice = dish => {
     const formattedPrice = formatPrice(dish.price * dish.quantity);
     return formattedPrice;
+  };
+
+  const confirmPayment = () => {
+    ReactSwal.fire({
+      title: <p>Pedido Confirmado!</p>,
+      footer: 'Daqui a pouco seu pedido vai chegar :D',
+      icon: 'success'
+    }).then(() => {
+      dispatch(clearBasket());
+      history.push(`/categorias/${restaurantId}/${chair}`);
+    });
   };
 
   const handleDoAPayment = async () => {
@@ -40,13 +54,7 @@ export default function Basket({ location }) {
     });
 
     if (orderResult) {
-      ReactSwal.fire({
-        title: <p>Pedido Confirmado!</p>,
-        footer: 'Daqui a pouco seu pedido vai chegar :D',
-        icon: 'success'
-      }).then(() => {
-        history.push(`/categorias/${restaurantId}/${chair}`)
-      });
+      confirmPayment();
     }
   };
 
