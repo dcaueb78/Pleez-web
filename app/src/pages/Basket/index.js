@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
-import { addToBasket } from '~/store/modules/basket/actions';
 import api from '~/services/api';
 import history from '~/services/history';
 import { formatPrice } from '~/utils/format';
@@ -16,6 +15,11 @@ import cartIcon from '~/assets/icons/CartIcon.png';
 export default function Basket() {
   const basket = useSelector(state => state.basket.basket);
   const [completeBasket, setCompleteBasket] = useState([]);
+
+  const formatDishPrice = (dish) => {
+    const formattedPrice = formatPrice(dish.price * dish.quantity);
+    return formattedPrice;
+  }
 
   useEffect(() => {
     async function loadBasketDishInfo() {
@@ -37,6 +41,7 @@ export default function Basket() {
     }
     loadBasketDishInfo();
   }, [basket]);
+
   return (
     <Wrapper>
       <Content>
@@ -67,7 +72,7 @@ export default function Basket() {
               <div>
                 <p>
                   <span>Valor: </span>
-                  <b>R$ 24,00 </b>
+                  <b> {formatDishPrice(dish)} </b>
                 </p>
               </div>
             </div>
