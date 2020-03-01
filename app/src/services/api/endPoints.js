@@ -1,6 +1,7 @@
 const dishesDetails = '/dishes-details';
 const sessions = 'sessions';
 const users = 'users';
+const order = 'order';
 
 const restaurantDetails = restaurant_id => {
   return `restaurant/${restaurant_id}`;
@@ -23,5 +24,6 @@ export {
   categoriesFromRestaurantId,
   restaurantDetails,
   dishDetails,
-  allDishesFromCategoryId
+  allDishesFromCategoryId,
+  order
 };

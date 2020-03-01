@@ -9,7 +9,7 @@ import api from '~/config/api';
 import history from '~/services/history';
 import { formatPrice } from '~/utils/format';
 
-import { dishesDetails } from '~/services/api/endPoints';
+import { dishesDetails, order } from '~/services/api/endPoints';
 
 import { Wrapper, Content, Scroll } from './styles';
 import BasketContent from '~/components/BasketContent';
@@ -27,16 +27,16 @@ export default function Basket({ location }) {
     return formattedPrice;
   };
 
-  const handleDoAPayment = () => {
+  const handleDoAPayment = async () => {
     const restaurantId = queryString.parse(location.search);
-
-    const basketInfos = {
-      restaurantId,
+    console.log(completeBasket);
+    const response = await api.post(order, {
       dishes: completeBasket,
-      chair: useChairNumber
-    };
+      restaurant_id: 1,
+      chair: chair,
+    });
 
-    api.post('/');
+    console.log(response.data);
   };
 
   useEffect(() => {

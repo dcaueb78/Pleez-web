@@ -27,6 +27,8 @@ class OrderController {
       chair: Yup.number().required()
     });
 
+    console.log(req.body);
+
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({ error: 'Falha de validação!' });
     }
@@ -38,7 +40,7 @@ class OrderController {
 
     let priceTemp = 0;
     const totalPrice = await Promise.all(req.body.dishes.map(async dish => {
-      const dishDetails = await findDishDetailsById(dish.dish_id);
+      const dishDetails = await findDishDetailsById(dish.id);
       priceTemp += dishDetails.price * dish.quantity;
     }));
 

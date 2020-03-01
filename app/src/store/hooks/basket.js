@@ -2,12 +2,12 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 const useChairNumber = () => {
-  const chair = useSelector(state => state.basket.chair);
+  const chairSelector = useSelector(state => state.basket.chair);
 
-  if (!chair) {
+  if (!chairSelector) {
     return false;
   }
-  return chair;
+  return chairSelector.chair;
 };
 
 export { useChairNumber };
