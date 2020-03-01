@@ -60,7 +60,7 @@ export default function Basket() {
         </header>
         <Scroll>
           {completeBasket.map(dish => (
-            <div key={dish.id}>
+            <div key={`${dish.id}-${dish.quantity}`}>
               <div>
                 <h2>{dish.quantity}x</h2>
                 <p>{dish.name}</p>
