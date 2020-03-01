@@ -7,8 +7,8 @@ import { Wrapper, Content, Scroll } from './styles';
 import FoodCard from '~/components/FoodCard';
 import CartFooter from '~/components/CartFooter';
 
-import { useChairNumber } from '~/store/hooks/basket';
-import { addChair } from '~/store/modules/basket/actions';
+import { useChairNumber, useRestaurantId } from '~/store/hooks/basket';
+import { addChair, addRestaurant } from '~/store/modules/basket/actions';
 import api from '~/config/api';
 import history from '~/services/history';
 
@@ -23,6 +23,7 @@ import unclejoe from '~/assets/unclejoe.png';
 export default function Categories({ match }) {
   const { restaurant, chair } = match.params;
   const chairNumberExists = useChairNumber();
+  const restaurantIdExists = useRestaurantId();
 
   const dispatch = useDispatch();
 
@@ -33,7 +34,14 @@ export default function Categories({ match }) {
       }
     }
 
+    function validateRestaurantExists() {
+      if(!restaurantIdExists || restaurant !== restaurantIdExists) {
+        dispatch(addRestaurant({ restaurant }));
+      }
+    }
+
     validateChairExists();
+    validateRestaurantExists();
   }, []);
 
   const [restaurantName, setRestaurantName] = useState('');
