@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 import Order from '../../schemas/Order';
-
+import Dish from '../../models/Dish';
 class OrderController {
   async index(req, res) {
     const schema = Yup.object().shape({
@@ -22,11 +22,8 @@ class OrderController {
 
   async store(req, res) {
     const schema = Yup.object().shape({
-      comment: Yup.string().required(),
-      dish: Yup.array().required(),
-      total_price: Yup.number().required(),
+      dishes: Yup.array().required(),
       restaurant_id: Yup.number().required(),
-      user_id: Yup.number().required(),
       chair: Yup.number().required()
     });
 
@@ -34,8 +31,21 @@ class OrderController {
       return res.status(400).json({ error: 'Falha de validação!' });
     }
 
+    async function findDishDetailsById (id) {
+      const dishDetails = await Dish.findByPk(id);
+      return dishDetails;
+    }
+
+    let priceTemp = 0;
+    const totalPrice = await Promise.all(req.body.dishes.map(async dish => {
+      const dishDetails = await findDishDetailsById(dish.dish_id);
+      priceTemp += dishDetails.price * dish.quantity;
+    }));
+
     const { id, status, chair } = await Order.create({
-      ...req.body
+      ...req.body,
+      user_id: req.userId,
+      total_price: priceTemp
     });
 
     return res.status(200).json({ id, status, chair });

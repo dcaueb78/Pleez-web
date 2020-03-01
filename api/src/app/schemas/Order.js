@@ -23,11 +23,7 @@ const OrderSchema = new mongoose.Schema({
     required: true,
     default: true,
   },
-  comment: {
-    type: String,
-    required: true,
-  },
-  dish: {
+  dishes: {
     type: Array,
     required: true,
   },
