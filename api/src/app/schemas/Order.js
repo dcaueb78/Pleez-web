@@ -30,6 +30,10 @@ const OrderSchema = new mongoose.Schema({
   chair: {
     type: Number,
     required: true,
+  },
+  transaction_id: {
+    type: Number,
+    required: true,
   }
 }, {
   timestamps: true,
