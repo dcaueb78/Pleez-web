@@ -3,6 +3,8 @@ import { useSelector } from 'react-redux';
 
 import history from '~/services/history';
 
+import { basket } from '~/services/api/pages';
+
 import { Container } from './styles';
 import cartIcon from '~/assets/icons/CartIcon.png';
 
@@ -10,7 +12,7 @@ export default function CartFooter() {
   const basketQuantity = useSelector(state => state.basket.quantity);
 
   function handleCartRedirect() {
-    history.push('/comanda');
+    history.push(basket);
   }
 
   return (

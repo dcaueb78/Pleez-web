@@ -13,6 +13,7 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
 import { dishesDetails, order } from '~/services/api/endPoints';
+import { infos, category } from '~/services/api/pages';
 
 import { Wrapper, Content, Scroll } from './styles';
 import BasketContent from '~/components/BasketContent';
@@ -41,10 +42,19 @@ export default function Basket({ location }) {
       footer: 'Daqui a pouco seu pedido vai chegar :D',
       icon: 'success'
     }).then(() => {
+      history.push(category(restaurantId, chair));
       dispatch(clearBasket());
-      history.push(`/categorias/${restaurantId}/${chair}`);
     });
   };
+
+  const paymentException = () => {
+    ReactSwal.fire({
+      title: <p>Houve um problema no pedido!</p>,
+      footer: 'Poderia tentar novamente? :(',
+      icon: 'error'
+    });
+  };
+
 
   const handleDoAPayment = async () => {
     const orderResult = await api.post(order, {
@@ -55,18 +65,20 @@ export default function Basket({ location }) {
 
     if (orderResult) {
       confirmPayment();
+    } else {
+      paymentException();
     }
   };
 
   useEffect(() => {
     function validateChairExists() {
       if (!chair) {
-        history.push('/informacoes');
+        history.push(infos);
       }
     }
 
     validateChairExists();
-  }, []);
+  }, [chair]);
 
   useEffect(() => {
     async function loadBasketDishInfo() {

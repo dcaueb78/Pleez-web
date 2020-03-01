@@ -8,6 +8,8 @@ import api from '~/config/api';
 import history from '~/services/history';
 import { toast } from 'react-toastify';
 
+import { base } from '~/services/api/pages';
+
 import { allDishesFromCategoryId, restaurantDetails } from '~/services/api/endPoints';
 
 import { MdArrowBack } from 'react-icons/md';
@@ -38,7 +40,7 @@ export default function Categories({ match }) {
         toast.error(
           'Não consegui achar o restaurante :( Poderia tentar mais uma vez?'
         );
-        history.push('/');
+        history.push(base);
       }
     }
 

@@ -12,6 +12,8 @@ import { addChair, addRestaurant } from '~/store/modules/basket/actions';
 import api from '~/config/api';
 import history from '~/services/history';
 
+import { base } from '~/services/api/pages';
+
 import {
   restaurantDetails,
   categoriesFromRestaurantId
@@ -65,7 +67,7 @@ export default function Categories({ match }) {
         toast.error(
           'Não consegui achar o restaurante :( Poderia tentar mais uma vez?'
         );
-        history.push('/');
+        history.push(base);
       }
     }
 

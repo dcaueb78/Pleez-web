@@ -11,6 +11,8 @@ import Details from '../pages/Details';
 import Basket from '../pages/Basket';
 import Infos from '../pages/Infos';
 
+import { basket, categoryBaseRoute, dishBaseRoute, detailsBaseRoute } from '~/services/api/pages';
+
 export default function Routes() {
   return (
     <Switch>
@@ -18,24 +20,24 @@ export default function Routes() {
       <Route path="/registro" component={SignUp} />
 
       <Route
-        path="/categorias/:restaurant/:chair"
+        path={`${categoryBaseRoute}/:restaurant/:chair`}
         exact
         component={Categories}
         isPrivate
       />
       <Route
-        path="/pratos/:restaurant/:category"
+        path={`${dishBaseRoute}/:restaurant/:category`}
         exact
         component={Dish}
         isPrivate
       />
       <Route
-        path="/detalhes/:restaurant/:dish"
+        path={`${detailsBaseRoute}/:restaurant/:dish`}
         exact
         component={Details}
         isPrivate
       />
-      <Route path="/comanda/" exact component={Basket} isPrivate />
+      <Route path={basket} exact component={Basket} isPrivate />
       <Route path="/informacoes/" exact component={Infos} isPrivate />
 
       <Route path="/" component={() => <h1>404</h1>} />

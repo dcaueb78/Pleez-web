@@ -5,6 +5,8 @@ import { toast } from 'react-toastify';
 import history from '~/services/history';
 import api from '~/config/api';
 
+import { base } from '~/services/api/pages';
+
 import { sessions, users } from '~/services/api/endPoints';
 
 import { signInSuccess, signFailure } from './actions';
@@ -48,7 +50,7 @@ export function* signUp({ payload }) {
 
     toast.success('Cadastrado com sucesso :D');
 
-    history.push('/');
+    history.push(base);
   } catch (err) {
     toast.error(
       <div>
