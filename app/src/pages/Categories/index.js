@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
+import { toast } from 'react-toastify';
+
 import { Wrapper, Content, Scroll } from './styles';
 import FoodCard from '~/components/FoodCard';
 import CartFooter from '~/components/CartFooter';
 
 import { useChairNumber } from '~/store/hooks/basket';
 import { addChair } from '~/store/modules/basket/actions';
-import api from '~/services/api';
+import api from '~/config/api';
 import history from '~/services/history';
-import { toast } from 'react-toastify';
+
+import {
+  restaurantDetails,
+  categoriesFromRestaurantId
+} from '~/services/api/endPoints';
 
 import logo from '~/assets/logo.png';
 import unclejoe from '~/assets/unclejoe.png';
@@ -18,20 +24,24 @@ export default function Categories({ match }) {
   const { restaurant, chair } = match.params;
   const chairNumberExists = useChairNumber();
 
-  useEffect(() => {
-    if (!chairNumberExists || chair !== chairNumberExists) {
-      dispatch(addChair({ chair }));
-    }
-  }, []);
-
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    function validateChairExists() {
+      if (!chairNumberExists || chair !== chairNumberExists) {
+        dispatch(addChair({ chair }));
+      }
+    }
+
+    validateChairExists();
+  }, []);
 
   const [restaurantName, setRestaurantName] = useState('');
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     async function findAllCategoriesFromSelectedRestaurant(restaurant_id) {
-      const response = await api.get(`category/${restaurant_id}`);
+      const response = await api.get(categoriesFromRestaurantId(restaurant_id));
       setCategories(response.data);
     }
 
@@ -41,7 +51,7 @@ export default function Categories({ match }) {
   useEffect(() => {
     async function shouldRestaurantExists(restaurant_id) {
       try {
-        const response = await api.get(`restaurant/${restaurant_id}`);
+        const response = await api.get(restaurantDetails(restaurant_id));
         setRestaurantName(response.data.name);
       } catch (err) {
         toast.error(

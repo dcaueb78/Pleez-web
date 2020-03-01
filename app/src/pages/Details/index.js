@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
+import { MdArrowBack } from 'react-icons/md';
+
 import { addToBasket } from '~/store/modules/basket/actions';
-import api from '~/services/api';
+import api from '~/config/api';
 import history from '~/services/history';
 import { formatPrice } from '~/utils/format';
+
+import { dishDetails as dishDetailsEndPoint } from '~/services/api/endPoints';
 
 import { Wrapper, Content, Scroll } from './styles';
 import FoodImage from '~/components/FoodImage';
 import AddToCartFooter from '~/components/AddToCartFooter';
 
-import { MdArrowBack } from 'react-icons/md';
 import logo from '~/assets/logo.png';
 
 export default function Details({ match }) {
@@ -25,7 +28,7 @@ export default function Details({ match }) {
 
   useEffect(() => {
     async function findDishDetails(dish_id) {
-      const response = await api.get(`dish-details/${dish_id}`);
+      const response = await api.get(dishDetailsEndPoint(dish_id));
       setDishDetails(response.data);
       setDishId(response.data.id);
     }
@@ -56,7 +59,7 @@ export default function Details({ match }) {
   return (
     <Wrapper>
       <Content>
-        <button onClick={history.goBack}>
+        <button type="button" onClick={history.goBack}>
           <MdArrowBack size={32} color="white" />
         </button>
         <img src={logo} alt="Pleez" />
@@ -73,9 +76,9 @@ export default function Details({ match }) {
           />
           <h3>Quantos vai querer?</h3>
           <div className="quantity">
-            <button onClick={handleDishQuantitySub}>-</button>
+            <button type="button" onClick={handleDishQuantitySub}>-</button>
             <input type="number" placeholder={dishQuantity} disabled />
-            <button onClick={handleDishQuantitySum}>+</button>
+            <button type="button" onClick={handleDishQuantitySum}>+</button>
           </div>
         </Scroll>
       </Content>

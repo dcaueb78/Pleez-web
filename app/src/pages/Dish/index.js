@@ -4,9 +4,11 @@ import { Wrapper, Content, Scroll } from './styles';
 import FoodCard from '~/components/FoodCard';
 import CartFooter from '~/components/CartFooter';
 
-import api from '~/services/api';
+import api from '~/config/api';
 import history from '~/services/history';
 import { toast } from 'react-toastify';
+
+import { allDishesFromCategoryId, restaurantDetails } from '~/services/api/endPoints';
 
 import { MdArrowBack } from 'react-icons/md';
 import logo from '~/assets/logo.png';
@@ -20,7 +22,7 @@ export default function Categories({ match }) {
 
   useEffect(() => {
     async function findAllDishesFromSelectedCategory(category_id) {
-      const response = await api.get(`dish/${category_id}`);
+      const response = await api.get(allDishesFromCategoryId(category_id));
       setdishes(response.data);
     }
 
@@ -30,7 +32,7 @@ export default function Categories({ match }) {
   useEffect(() => {
     async function shouldRestaurantExists(restaurant_id) {
       try {
-        const response = await api.get(`restaurant/${restaurant_id}`);
+        const response = await api.get(restaurantDetails(restaurant_id));
         setRestaurantName(response.data.name);
       } catch (err) {
         toast.error(
@@ -46,8 +48,8 @@ export default function Categories({ match }) {
   return (
     <Wrapper>
       <Content>
-        <button onClick={history.goBack}>
-          <MdArrowBack size={32} color="white"/>
+        <button type="button" onClick={history.goBack}>
+          <MdArrowBack size={32} color="white" />
         </button>
         <img src={logo} alt="Pleez" />
         <Scroll>

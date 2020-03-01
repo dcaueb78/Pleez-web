@@ -2,20 +2,24 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import queryString from 'query-string';
 
-import api from '~/services/api';
+import { MdArrowBack } from 'react-icons/md';
+
+import { useChairNumber } from '~/store/hooks/basket';
+import api from '~/config/api';
 import history from '~/services/history';
 import { formatPrice } from '~/utils/format';
+
+import { dishesDetails } from '~/services/api/endPoints';
 
 import { Wrapper, Content, Scroll } from './styles';
 import BasketContent from '~/components/BasketContent';
 
-import { MdArrowBack } from 'react-icons/md';
 import logo from '~/assets/logo.png';
 import cartIcon from '~/assets/icons/CartIcon.png';
 
 export default function Basket({ location }) {
   const basket = useSelector(state => state.basket.basket);
-  const chair = useSelector(state => state.basket.chair);
+  const chair = useChairNumber();
   const [completeBasket, setCompleteBasket] = useState([]);
 
   const formatDishPrice = dish => {
@@ -29,15 +33,27 @@ export default function Basket({ location }) {
     const basketInfos = {
       restaurantId,
       dishes: completeBasket,
+      chair: useChairNumber
     };
-    console.log(chair);
+
+    api.post('/');
   };
+
+  useEffect(() => {
+    function validateChairExists() {
+      if (!chair) {
+        history.push('/informacoes');
+      }
+    }
+
+    validateChairExists();
+  }, []);
 
   useEffect(() => {
     async function loadBasketDishInfo() {
       const idList = await basket.map(dish => dish.dishId);
 
-      const getBasketDetailsByIds = await api.post('/dishes-details', {
+      const getBasketDetailsByIds = await api.post(dishesDetails, {
         dishes_id: idList
       });
 
@@ -56,7 +72,7 @@ export default function Basket({ location }) {
   return (
     <Wrapper>
       <Content>
-        <button onClick={history.goBack}>
+        <button type="button" onClick={history.goBack}>
           <MdArrowBack size={32} color="white" />
         </button>
         <img src={logo} alt="Pleez" />
@@ -90,7 +106,9 @@ export default function Basket({ location }) {
           ))}
         </Scroll>
         <footer>
-          <button onClick={handleDoAPayment}>Fazer o pedido</button>
+          <button type="button" onClick={handleDoAPayment}>
+            Fazer o pedido
+          </button>
         </footer>
       </BasketContent>
     </Wrapper>

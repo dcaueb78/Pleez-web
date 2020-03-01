@@ -3,7 +3,9 @@ import { takeLatest, call, put, all } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 
 import history from '~/services/history';
-import api from '~/services/api';
+import api from '~/config/api';
+
+import { sessions, users } from '~/services/api/endPoints';
 
 import { signInSuccess, signFailure } from './actions';
 
@@ -11,7 +13,7 @@ export function* signIn({ payload }) {
   try {
     const { email, password } = payload;
 
-    const response = yield call(api.post, 'sessions', {
+    const response = yield call(api.post, sessions, {
       email,
       password
     });
@@ -38,7 +40,7 @@ export function* signUp({ payload }) {
   try {
     const { name, email, password } = payload;
 
-    yield call(api.post, 'users', {
+    yield call(api.post, users, {
       name,
       email,
       password
