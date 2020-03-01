@@ -8,6 +8,9 @@ import api from '~/config/api';
 import history from '~/services/history';
 import { formatPrice } from '~/utils/format';
 
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+
 import { dishesDetails, order } from '~/services/api/endPoints';
 
 import { Wrapper, Content, Scroll } from './styles';
@@ -22,6 +25,8 @@ export default function Basket({ location }) {
   const restaurantId = useRestaurantId();
   const [completeBasket, setCompleteBasket] = useState([]);
 
+  const ReactSwal = withReactContent(Swal);
+
   const formatDishPrice = dish => {
     const formattedPrice = formatPrice(dish.price * dish.quantity);
     return formattedPrice;
@@ -35,7 +40,13 @@ export default function Basket({ location }) {
     });
 
     if (orderResult) {
-      history.goBack();
+      ReactSwal.fire({
+        title: <p>Pedido Confirmado!</p>,
+        footer: 'Daqui a pouco seu pedido vai chegar :D',
+        icon: 'success'
+      }).then(() => {
+        history.push(`/categorias/${restaurantId}/${chair}`)
+      });
     }
   };
 
