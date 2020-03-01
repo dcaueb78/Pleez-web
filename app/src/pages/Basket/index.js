@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import queryString from 'query-string';
 
 import { MdArrowBack } from 'react-icons/md';
 
-import { useChairNumber } from '~/store/hooks/basket';
+import { useChairNumber, useRestaurantId } from '~/store/hooks/basket';
 import api from '~/config/api';
 import history from '~/services/history';
 import { formatPrice } from '~/utils/format';
@@ -20,6 +19,7 @@ import cartIcon from '~/assets/icons/CartIcon.png';
 export default function Basket({ location }) {
   const basket = useSelector(state => state.basket.basket);
   const chair = useChairNumber();
+  const restaurantId = useRestaurantId();
   const [completeBasket, setCompleteBasket] = useState([]);
 
   const formatDishPrice = dish => {
@@ -28,15 +28,15 @@ export default function Basket({ location }) {
   };
 
   const handleDoAPayment = async () => {
-    const restaurantId = queryString.parse(location.search);
-    console.log(completeBasket);
-    const response = await api.post(order, {
+    const orderResult = await api.post(order, {
       dishes: completeBasket,
-      restaurant_id: 1,
-      chair: chair,
+      restaurant_id: restaurantId,
+      chair: chair
     });
 
-    console.log(response.data);
+    if (orderResult) {
+      history.goBack();
+    }
   };
 
   useEffect(() => {
