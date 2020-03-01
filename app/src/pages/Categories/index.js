@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { Wrapper, Content, Scroll } from './styles';
 import FoodCard from '~/components/FoodCard';
 import CartFooter from '~/components/CartFooter';
 
+import { useChairNumber } from '~/store/hooks/basket';
+import { addChair } from '~/store/modules/basket/actions';
 import api from '~/services/api';
 import history from '~/services/history';
 import { toast } from 'react-toastify';
@@ -13,6 +16,15 @@ import unclejoe from '~/assets/unclejoe.png';
 
 export default function Categories({ match }) {
   const { restaurant, chair } = match.params;
+  const chairNumberExists = useChairNumber();
+
+  useEffect(() => {
+    if (!chairNumberExists || chair !== chairNumberExists) {
+      dispatch(addChair({ chair }));
+    }
+  }, []);
+
+  const dispatch = useDispatch();
 
   const [restaurantName, setRestaurantName] = useState('');
   const [categories, setCategories] = useState([]);
@@ -62,7 +74,7 @@ export default function Categories({ match }) {
               ))}
             </>
           ) : (
-            <div/>
+            <div />
           )}
         </Scroll>
       </Content>
