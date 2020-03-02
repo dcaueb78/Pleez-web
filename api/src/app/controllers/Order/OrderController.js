@@ -3,6 +3,8 @@ import Order from '../../schemas/Order';
 import Dish from '../../models/Dish';
 import pagarme from 'pagarme';
 
+import { api_key } from '../../../config/pagarme';
+
 class OrderController {
   async index(req, res) {
     const schema = Yup.object().shape({
@@ -33,7 +35,7 @@ class OrderController {
     let cardHash = '';
 
     await pagarme.client
-      .connect({ api_key: 'ak_test_W9wF4YHTEsW44xN7BRj3Rlc3L9ygoc' })
+      .connect({ api_key })
       .then(client => client.security.encrypt(card))
       .then(card_hash => {
         cardHash = card_hash;
@@ -42,7 +44,7 @@ class OrderController {
     let transaction_id = '';
 
     await pagarme.client
-      .connect({ api_key: 'ak_test_W9wF4YHTEsW44xN7BRj3Rlc3L9ygoc' })
+      .connect({ api_key })
       .then(client =>
         client.transactions.create({
           amount: 100,
@@ -81,7 +83,7 @@ class OrderController {
               unit_price: 1,
               quantity: 1,
               tangible: false
-            },
+            }
           ]
         })
       )
@@ -99,16 +101,18 @@ class OrderController {
       return res.status(400).json({ error: 'Falha de validação!' });
     }
 
-    async function findDishDetailsById (id) {
+    async function findDishDetailsById(id) {
       const dishDetails = await Dish.findByPk(id);
       return dishDetails;
     }
 
     let priceTemp = 0;
-    await Promise.all(req.body.dishes.map(async dish => {
-      const dishDetails = await findDishDetailsById(dish.id);
-      priceTemp += dishDetails.price * dish.quantity;
-    }));
+    await Promise.all(
+      req.body.dishes.map(async dish => {
+        const dishDetails = await findDishDetailsById(dish.id);
+        priceTemp += dishDetails.price * dish.quantity;
+      })
+    );
 
     const { id, status, chair } = await Order.create({
       ...req.body,
