@@ -36,6 +36,17 @@ export default function Basket({ location }) {
     return formattedPrice;
   };
 
+  const paymentRequestAlert = () => {
+    ReactSwal.fire({
+      title: <p>Aguardando provação do pedido!</p>,
+      footer: 'Acompanhe o seu pedido :3',
+      icon: 'info'
+    }).then(() => {
+      history.push(category(restaurantId, chair));
+      dispatch(clearBasket());
+    });
+  };
+
   const confirmPayment = () => {
     ReactSwal.fire({
       title: <p>Pedido Confirmado!</p>,
@@ -43,7 +54,6 @@ export default function Basket({ location }) {
       icon: 'success'
     }).then(() => {
       history.push(category(restaurantId, chair));
-      dispatch(clearBasket());
     });
   };
 
@@ -55,8 +65,8 @@ export default function Basket({ location }) {
     });
   };
 
-
   const handleDoAPayment = async () => {
+    paymentRequestAlert();
     const orderResult = await api.post(order, {
       dishes: completeBasket,
       restaurant_id: restaurantId,
