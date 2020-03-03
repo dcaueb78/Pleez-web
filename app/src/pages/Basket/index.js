@@ -12,6 +12,14 @@ import { formatPrice } from '~/utils/format';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
+import Card from 'react-credit-cards';
+import {
+  formatCreditCardNumber,
+  formatCVC,
+  formatExpirationDate
+} from '~/utils/payment';
+import 'react-credit-cards/es/styles-compiled.css';
+
 import { dishesDetails, order } from '~/services/api/endPoints';
 import { infos, category } from '~/services/api/pages';
 
@@ -21,11 +29,16 @@ import BasketContent from '~/components/BasketContent';
 import logo from '~/assets/logo.png';
 import cartIcon from '~/assets/icons/CartIcon.png';
 
-export default function Basket({ location }) {
+export default function Basket() {
   const basket = useSelector(state => state.basket.basket);
   const chair = useChairNumber();
   const restaurantId = useRestaurantId();
   const [completeBasket, setCompleteBasket] = useState([]);
+  const [cvc, setCvc] = useState('');
+  const [expiry, setExpiry] = useState('');
+  const [focused, setFocused] = useState();
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState(' ');
 
   const dispatch = useDispatch();
 
@@ -78,6 +91,29 @@ export default function Basket({ location }) {
     } else {
       paymentException();
     }
+  };
+
+  const handleCreditCardNumberChange = ({ target }) => {
+    target.value = formatCreditCardNumber(target.value);
+    setNumber(target.value);
+  };
+
+  const handleExpiryNumberChange = ({ target }) => {
+    target.value = formatExpirationDate(target.value);
+    setExpiry(target.value);
+  };
+
+  const handleCvcChange = ({ target }) => {
+    target.value = formatCVC(target.value);
+    setCvc(target.value);
+  };
+
+  const handleCreditCardNameChange = ({ target }) => {
+    setName(target.value);
+  };
+
+  const handleInputFocus = ({ target }) => {
+    setFocused(target.name);
   };
 
   useEffect(() => {
@@ -145,6 +181,73 @@ export default function Basket({ location }) {
               </div>
             </div>
           ))}
+          <h4>Pagamento</h4>
+          <div id="PaymentForm">
+            <Card
+              number={number}
+              name={name}
+              expiry={expiry}
+              cvc={cvc}
+              focused={focused}
+              placeholders={{ name: 'SEU NOME' }}
+            />
+          </div>
+
+          <form>
+            <div
+              className="form-group"
+              width="100%"
+            >
+              <input
+                type="tel"
+                name="number"
+                className="form-control"
+                placeholder="Número do cartão"
+                pattern="[\d| ]{16,22}"
+                required
+                onChange={handleCreditCardNumberChange}
+                onFocus={handleInputFocus}
+                styles="width: 100% !important;"
+              />
+            </div>
+            <div className="form-group">
+              <input
+                type="text"
+                name="name"
+                className="form-control"
+                placeholder="Nome"
+                required
+                onChange={handleCreditCardNameChange}
+                onFocus={handleInputFocus}
+              />
+            </div>
+            <div className="row">
+              <div className="col-6">
+                <input
+                  type="tel"
+                  name="expiry"
+                  className="form-control"
+                  placeholder="Validade"
+                  pattern="\d\d/\d\d"
+                  required
+                  onChange={handleExpiryNumberChange}
+                  onFocus={handleInputFocus}
+                />
+              </div>
+              <div className="col-6">
+                <input
+                  type="tel"
+                  name="cvc"
+                  className="form-control"
+                  placeholder="CVC"
+                  pattern="\d{3,4}"
+                  required
+                  onChange={handleCvcChange}
+                  onFocus={handleInputFocus}
+                />
+              </div>
+            </div>
+          </form>
         </Scroll>
         <footer>
           <button type="button" onClick={handleDoAPayment}>
