@@ -34,11 +34,11 @@ export default function Basket() {
   const chair = useChairNumber();
   const restaurantId = useRestaurantId();
   const [completeBasket, setCompleteBasket] = useState([]);
+  const [focused, setFocused] = useState();
   const [cvc, setCvc] = useState('');
   const [expiry, setExpiry] = useState('');
-  const [focused, setFocused] = useState();
   const [name, setName] = useState('');
-  const [number, setNumber] = useState(' ');
+  const [cardNumber, setCardNumber] = useState(' ');
 
   const dispatch = useDispatch();
 
@@ -83,7 +83,13 @@ export default function Basket() {
     const orderResult = await api.post(order, {
       dishes: completeBasket,
       restaurant_id: restaurantId,
-      chair: chair
+      chair: chair,
+      creditCard: {
+        number: cardNumber,
+        expiry,
+        cvc,
+        name
+      }
     });
 
     if (orderResult) {
@@ -95,7 +101,7 @@ export default function Basket() {
 
   const handleCreditCardNumberChange = ({ target }) => {
     target.value = formatCreditCardNumber(target.value);
-    setNumber(target.value);
+    setCardNumber(target.value);
   };
 
   const handleExpiryNumberChange = ({ target }) => {
@@ -184,7 +190,7 @@ export default function Basket() {
           <h4>Pagamento</h4>
           <div id="PaymentForm">
             <Card
-              number={number}
+              number={cardNumber}
               name={name}
               expiry={expiry}
               cvc={cvc}

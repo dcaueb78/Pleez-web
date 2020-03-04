@@ -25,6 +25,19 @@ class OrderController {
   }
 
   async store(req, res) {
+    const schema = Yup.object().shape({
+      dishes: Yup.array().required(),
+      restaurant_id: Yup.number().required(),
+      chair: Yup.number().required(),
+      creditCard: Yup.object().required()
+    });
+
+    if (!(await schema.isValid(req.body))) {
+      return res.status(400).json({ error: 'Falha de validação!' });
+    }
+
+    let cardHash = '';
+
     const card = {
       card_number: '4111111111111111',
       card_holder_name: 'abc',
@@ -32,11 +45,19 @@ class OrderController {
       card_cvv: '123'
     };
 
-    let cardHash = '';
+    const card2 = {
+      card_number: req.body.creditCard.number.split(" ").join(""),
+      card_holder_name: req.body.creditCard.name,
+      card_expiration_date: req.body.creditCard.expiry.replace("/", ""),
+      card_cvv: req.body.creditCard.cvc
+    };
+
 
     await pagarme.client
       .connect({ api_key })
-      .then(client => client.security.encrypt(card))
+      .then(client =>
+        client.security.encrypt(card2)
+      )
       .then(card_hash => {
         cardHash = card_hash;
       });
@@ -90,16 +111,6 @@ class OrderController {
       .then(transaction => {
         transaction_id = transaction.id;
       });
-
-    const schema = Yup.object().shape({
-      dishes: Yup.array().required(),
-      restaurant_id: Yup.number().required(),
-      chair: Yup.number().required()
-    });
-
-    if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Falha de validação!' });
-    }
 
     async function findDishDetailsById(id) {
       const dishDetails = await Dish.findByPk(id);
