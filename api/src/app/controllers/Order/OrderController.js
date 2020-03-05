@@ -1,6 +1,8 @@
 import * as Yup from 'yup';
 import Order from '../../schemas/Order';
 import Dish from '../../models/Dish';
+import User from '../../models/User';
+
 import pagarme from 'pagarme';
 
 import { api_key } from '../../../config/pagarme';
@@ -36,7 +38,7 @@ class OrderController {
       return res.status(400).json({ error: 'Falha de validação!' });
     }
 
-    console.log(req.body);
+    const userDetails = await User.findByPk(req.userId);
 
     const { dishes } = req.body;
 
@@ -44,7 +46,7 @@ class OrderController {
       .map(dish => dish.price * dish.quantity)
       .reduce((a, b) => a + b, 0);
 
-    console.log(totalPrice.toFixed(2).replace('.', ''));
+    // console.log(totalPrice.toFixed(2).replace('.', ''));
 
     let cardHash = '';
 
@@ -72,11 +74,11 @@ class OrderController {
           card_hash: cardHash,
           payment_method: 'credit_card',
           customer: {
-            external_id: '#3311',
-            name: 'Morpheus Fishburne',
+            external_id: `#${userDetails.id}`,
+            name: userDetails.name,
             type: 'individual',
             country: 'br',
-            email: 'mopheus@nabucodonozor.com',
+            email: userDetails.email,
             documents: [
               {
                 type: 'cpf',
@@ -84,7 +86,7 @@ class OrderController {
               }
             ],
             phone_numbers: ['+5511999998888', '+5511888889999'],
-            birthday: '1965-01-01'
+            // birthday: '1965-01-01'
           },
           billing: {
             name: 'Trinity Moss',
@@ -111,7 +113,7 @@ class OrderController {
       )
       .then(transaction => {
         transaction_id = transaction.id;
-        console.log(transaction);
+        // console.log(transaction);
       });
 
     async function findDishDetailsById(id) {
