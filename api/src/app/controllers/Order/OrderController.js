@@ -36,28 +36,28 @@ class OrderController {
       return res.status(400).json({ error: 'Falha de validação!' });
     }
 
+    console.log(req.body);
+
+    const { dishes } = req.body;
+
+    const totalPrice = dishes
+      .map(dish => dish.price * dish.quantity)
+      .reduce((a, b) => a + b, 0);
+
+    console.log(totalPrice.toFixed(2).replace('.', ''));
+
     let cardHash = '';
 
     const card = {
-      card_number: '4111111111111111',
-      card_holder_name: 'abc',
-      card_expiration_date: '1225',
-      card_cvv: '123'
-    };
-
-    const card2 = {
-      card_number: req.body.creditCard.number.split(" ").join(""),
+      card_number: req.body.creditCard.number.split(' ').join(''),
       card_holder_name: req.body.creditCard.name,
-      card_expiration_date: req.body.creditCard.expiry.replace("/", ""),
+      card_expiration_date: req.body.creditCard.expiry.replace('/', ''),
       card_cvv: req.body.creditCard.cvc
     };
 
-
     await pagarme.client
       .connect({ api_key })
-      .then(client =>
-        client.security.encrypt(card2)
-      )
+      .then(client => client.security.encrypt(card))
       .then(card_hash => {
         cardHash = card_hash;
       });
@@ -68,8 +68,9 @@ class OrderController {
       .connect({ api_key })
       .then(client =>
         client.transactions.create({
-          amount: 100,
+          amount: totalPrice.toFixed(2).replace('.', ''),
           card_hash: cardHash,
+          payment_method: 'credit_card',
           customer: {
             external_id: '#3311',
             name: 'Morpheus Fishburne',
@@ -101,7 +102,7 @@ class OrderController {
             {
               id: 'r123',
               title: 'Red pill',
-              unit_price: 1,
+              unit_price: totalPrice.toFixed(2).replace('.', ''),
               quantity: 1,
               tangible: false
             }
@@ -110,6 +111,7 @@ class OrderController {
       )
       .then(transaction => {
         transaction_id = transaction.id;
+        console.log(transaction);
       });
 
     async function findDishDetailsById(id) {
