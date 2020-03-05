@@ -64,6 +64,10 @@ export const Scroll = styled(PerfectScrollbar)`
   border-radius: 12px;
   padding: 15px 20px 0 20px;
 
+  h4 {
+    margin: 10px;
+  }
+
   > div {
     border-bottom: 2px solid #eee;
     > div:first-child {
@@ -98,6 +102,28 @@ export const Scroll = styled(PerfectScrollbar)`
     }
     padding-bottom: 15px;
     margin-bottom: 15px;
+  }
+
+  .input-width-100 {
+    width: 100%;
+  }
+
+  input {
+    height: 30px;
+    border-radius: 8px;
+    padding: 5px;
+    color: #000;
+    opacity: 0.7;
+
+    border: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+  }
+
+  input::placeholder {
+    color: grey;
+    opacity: 0.8;
   }
 `;
 

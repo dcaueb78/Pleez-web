@@ -188,7 +188,7 @@ export default function Basket() {
             </div>
           ))}
           <h4>Pagamento</h4>
-          <div id="PaymentForm">
+          <div>
             <Card
               number={cardNumber}
               name={name}
@@ -200,39 +200,35 @@ export default function Basket() {
           </div>
 
           <form>
-            <div
-              className="form-group"
-              width="100%"
-            >
+            <div>
               <input
+                className="input-width-100"
                 type="tel"
                 name="number"
-                className="form-control"
                 placeholder="Número do cartão"
                 pattern="[\d| ]{16,22}"
                 required
                 onChange={handleCreditCardNumberChange}
                 onFocus={handleInputFocus}
-                styles="width: 100% !important;"
               />
             </div>
-            <div className="form-group">
+            <div>
               <input
+                className="input-width-100"
                 type="text"
                 name="name"
-                className="form-control"
                 placeholder="Nome"
                 required
                 onChange={handleCreditCardNameChange}
                 onFocus={handleInputFocus}
               />
             </div>
-            <div className="row">
-              <div className="col-6">
+            <div>
+              <div>
                 <input
+                  className="input-width-100"
                   type="tel"
                   name="expiry"
-                  className="form-control"
                   placeholder="Validade"
                   pattern="\d\d/\d\d"
                   required
@@ -240,11 +236,11 @@ export default function Basket() {
                   onFocus={handleInputFocus}
                 />
               </div>
-              <div className="col-6">
+              <div>
                 <input
+                  className="input-width-100"
                   type="tel"
                   name="cvc"
-                  className="form-control"
                   placeholder="CVC"
                   pattern="\d{3,4}"
                   required
