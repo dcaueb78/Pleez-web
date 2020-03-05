@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import 'react-perfect-scrollbar/dist/css/styles.css';
+import { lighten } from 'polished';
 
 export const Wrapper = styled.div`
   height: 100%;
@@ -112,7 +113,7 @@ export const Scroll = styled(PerfectScrollbar)`
     height: 30px;
     border-radius: 8px;
     padding: 5px;
-    color: #000;
+    color: ${lighten(0.1, '#000')};
     opacity: 0.7;
 
     border: none;
@@ -122,8 +123,7 @@ export const Scroll = styled(PerfectScrollbar)`
   }
 
   input::placeholder {
-    color: grey;
-    opacity: 0.8;
+    color: ${lighten(0.6, '#000')};
   }
 `;
 
