@@ -46,8 +46,6 @@ class OrderController {
       .map(dish => dish.price * dish.quantity)
       .reduce((a, b) => a + b, 0);
 
-    // console.log(totalPrice.toFixed(2).replace('.', ''));
-
     let cardHash = '';
 
     const card = {
@@ -86,7 +84,6 @@ class OrderController {
               }
             ],
             phone_numbers: ['+5511999998888', '+5511888889999'],
-            // birthday: '1965-01-01'
           },
           billing: {
             name: 'Trinity Moss',
