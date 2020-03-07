@@ -1,27 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { MdArrowBack } from 'react-icons/md';
 
-import { useChairNumber, useRestaurantId } from '~/store/hooks/basket';
-import { clearBasket } from '~/store/modules/basket/actions';
+import { useChairNumber } from '~/store/hooks/basket';
 import api from '~/config/api';
 import history from '~/services/history';
 import { formatPrice } from '~/utils/format';
 
-import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
+import Payment from '~/components/Payment/index';
 
-import Card from 'react-credit-cards';
-import {
-  formatCreditCardNumber,
-  formatCVC,
-  formatExpirationDate
-} from '~/utils/payment';
 import 'react-credit-cards/es/styles-compiled.css';
 
-import { dishesDetails, order } from '~/services/api/endPoints';
-import { infos, category } from '~/services/api/pages';
+import { dishesDetails } from '~/services/api/endPoints';
+import { infos } from '~/services/api/pages';
 
 import { Wrapper, Content, Scroll } from './styles';
 import BasketContent from '~/components/BasketContent';
@@ -32,95 +24,18 @@ import cartIcon from '~/assets/icons/CartIcon.png';
 export default function Basket() {
   const basket = useSelector(state => state.basket.basket);
   const chair = useChairNumber();
-  const restaurantId = useRestaurantId();
   const [completeBasket, setCompleteBasket] = useState([]);
-  const [focused, setFocused] = useState();
-  const [cvc, setCvc] = useState('');
-  const [expiry, setExpiry] = useState('');
-  const [name, setName] = useState('');
-  const [cardNumber, setCardNumber] = useState(' ');
 
-  const dispatch = useDispatch();
-
-  const ReactSwal = withReactContent(Swal);
+  const totalPrice = completeBasket
+    .map(dish => dish.price * dish.quantity)
+    .reduce((a, b) => a + b, 0);
 
   const formatDishPrice = dish => {
     const formattedPrice = formatPrice(dish.price * dish.quantity);
     return formattedPrice;
   };
 
-  const paymentRequestAlert = () => {
-    ReactSwal.fire({
-      title: <p>Aguardando provação do pedido!</p>,
-      footer: 'Acompanhe o seu pedido :3',
-      icon: 'info'
-    }).then(() => {
-      history.push(category(restaurantId, chair));
-      dispatch(clearBasket());
-    });
-  };
-
-  const confirmPayment = () => {
-    ReactSwal.fire({
-      title: <p>Pedido Confirmado!</p>,
-      footer: 'Daqui a pouco seu pedido vai chegar :D',
-      icon: 'success'
-    }).then(() => {
-      history.push(category(restaurantId, chair));
-    });
-  };
-
-  const paymentException = () => {
-    ReactSwal.fire({
-      title: <p>Houve um problema no pedido!</p>,
-      footer: 'Poderia tentar novamente? :(',
-      icon: 'error'
-    });
-  };
-
-  const handleDoAPayment = async () => {
-    paymentRequestAlert();
-    const orderResult = await api.post(order, {
-      dishes: completeBasket,
-      restaurant_id: restaurantId,
-      chair: chair,
-      creditCard: {
-        number: cardNumber,
-        expiry,
-        cvc,
-        name
-      }
-    });
-
-    if (orderResult) {
-      confirmPayment();
-    } else {
-      paymentException();
-    }
-  };
-
-  const handleCreditCardNumberChange = ({ target }) => {
-    target.value = formatCreditCardNumber(target.value);
-    setCardNumber(target.value);
-  };
-
-  const handleExpiryNumberChange = ({ target }) => {
-    target.value = formatExpirationDate(target.value);
-    setExpiry(target.value);
-  };
-
-  const handleCvcChange = ({ target }) => {
-    target.value = formatCVC(target.value);
-    setCvc(target.value);
-  };
-
-  const handleCreditCardNameChange = ({ target }) => {
-    setName(target.value);
-  };
-
-  const handleInputFocus = ({ target }) => {
-    setFocused(target.name);
-  };
+  const existItemsOnBasket = () => !!completeBasket.length;
 
   useEffect(() => {
     function validateChairExists() {
@@ -134,6 +49,8 @@ export default function Basket() {
 
   useEffect(() => {
     async function loadBasketDishInfo() {
+      if (basket.length <= 0) return;
+
       const idList = await basket.map(dish => dish.dishId);
 
       const getBasketDetailsByIds = await api.post(dishesDetails, {
@@ -187,75 +104,18 @@ export default function Basket() {
               </div>
             </div>
           ))}
-          <h4>Pagamento</h4>
           <div>
-            <Card
-              number={cardNumber}
-              name={name}
-              expiry={expiry}
-              cvc={cvc}
-              focused={focused}
-              placeholders={{ name: 'SEU NOME' }}
-            />
+            <span>
+              Total: <b>{formatPrice(totalPrice)}</b>
+            </span>
           </div>
 
-          <form>
-            <div>
-              <input
-                className="input-width-100"
-                type="tel"
-                name="number"
-                placeholder="Número do cartão"
-                pattern="[\d| ]{16,22}"
-                required
-                onChange={handleCreditCardNumberChange}
-                onFocus={handleInputFocus}
-              />
-            </div>
-            <div>
-              <input
-                className="input-width-100"
-                type="text"
-                name="name"
-                placeholder="Nome"
-                required
-                onChange={handleCreditCardNameChange}
-                onFocus={handleInputFocus}
-              />
-            </div>
-            <div>
-              <div>
-                <input
-                  className="input-width-100"
-                  type="tel"
-                  name="expiry"
-                  placeholder="Validade"
-                  pattern="\d\d/\d\d"
-                  required
-                  onChange={handleExpiryNumberChange}
-                  onFocus={handleInputFocus}
-                />
-              </div>
-              <div>
-                <input
-                  className="input-width-100"
-                  type="tel"
-                  name="cvc"
-                  placeholder="CVC"
-                  pattern="\d{3,4}"
-                  required
-                  onChange={handleCvcChange}
-                  onFocus={handleInputFocus}
-                />
-              </div>
-            </div>
-          </form>
+          {completeBasket.length > 0 ? (
+            <Payment completeBasket={existItemsOnBasket} chair={chair} />
+          ) : (
+            <p>Sua bandeja está vazia :(</p>
+          )}
         </Scroll>
-        <footer>
-          <button type="button" onClick={handleDoAPayment}>
-            Fazer o pedido
-          </button>
-        </footer>
       </BasketContent>
     </Wrapper>
   );
