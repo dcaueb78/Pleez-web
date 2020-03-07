@@ -111,7 +111,7 @@ export default function Basket() {
           </div>
 
           {completeBasket.length > 0 ? (
-            <Payment completeBasket={existItemsOnBasket} chair={chair} />
+            <Payment completeBasket={completeBasket} chair={chair} />
           ) : (
             <p>Sua bandeja está vazia :(</p>
           )}
