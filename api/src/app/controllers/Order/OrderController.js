@@ -1,11 +1,12 @@
 import * as Yup from 'yup';
+
+import pagarme from 'pagarme';
+import { api_key, pleez_recipient_id } from '../../../config/pagarme';
+
 import Order from '../../schemas/Order';
 import Dish from '../../models/Dish';
 import User from '../../models/User';
-
-import pagarme from 'pagarme';
-
-import { api_key } from '../../../config/pagarme';
+import Restaurant from '../../models/Restaurant';
 
 class OrderController {
   async index(req, res) {
@@ -46,8 +47,6 @@ class OrderController {
       .map(dish => dish.price * dish.quantity)
       .reduce((a, b) => a + b, 0);
 
-    let cardHash = '';
-
     const card = {
       card_number: req.body.creditCard.number.split(' ').join(''),
       card_holder_name: req.body.creditCard.name,
@@ -55,6 +54,7 @@ class OrderController {
       card_cvv: req.body.creditCard.cvc
     };
 
+    let cardHash = '';
     await pagarme.client
       .connect({ api_key })
       .then(client => client.security.encrypt(card))
@@ -62,8 +62,9 @@ class OrderController {
         cardHash = card_hash;
       });
 
-    let transaction_id = '';
+    const { recipient_id } = await Restaurant.findByPk(req.body.restaurant_id);
 
+    let transaction_id = '';
     await pagarme.client
       .connect({ api_key })
       .then(client =>
@@ -83,33 +84,39 @@ class OrderController {
                 number: '30621143049'
               }
             ],
-            phone_numbers: ['+5511999998888', '+5511888889999'],
+            phone_numbers: ['+5511999998888', '+5511888889999']
           },
-          billing: {
-            name: 'Trinity Moss',
-            address: {
-              country: 'br',
-              state: 'sp',
-              city: 'Cotia',
-              neighborhood: 'Rio Cotia',
-              street: 'Rua Matrix',
-              street_number: '9999',
-              zipcode: '06714360'
-            }
-          },
-          items: [
+          items: dishes.map(dish => ({
+            id: `${dish.id}`,
+            title: dish.name,
+            unit_price: dish.price.toFixed(2).replace('.', ''),
+            quantity: dish.quantity,
+            tangible: false
+          })),
+          split_rules: [
             {
-              id: 'r123',
-              title: 'Red pill',
-              unit_price: totalPrice.toFixed(2).replace('.', ''),
-              quantity: 1,
-              tangible: false
+              recipient_id: pleez_recipient_id,
+              percentage: 1,
+              liable: true,
+              charge_processing_fee: true
+            },
+            {
+              recipient_id,
+              percentage: 99,
+              liable: false,
+              charge_processing_fee: true
             }
           ]
         })
       )
       .then(transaction => {
-        transaction_id = transaction.id;
+        if (transaction.status === 'paid') {
+          transaction_id = transaction.id;
+
+          console.log(transaction);
+        } else {
+          return res.status(402).json({ error: 'Pagamento recusado' });
+        }
       });
 
     async function findDishDetailsById(id) {
