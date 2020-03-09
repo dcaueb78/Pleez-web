@@ -110,7 +110,6 @@ class OrderController {
       )
       .then(transaction => {
         transaction_id = transaction.id;
-        // console.log(transaction);
       });
 
     async function findDishDetailsById(id) {
