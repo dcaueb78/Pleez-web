@@ -56,6 +56,7 @@ export default function Payment({ completeBasket, chair }) {
 
   const handleDoAPayment = async () => {
     paymentRequestAlert();
+    dispatch(clearBasket());
     const orderResult = await api.post(order, {
       dishes: completeBasket,
       restaurant_id: restaurantId,
@@ -81,7 +82,6 @@ export default function Payment({ completeBasket, chair }) {
       icon: 'info'
     }).then(() => {
       history.push(category(restaurantId, chair));
-      dispatch(clearBasket());
     });
   };
 
