@@ -110,7 +110,7 @@ export default function Basket() {
             </span>
           </div>
 
-          {completeBasket.length > 0 ? (
+          {existItemsOnBasket ? (
             <Payment completeBasket={completeBasket} chair={chair} />
           ) : (
             <p>Sua bandeja está vazia :(</p>
