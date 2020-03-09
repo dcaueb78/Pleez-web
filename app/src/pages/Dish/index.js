@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from 'react';
 
+import { toast } from 'react-toastify';
+import { MdArrowBack } from 'react-icons/md';
+
 import { Wrapper, Content, Scroll } from './styles';
 import FoodCard from '~/components/FoodCard';
 import CartFooter from '~/components/CartFooter';
 
 import api from '~/config/api';
 import history from '~/services/history';
-import { toast } from 'react-toastify';
 
 import { base } from '~/services/api/pages';
 
-import { allDishesFromCategoryId, restaurantDetails } from '~/services/api/endPoints';
+import {
+  allDishesFromCategoryId,
+  restaurantDetails
+} from '~/services/api/endPoints';
 
-import { MdArrowBack } from 'react-icons/md';
 import logo from '~/assets/logo.png';
 import unclejoe from '~/assets/unclejoe.png';
 
@@ -29,7 +33,7 @@ export default function Categories({ match }) {
     }
 
     findAllDishesFromSelectedCategory(category);
-  }, []);
+  }, [category]);
 
   useEffect(() => {
     async function shouldRestaurantExists(restaurant_id) {
@@ -45,7 +49,7 @@ export default function Categories({ match }) {
     }
 
     shouldRestaurantExists(restaurant);
-  }, []);
+  }, [restaurant]);
 
   return (
     <Wrapper>

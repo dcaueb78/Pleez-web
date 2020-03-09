@@ -37,14 +37,14 @@ export default function Categories({ match }) {
     }
 
     function validateRestaurantExists() {
-      if(!restaurantIdExists || restaurant !== restaurantIdExists) {
+      if (!restaurantIdExists || restaurant !== restaurantIdExists) {
         dispatch(addRestaurant({ restaurant }));
       }
     }
 
     validateChairExists();
     validateRestaurantExists();
-  }, []);
+  }, [chair, chairNumberExists, dispatch, restaurant, restaurantIdExists]);
 
   const [restaurantName, setRestaurantName] = useState('');
   const [categories, setCategories] = useState([]);
@@ -56,7 +56,7 @@ export default function Categories({ match }) {
     }
 
     findAllCategoriesFromSelectedRestaurant(restaurant);
-  }, []);
+  }, [restaurant]);
 
   useEffect(() => {
     async function shouldRestaurantExists(restaurant_id) {
@@ -72,7 +72,7 @@ export default function Categories({ match }) {
     }
 
     shouldRestaurantExists(restaurant);
-  }, []);
+  }, [restaurant]);
 
   return (
     <Wrapper>

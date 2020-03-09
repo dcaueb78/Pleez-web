@@ -1,4 +1,3 @@
-import React from 'react';
 import { useSelector } from 'react-redux';
 
 const useChairNumber = () => {
@@ -13,10 +12,10 @@ const useChairNumber = () => {
 const useRestaurantId = () => {
   const restaurantIdSelector = useSelector(state => state.basket.restaurant);
 
-  if(!restaurantIdSelector) {
+  if (!restaurantIdSelector) {
     return false;
   }
   return restaurantIdSelector.restaurant;
-}
+};
 
 export { useChairNumber, useRestaurantId };

@@ -34,7 +34,7 @@ export default function Details({ match }) {
     }
 
     findDishDetails(dish);
-  }, []);
+  }, [dish]);
 
   const subTotal = formatPrice(dishDetails.price * dishQuantity);
 
@@ -76,9 +76,13 @@ export default function Details({ match }) {
           />
           <h3>Quantos vai querer?</h3>
           <div className="quantity">
-            <button type="button" onClick={handleDishQuantitySub}>-</button>
+            <button type="button" onClick={handleDishQuantitySub}>
+              -
+            </button>
             <input type="number" placeholder={dishQuantity} disabled />
-            <button type="button" onClick={handleDishQuantitySum}>+</button>
+            <button type="button" onClick={handleDishQuantitySum}>
+              +
+            </button>
           </div>
         </Scroll>
       </Content>
