@@ -10,7 +10,6 @@ class ProfessionalAccount extends Model {
         password: Sequelize.VIRTUAL,
         password_hash: Sequelize.STRING,
         cnpj: Sequelize.BIGINT,
-        recipient_id: Sequelize.STRING,
       },
       {
         sequelize

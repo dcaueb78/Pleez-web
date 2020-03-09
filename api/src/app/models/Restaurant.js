@@ -12,7 +12,8 @@ class Restaurant extends Model {
         state: Sequelize.STRING,
         neighborhood: Sequelize.STRING,
         addres: Sequelize.STRING,
-        number: Sequelize.BIGINT
+        number: Sequelize.BIGINT,
+        recipient_id: Sequelize.STRING,
       },
       {
         sequelize
