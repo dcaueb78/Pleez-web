@@ -7,6 +7,8 @@ import { orderPage } from '~/services/api/endPoints';
 import api from '~/config/api';
 import history from '~/services/history';
 
+import { getStatusDescription, getColorStatusList } from '~/utils/orderStatus';
+
 import 'react-credit-cards/es/styles-compiled.css';
 
 import { Wrapper, Content, Scroll } from './styles';
@@ -23,7 +25,6 @@ export default function PaymentHistory() {
     async function loadOrders() {
       const response = await api.get(orderPage(page));
       setOrders(response.data);
-      console.log(response.data);
     }
 
     loadOrders();
@@ -45,76 +46,13 @@ export default function PaymentHistory() {
           </div>
         </header>
         <Scroll>
-          <div>
-            <p>#125</p>
-            <div>Preparando</div>
-            <div>bola</div>
-          </div>
-          <div>
-            <p>#125</p>
-            <div>Preparando</div>
-            <div>bola</div>
-          </div>
-          <div>
-            <p>#125</p>
-            <div>Preparando</div>
-            <div>bola</div>
-          </div>
-          <div>
-            <p>#125</p>
-            <div>Preparando</div>
-            <div>bola</div>
-          </div>
-          <div>
-            <p>#125</p>
-            <div>Preparando</div>
-            <div>bola</div>
-          </div>
-          <div>
-            <p>#125</p>
-            <div>Preparando</div>
-            <div>bola</div>
-          </div>
-          <div>
-            <p>#125</p>
-            <div>Preparando</div>
-            <div>bola</div>
-          </div>
-          <div>
-            <p>#125</p>
-            <div>Preparando</div>
-            <div>bola</div>
-          </div>
-          <div>
-            <p>#125</p>
-            <div>Preparando</div>
-            <div>bola</div>
-          </div>
-          <div>
-            <p>#125</p>
-            <div>Preparando</div>
-            <div>bola</div>
-          </div>
-          <div>
-            <p>#125</p>
-            <div>Preparando</div>
-            <div>bola</div>
-          </div>
-          <div>
-            <p>#125</p>
-            <div>Preparando</div>
-            <div>bola</div>
-          </div>
-          <div>
-            <p>#125</p>
-            <div>Preparando</div>
-            <div>bola</div>
-          </div>
-          <div>
-            <p>#125</p>
-            <div>Preparando</div>
-            <div>bola</div>
-          </div>
+          {orders.map(order => (
+            <div key={order._id}>
+              <p>{`#${1}`}</p>
+              <div>{getStatusDescription(order.status)}</div>
+              <div className={getColorStatusList(order.status)} />
+            </div>
+          ))}
         </Scroll>
       </BasketContent>
     </Wrapper>

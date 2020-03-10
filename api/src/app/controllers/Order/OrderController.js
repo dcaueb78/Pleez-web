@@ -114,8 +114,6 @@ class OrderController {
       .then(transaction => {
         if (transaction.status === 'paid') {
           transaction_id = transaction.id;
-
-          console.log(transaction);
         } else {
           return res.status(402).json({ error: 'Pagamento recusado' });
         }

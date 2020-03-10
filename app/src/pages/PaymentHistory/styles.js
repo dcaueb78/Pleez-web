@@ -34,6 +34,27 @@ export const Wrapper = styled.div`
       }
     }
   }
+
+  .greenCircle {
+    background-color: green;
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+  }
+
+  .greyCircle {
+    background-color: grey;
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+  }
+
+  .yellowCircle {
+    background-color: yellow;
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+  }
 `;
 
 export const Content = styled.div`
@@ -86,9 +107,5 @@ export const Scroll = styled(PerfectScrollbar)`
     padding: 15px 0 15px 0;
 
     border-bottom: 2px solid #eee;
-  }
-
-  > div:first-child {
-    border-top: 2px solid #eee;
   }
 `;
