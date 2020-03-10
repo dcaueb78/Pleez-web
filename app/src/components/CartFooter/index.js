@@ -1,6 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
+import { MdKeyboardArrowUp } from 'react-icons/md';
+
 import history from '~/services/history';
 
 import { basket } from '~/services/api/pages';
@@ -22,7 +24,9 @@ export default function CartFooter() {
       </div>
       <div>
         <div>
-          <span>seta</span>
+          <button type="button">
+            <MdKeyboardArrowUp size={32} color="white" />
+          </button>
           <span>Itens na bandeja</span>
         </div>
       </div>

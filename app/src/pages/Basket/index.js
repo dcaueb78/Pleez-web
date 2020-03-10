@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
-import { MdArrowBack } from 'react-icons/md';
+import { MdArrowBack, MdKeyboardArrowDown } from 'react-icons/md';
 
 import { useChairNumber } from '~/store/hooks/basket';
 import api from '~/config/api';
@@ -79,7 +79,9 @@ export default function Basket() {
       </Content>
       <BasketContent>
         <header>
-          <p>seta</p>
+          <button type="button">
+            <MdKeyboardArrowDown size={32} color="white" />
+          </button>
           <div>
             <h1>Sua Bandeja</h1>
             <img src={cartIcon} alt="Cart" />
