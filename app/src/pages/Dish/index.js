@@ -10,7 +10,7 @@ import CartFooter from '~/components/CartFooter';
 import api from '~/config/api';
 import history from '~/services/history';
 
-import { base } from '~/services/api/pages';
+import { base, paymentHistory } from '~/services/api/pages';
 
 import {
   allDishesFromCategoryId,
@@ -58,6 +58,9 @@ export default function Categories({ match }) {
           <MdArrowBack size={32} color="white" />
         </button>
         <img src={logo} alt="Pleez" />
+        <button type="button" onClick={() => history.push(paymentHistory)}>
+          <MdArrowBack size={32} color="white" />
+        </button>
         <Scroll>
           {/* <h1>{restaurantName}</h1> */}
           <img src={unclejoe} alt="Restaurante" />

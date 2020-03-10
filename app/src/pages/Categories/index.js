@@ -3,6 +3,8 @@ import { useDispatch } from 'react-redux';
 
 import { toast } from 'react-toastify';
 
+import { MdArrowBack } from 'react-icons/md';
+
 import { Wrapper, Content, Scroll } from './styles';
 import FoodCard from '~/components/FoodCard';
 import CartFooter from '~/components/CartFooter';
@@ -12,7 +14,7 @@ import { addChair, addRestaurant } from '~/store/modules/basket/actions';
 import api from '~/config/api';
 import history from '~/services/history';
 
-import { base } from '~/services/api/pages';
+import { base, paymentHistory } from '~/services/api/pages';
 
 import {
   restaurantDetails,
@@ -78,6 +80,9 @@ export default function Categories({ match }) {
     <Wrapper>
       <Content>
         <img src={logo} alt="Pleez" />
+        <button type="button" onClick={() => history.push(paymentHistory)}>
+          <MdArrowBack size={32} color="white" />
+        </button>
         <Scroll>
           {/* <h1>{restaurantName}</h1> */}
           <img src={unclejoe} alt="Restaurante" />
