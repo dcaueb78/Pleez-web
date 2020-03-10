@@ -21,7 +21,9 @@ class OrderController {
     const orders = await Order.find({
       user_id: req.params.userId
     })
-      .sort('createdAt')
+      .sort({
+        createdAt: 'desc'
+      })
       .limit(10);
 
     return res.json(orders);

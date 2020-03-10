@@ -17,6 +17,10 @@ const allDishesFromCategoryId = category_id => {
   return `dish/${category_id}`;
 };
 
+const orderPage = page => {
+  return `order/${page}`;
+};
+
 export {
   dishesDetails,
   sessions,
@@ -25,5 +29,6 @@ export {
   restaurantDetails,
   dishDetails,
   allDishesFromCategoryId,
-  order
+  order,
+  orderPage
 };

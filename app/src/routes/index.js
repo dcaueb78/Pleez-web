@@ -10,8 +10,15 @@ import Dish from '../pages/Dish';
 import Details from '../pages/Details';
 import Basket from '../pages/Basket';
 import Infos from '../pages/Infos';
+import PaymentHistory from '../pages/PaymentHistory';
 
-import { basket, categoryBaseRoute, dishBaseRoute, detailsBaseRoute } from '~/services/api/pages';
+import {
+  basket,
+  categoryBaseRoute,
+  dishBaseRoute,
+  detailsBaseRoute,
+  paymentHistory
+} from '~/services/api/pages';
 
 export default function Routes() {
   return (
@@ -37,6 +44,8 @@ export default function Routes() {
         component={Details}
         isPrivate
       />
+      <Route path={paymentHistory} exact component={PaymentHistory} isPrivate />
+
       <Route path={basket} exact component={Basket} isPrivate />
       <Route path="/informacoes/" exact component={Infos} isPrivate />
 
