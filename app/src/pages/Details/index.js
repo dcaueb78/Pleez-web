@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { MdArrowBack } from 'react-icons/md';
+import { MdArrowBack, MdReorder } from 'react-icons/md';
 
 import { addToBasket } from '~/store/modules/basket/actions';
 import api from '~/config/api';
@@ -9,6 +9,8 @@ import history from '~/services/history';
 import { formatPrice } from '~/utils/format';
 
 import { dishDetails as dishDetailsEndPoint } from '~/services/api/endPoints';
+
+import { paymentHistory } from '~/services/api/pages';
 
 import { Wrapper, Content, Scroll } from './styles';
 import FoodImage from '~/components/FoodImage';
@@ -63,6 +65,9 @@ export default function Details({ match }) {
           <MdArrowBack size={32} color="white" />
         </button>
         <img src={logo} alt="Pleez" />
+        <button type="button" onClick={() => history.push(paymentHistory)}>
+          <MdReorder size={32} color="white" />
+        </button>
         <Scroll>
           <h1>{dishDetails.name}</h1>
           <FoodImage />

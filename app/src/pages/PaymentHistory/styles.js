@@ -105,7 +105,12 @@ export const Scroll = styled(PerfectScrollbar)`
     justify-content: space-between;
     color: #46494e;
     padding: 15px 0 15px 0;
+    align-items: center;
 
     border-bottom: 2px solid #eee;
+
+    p {
+      font-size: 16px;
+    }
   }
 `;

@@ -27,7 +27,7 @@ export const Content = styled.div`
   flex: 1;
   height: 100%;
 
-  > button {
+  > button:first-child {
     position: absolute;
     left: 10px;
     top: 10px;
@@ -45,6 +45,21 @@ export const Content = styled.div`
   img {
     margin: 8px;
     width: 50px;
+  }
+
+  > button {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 50px;
+    height: 50px;
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
   }
 
   > div {

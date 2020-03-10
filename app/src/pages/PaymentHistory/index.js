@@ -48,7 +48,7 @@ export default function PaymentHistory() {
         <Scroll>
           {orders.map(order => (
             <div key={order._id}>
-              <p>{`#${1}`}</p>
+              <p>{`#${order.transaction_id}`}</p>
               <div>{getStatusDescription(order.status)}</div>
               <div className={getColorStatusList(order.status)} />
             </div>
