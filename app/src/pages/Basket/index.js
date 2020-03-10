@@ -79,7 +79,7 @@ export default function Basket() {
       </Content>
       <BasketContent>
         <header>
-          <button type="button">
+          <button type="button" onClick={history.goBack}>
             <MdKeyboardArrowDown size={32} color="white" />
           </button>
           <div>
