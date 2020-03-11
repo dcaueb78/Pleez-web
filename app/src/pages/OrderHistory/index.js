@@ -33,9 +33,10 @@ export default function OrderHistory() {
 
   const handleLoadMore = () => {
     async function loadMoreOrders() {
+      const response = await api.get(orderPage(page + 1));
       setPage(page + 1);
-      const response = await api.get(orderPage(page));
-      setOrders(response.data);
+      const newOrdersList = orders.concat(response.data);
+      setOrders(newOrdersList);
     }
 
     loadMoreOrders();

@@ -31,15 +31,17 @@ class DishDetailsController {
 
     const dishIdList = req.body.dishes_id;
 
-    async function findDishDetailsById (id) {
+    async function findDishDetailsById(id) {
       const dishDetails = await Dish.findByPk(id);
       return dishDetails;
     }
 
-    const dishesDetails = await Promise.all(dishIdList.map(async(id) => {
-      const dish = await findDishDetailsById(id);
-      return dish;
-    }));
+    const dishesDetails = await Promise.all(
+      dishIdList.map(async id => {
+        const dish = await findDishDetailsById(id);
+        return dish;
+      })
+    );
 
     return res.json(dishesDetails);
   }

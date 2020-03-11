@@ -18,7 +18,7 @@ const allDishesFromCategoryId = category_id => {
 };
 
 const orderPage = page => {
-  return `order/${page}`;
+  return `order?page=${page}`;
 };
 
 export {

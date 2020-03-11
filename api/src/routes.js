@@ -53,7 +53,7 @@ routes.post('/dishes-details/', DishDetailsController.indexAllById);
 routes.get('/dish-details/:dish_id', DishDetailsController.index);
 
 routes.post('/order', UserAuthMiddleware, OrderController.store);
-routes.get('/order/:userId', UserAuthMiddleware, OrderController.index);
+routes.get('/order/', UserAuthMiddleware, OrderController.index);
 
 routes.use(UserAuthMiddleware);
 

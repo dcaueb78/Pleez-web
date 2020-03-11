@@ -11,8 +11,7 @@ class ProfessionalAccountController {
       password: Yup.string()
         .required()
         .min(6),
-      cnpj: Yup.number()
-        .required()
+      cnpj: Yup.number().required()
     });
 
     if (!(await schema.isValid(req.body))) {

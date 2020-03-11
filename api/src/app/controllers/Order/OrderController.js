@@ -10,21 +10,17 @@ import Restaurant from '../../models/Restaurant';
 
 class OrderController {
   async index(req, res) {
-    const schema = Yup.object().shape({
-      userId: Yup.number().required()
-    });
-
-    if (!(await schema.isValid(req.params))) {
-      return res.status(400).json({ error: 'Falha de validação!' });
-    }
+    const { page = 1 } = req.query;
+    const pageLimit = 10;
 
     const orders = await Order.find({
-      user_id: req.params.userId
+      user_id: req.userId
     })
       .sort({
         createdAt: 'desc'
       })
-      .limit(10);
+      .limit(pageLimit)
+      .skip((page - 1) * 10);
 
     return res.json(orders);
   }
@@ -117,6 +113,7 @@ class OrderController {
         } else {
           return res.status(402).json({ error: 'Pagamento recusado' });
         }
+        return transaction_id;
       });
 
     async function findDishDetailsById(id) {
