@@ -22,6 +22,7 @@ module.exports = {
     'react/state-in-constructor': 'off',
     'react/jsx-filename-extension': ['warn', { extensions: ['.jsx', '.js'] }],
     'import/prefer-default-export': 'off',
+    'no-underscore-dangle': 'off',
     'no-param-reassign': 'off',
     'no-console': ['error', { allow: ['tron'] }],
     'react-hooks/rules-of-hooks': 'error',
