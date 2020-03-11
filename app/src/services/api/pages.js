@@ -1,8 +1,8 @@
 const base = '/';
 const infos = '/informacoes';
 const basket = '/comanda';
-const paymentHistory = '/historico';
 
+const orderHistoryRoute = '/historico';
 const categoryBaseRoute = '/categorias';
 const dishBaseRoute = '/pratos';
 const detailsBaseRoute = '/detalhes';
@@ -18,5 +18,5 @@ export {
   categoryBaseRoute,
   dishBaseRoute,
   detailsBaseRoute,
-  paymentHistory
+  orderHistoryRoute
 };

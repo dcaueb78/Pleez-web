@@ -17,18 +17,29 @@ import BasketContent from '~/components/AccountInfosContent';
 import logo from '~/assets/logo.png';
 import cartHistoryIcon from '~/assets/icons/CartHistory.svg';
 
-export default function PaymentHistory() {
+export default function OrderHistory() {
   const [orders, setOrders] = useState([]);
-  const [page, setPage] = useState(1);
+  const defaultPage = 1;
+  const [page, setPage] = useState(defaultPage);
 
   useEffect(() => {
     async function loadOrders() {
-      const response = await api.get(orderPage(page));
+      const response = await api.get(orderPage(defaultPage));
       setOrders(response.data);
     }
 
     loadOrders();
-  }, [page]);
+  }, []);
+
+  const handleLoadMore = () => {
+    async function loadMoreOrders() {
+      setPage(page + 1);
+      const response = await api.get(orderPage(page));
+      setOrders(response.data);
+    }
+
+    loadMoreOrders();
+  };
 
   return (
     <Wrapper>
@@ -53,6 +64,11 @@ export default function PaymentHistory() {
               <div className={getColorStatusList(order.status)} />
             </div>
           ))}
+          <div>
+            <button type="button" onClick={handleLoadMore}>
+              Carregar mais
+            </button>
+          </div>
         </Scroll>
       </BasketContent>
     </Wrapper>

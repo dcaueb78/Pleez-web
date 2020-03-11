@@ -14,7 +14,7 @@ import { addChair, addRestaurant } from '~/store/modules/basket/actions';
 import api from '~/config/api';
 import history from '~/services/history';
 
-import { base, paymentHistory } from '~/services/api/pages';
+import { base, orderHistoryRoute } from '~/services/api/pages';
 
 import {
   restaurantDetails,
@@ -80,7 +80,7 @@ export default function Categories({ match }) {
     <Wrapper>
       <Content>
         <img src={logo} alt="Pleez" />
-        <button type="button" onClick={() => history.push(paymentHistory)}>
+        <button type="button" onClick={() => history.push(orderHistoryRoute)}>
           <MdReorder size={32} color="white" />
         </button>
         <Scroll>

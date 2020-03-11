@@ -10,7 +10,7 @@ import { formatPrice } from '~/utils/format';
 
 import { dishDetails as dishDetailsEndPoint } from '~/services/api/endPoints';
 
-import { paymentHistory } from '~/services/api/pages';
+import { orderHistoryRoute } from '~/services/api/pages';
 
 import { Wrapper, Content, Scroll } from './styles';
 import FoodImage from '~/components/FoodImage';
@@ -65,7 +65,7 @@ export default function Details({ match }) {
           <MdArrowBack size={32} color="white" />
         </button>
         <img src={logo} alt="Pleez" />
-        <button type="button" onClick={() => history.push(paymentHistory)}>
+        <button type="button" onClick={() => history.push(orderHistoryRoute)}>
           <MdReorder size={32} color="white" />
         </button>
         <Scroll>
