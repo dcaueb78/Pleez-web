@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "halogen-acumen-252020",
+  "private_key_id": "89e3e5794cef1da638eb5f9de283e0a52ba88728",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC84J4XVPaEyihF\nmMLS9aWcko/yS5maHFeESByKp3ZmCduVO3OmuDcwAODHSvzUYAbWOlcbmDO6B8tQ\np9NSYmY/V0vVLiz8SWTnyJqEDbzMeUyarzYKfoyFUdQTn6/NV5YiZFtgfF4vj+1a\n3GlO0uyGFfsTV2/Nzt7smwiHfZNyF5A1yKa3HKEpr42FXmvqAA5MMCtDJJT+afoa\nVRt8yj2FJwhkyohYymBdCEjXwc+WHakwuIxrLnrzSf4BOrOx5CNIZqZd2VuVyHDS\ng+fL/BT6veAkJbH/gZjCpj1JVcFFWjKSxUIoyrS23WjKGuUxSrEQAZ0Zrvx+NQcx\n92diBH7PAgMBAAECggEAGtvYL1oyKiTzQB5eihBLii3fUWXFxIAGQ/XbNS5mLFF3\ni8umAQ3OL0HYtQ5pUKwNHNaz/2UP6gLkuyX6a4s5ngVEb96+n+ux8TH6IxAvCmav\naYnD5g8j3WuK/HVnUwyC+YYK5ngZDqtpZdPVF9PvtYuXpiL3b61czwmm11mYp48K\njCaQ0bDnI8Ksii/MFZRUz7uFaq1PF3tlJoeVgqUoRlIBPWfEsseFGOfLyN6C9dlJ\ng7z5k/uFpjtBL/ebDkves2ElLJqXwXZizIVbyu4Ppup3KjP1OfHSeH/VacPa7MeT\nQXkDviISwxO0utKNByd5xMeiD7/m4OHPU26JQ7H88QKBgQDsOoSWy/C4eJ83NuDK\nJsMiDUb8Ptq0bMUmRmQGZSaK3FYVuR0bdhJWSUo4lPtakYnjllE/yZRu1POrp5z4\nlewofH/mnLokFw8kBb67CjoIoU7/4+nvpj0WbaKVFed7LxVgipP6jg7TGhHlhWAj\nlUCsGQy47EG8Aw1cSXKB5fqJ8QKBgQDMr4suVXUzn5WxOFPX+gcdDpHMvWzkp2Lb\nOB2i7/uhF+v53rqYEOcK7kN2fzobg1dX3NaYoE7VM1AIj7x+8MLzRtutbO9a+9s0\nIpDydYjlaYpl4mUdultBiXVh3PM4SzA7MmRBvFV6iykbHi6xy5ojnQZdu3UsWh4y\n3+XGc5zUvwKBgAUIKhLcPUBwsVOHw7oKoVV0WvK8lAQL3Rc3oKHSPcPvdZX433na\nRgG4hfA2nDQNrZY/eXOWY6cIujgJ1foll2Y1YLQU2pIyO4xU4v8w9JOCfCBPRoho\nThzQMQpj8Q5armXkDcrkg8RTZdYxxR5862e/ENpPjgbnOb2hguLpdzDBAoGBAMa6\nBMqGhBUL8t0uUBEYGoH2nE4I98mETnGCqRuCHm+Idz6RJd7wQjGVpQBOhA8kVM/k\nhKGIuyE6AZFeZGdmwBBMkoptgnJ2ppuWl94fiTsbXhiPVxcm0OTvXX0XdTkJnxlK\nUpaUEPW6WL2Qb0uF3vCGyyCEGT5nfHxub3te0jynAoGAAl3LHaiYEC7fpIpZtGqj\nFcKX9eOyAtfyZ/PgqPOkaW/SsQHjCJcK4EJ7vs2mD76JPXPJyYATW/xROi54Egmz\nIq4kKh0lmb7AcVWe0NKHFItnMhpx9oaERc0NKM116uNvcINQSi+QBbttg/fYBnna\nx87aS9NfDHkSATf0ghzC8xU=\n-----END PRIVATE KEY-----\n",
+  "client_email": "pleez-admin-storage@halogen-acumen-252020.iam.gserviceaccount.com",
+  "client_id": "109795937407204590292",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/pleez-admin-storage%40halogen-acumen-252020.iam.gserviceaccount.com"
+}

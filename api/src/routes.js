@@ -1,4 +1,7 @@
 import { Router } from 'express';
+import multer from 'multer';
+import multerConfig from './config/multer';
+import uploadImage from './helpers/helpers';
 
 import UserController from './app/controllers/User/UserController';
 import ClientSessionController from './app/controllers/Session/ClientSessionController';
@@ -15,6 +18,7 @@ import UserAuthMiddleware from './app/middlewares/authUser';
 import ProfessionalAccountAuthMiddleware from './app/middlewares/authProfessionalAccount';
 
 const routes = new Router();
+const upload = multer(multerConfig);
 
 routes.post('/users', UserController.store);
 routes.post('/sessions', ClientSessionController.store);
@@ -44,6 +48,23 @@ routes.post(
   '/category',
   ProfessionalAccountAuthMiddleware,
   CategoryController.store
+);
+
+routes.post(
+  '/category/image',
+  upload.single('file'),
+  async (req, res, next) => {
+    try {
+      const myFile = req.file;
+      const imageUrl = await uploadImage(myFile);
+      res.status(200).json({
+        message: 'Upload was successful',
+        data: imageUrl
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
 );
 routes.get('/category/:restaurant_id', CategoryController.index);
 
