@@ -6,6 +6,7 @@ class Category extends Model {
       {
         name: Sequelize.STRING,
         is_available: Sequelize.BOOLEAN,
+        image_id: Sequelize.STRING
       },
       {
         sequelize

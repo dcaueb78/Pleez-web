@@ -1,14 +1,16 @@
 import { format } from 'util';
+import Hashes from 'jshashes';
 
-import gc from '../config/googleCloud';
+import storage from '../config/Storage';
 
-const bucket = gc.bucket('pleez_images_bucket_1'); // should be your bucket name
+const bucket = storage.bucket('pleez_images_bucket_1');
 
 export default file =>
-  new Promise((resolve, reject) => {
+  new Promise(resolve => {
     const { originalname, buffer } = file;
 
-    const blob = bucket.file(originalname.replace(/ /g, '_'));
+    const hash = new Hashes.SHA1().b64(originalname);
+    const blob = bucket.file(`${hash}-${originalname.length}`);
     const blobStream = blob.createWriteStream({
       resumable: false
     });
