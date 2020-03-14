@@ -26,7 +26,7 @@ class CategoryFileController {
       url: imageUrl
     });
 
-    const teste = await Category.update(
+    const updatedCategory = await Category.update(
       {
         image_id: id
       },
@@ -37,7 +37,7 @@ class CategoryFileController {
       }
     );
 
-    return res.json({ teste });
+    return res.json({ updatedCategory });
   }
 }
 

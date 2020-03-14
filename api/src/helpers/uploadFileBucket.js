@@ -10,7 +10,9 @@ export default file =>
     const { originalname, buffer } = file;
 
     const hash = new Hashes.SHA1().b64(originalname);
-    const blob = bucket.file(`${hash}-${originalname.length}`);
+    const blob = bucket.file(
+      `${hash}-${originalname.length}-${Math.floor(Math.random() * 1000) + 1}`
+    );
     const blobStream = blob.createWriteStream({
       resumable: false
     });
@@ -22,7 +24,7 @@ export default file =>
         resolve(publicUrl);
       })
       .on('error', err => {
-        console.log(err);
+        throw new Error(err);
       })
       .end(buffer);
   });
