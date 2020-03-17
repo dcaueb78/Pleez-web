@@ -1,7 +1,6 @@
 import * as Yup from 'yup';
 import uploadImage from '../../../helpers/uploadFileBucket';
 
-import Images from '../../schemas/Images';
 import Category from '../../models/Category';
 
 class CategoryFileController {
@@ -22,13 +21,9 @@ class CategoryFileController {
       return res.status(400).json({ error: 'Arquivo inválido' });
     }
 
-    const { id } = await Images.create({
-      url: imageUrl
-    });
-
     const updatedCategory = await Category.update(
       {
-        image_id: id
+        image_url: imageUrl
       },
       {
         where: {

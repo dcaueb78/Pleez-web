@@ -1,13 +1,13 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.addColumn('categories', 'image_id', {
+    return queryInterface.addColumn('categories', 'image_url', {
       type: Sequelize.STRING,
       allowNull: true,
-      defaultValue: 'not_exists'
+      defaultValue: null
     });
   },
 
   down: queryInterface => {
-    return queryInterface.removeColumn('categories', 'image_id');
+    return queryInterface.removeColumn('categories', 'image_url');
   }
 };
