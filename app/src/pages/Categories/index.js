@@ -95,6 +95,7 @@ export default function Categories({ match }) {
                   name={category.name}
                   alt={category.name}
                   redirect={`/pratos/${restaurant}/${category.id}`}
+                  backgroundImageUrl={category.image_url}
                 />
               ))}
             </>
