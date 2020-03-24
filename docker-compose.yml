@@ -11,6 +11,16 @@ services:
       - ./app:/usr/app
     depends_on:
       - api
+  restaurant-app:
+    build:
+      context: restaurant-app
+      dockerfile: restaurant-app.Dockerfile
+    container_name: pleez_restaurant_app
+    ports:
+      - 3000:3000
+    volumes:
+      - ./restaurant-app:/usr/app
+    stdin_open: true
   api:
     build:
       context: api
