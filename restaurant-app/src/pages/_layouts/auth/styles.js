@@ -31,7 +31,7 @@ export const Content = styled.div`
       border-radius: 4px;
       height: 44px;
       padding: 0 15px;
-      color: #FFFFFF;
+      color: #ffffff;
       margin: 0 0 10px;
 
       &::placeholder {
@@ -40,7 +40,7 @@ export const Content = styled.div`
     }
 
     span {
-      color: #FFFFFF;
+      color: #ffffff;
       align-self: flex-start;
       margin: 0 0 10px;
       font-weight: bold;
@@ -49,20 +49,20 @@ export const Content = styled.div`
     button {
       margin: 5px 0 0;
       height: 44px;
-      background: #00CFB4;
-      color: #FFFFFF;
+      background: #00cfb4;
+      color: #ffffff;
       border: 0;
       border-radius: 4px;
       font-size: 16px;
       transition: background 0.2s;
 
       &:hover {
-        background: ${darken(0.03, '#00CFB4')}
+        background: ${darken(0.03, '#00CFB4')};
       }
     }
 
     a {
-      color: #FFFFFF;
+      color: #ffffff;
       margin-top: 15px;
       font-size: 16px;
       opacity: 0.8;
