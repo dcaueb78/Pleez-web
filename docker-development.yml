@@ -1,0 +1,18 @@
+version: '3'
+services:
+  api:
+    links:
+      - postgresql
+    depends_on:
+      - postgresql
+  postgresql:
+    image: postgres:9.4
+    container_name: pleez_db_pg
+    ports:
+      - 5432:5432
+    volumes:
+      - ./database/postgresql:/data/db
+    environment: 
+      - POSTGRES_DB=pleez
+      - POSTGRES_USER=pleez
+      - POSTGRES_PASSWORD=pleez
