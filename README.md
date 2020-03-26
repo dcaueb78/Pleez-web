@@ -3,11 +3,11 @@
 ### Build: 
     docker-compose build
 
-### Up:
-    docker-compose up
+### Subir container de desenvolvimento:
+    docker-compose -f docker-compose.yml -f docker-development.yml up -d
 
-### Start:
-    docker-compose start
+### Subir container testando produção:
+    docker-compose up -d
 
 ### Abrir terminal de algum container
     docker exec -ti <nome do container> /bin/bash  
