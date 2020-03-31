@@ -17,7 +17,6 @@ export function* signIn({ payload }) {
     });
 
     const { token, professionalAccount } = response.data;
-    console.log(response.data);
 
     api.defaults.headers.Authorization = `Bearer ${token}`;
 
