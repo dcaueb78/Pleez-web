@@ -8,8 +8,8 @@ const INITIAL_STATE = {
 export default function account(state = INITIAL_STATE, action) {
   switch (action.type) {
     case '@auth/SIGN_IN_SUCCESS':
-      return produce(state, draft => {
-        draft.profile = action.payload.user;
+      return produce(state, (draft) => {
+        draft.profile = action.payload.professionalAccount;
       });
     default:
       return state;

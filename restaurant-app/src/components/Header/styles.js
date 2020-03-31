@@ -25,7 +25,17 @@ export const Content = styled.div`
 
     a {
       font-weight: bold;
+      font-size: 18px;
       color: #fff;
+      margin-right: 20px;
+    }
+    a:hover {
+      transition: color 0.2s;
+      transition: top 5s;
+      color: #22d6bc;
+      cursor: pointer;
+      transform: translateY(-2px);
+      transition: all 0.1s;
     }
   }
 
