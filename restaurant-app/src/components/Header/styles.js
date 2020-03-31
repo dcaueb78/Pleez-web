@@ -27,7 +27,7 @@ export const Content = styled.div`
       font-weight: bold;
       font-size: 18px;
       color: #fff;
-      margin-right: 20px;
+      margin-right: 30px;
     }
     a:hover {
       transition: color 0.2s;
