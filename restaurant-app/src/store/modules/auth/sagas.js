@@ -35,13 +35,12 @@ export function* signIn({ payload }) {
 
 export function* signUp({ payload }) {
   try {
-    const { fullName, email, password, cnpj } = payload;
+    const { fullName, email, password } = payload;
 
     yield call(api.post, 'professional-account', {
       name: fullName,
       email,
       password,
-      cnpj,
     });
 
     toast.success('Cadastrado com sucesso :D');

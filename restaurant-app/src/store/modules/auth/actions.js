@@ -12,10 +12,10 @@ export function signInSuccess(token, professionalAccount) {
   };
 }
 
-export function signUpRequest(fullName, email, password, cnpj) {
+export function signUpRequest(fullName, email, password) {
   return {
     type: '@auth/SIGN_UP_REQUEST',
-    payload: { fullName, email, password, cnpj },
+    payload: { fullName, email, password },
   };
 }
 
