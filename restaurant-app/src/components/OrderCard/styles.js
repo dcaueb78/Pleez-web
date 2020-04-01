@@ -1,6 +1,4 @@
 import styled, { css } from 'styled-components';
-import { lighten } from 'polished';
-
 export const Nonconformity = styled.li`
 &:hover {
   cursor: pointer;
@@ -23,12 +21,12 @@ hr {
   ${props =>
     props.status === 1 &&
     css`
-      background: #569f39 !important;
+      background: yellow !important;
     `}
   ${props =>
     props.status === 2 &&
     css`
-      background: #d5212e !important;
+      background: #569f39 !important;
     `}
 }
 div {

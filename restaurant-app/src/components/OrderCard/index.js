@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Nonconformity } from './styles';
 
-export default function OrderCard({ status }) {
+export default function OrderCard({ status, totalPrice, code}) {
   return (
     <>
       <Nonconformity onClick={() => console.log('oi')} status={status}>
@@ -10,7 +10,7 @@ export default function OrderCard({ status }) {
         <div>
           <div>
             <strong>pedido</strong>
-            <span>#123</span>
+            <span>#{code}</span>
           </div>
           <div>
             <span>Preparar</span>
