@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
-import { lighten } from 'polished';
 
-export const Nonconformity = styled.li`
+export const Card = styled.li`
   &:hover {
     cursor: pointer;
     transform: translateY(-5px);

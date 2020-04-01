@@ -8,6 +8,8 @@ import SignUp from '~/pages/SignUp';
 import Profile from '~/pages/Profile';
 import Dashboard from '~/pages/Dashboard';
 
+import Restaurants from '~/pages/Restaurants';
+
 export default function Routes() {
   return (
     <Switch>
@@ -16,6 +18,8 @@ export default function Routes() {
 
       <Route path="/dashboard" exact component={Dashboard} isPrivate />
       <Route path="/perfil" exact component={Profile} isPrivate />
+
+      <Route path="/restaurantes" exact component={Restaurants} isPrivate />
 
       <Route path="/" component={() => <h1>Erro 404</h1>} />
     </Switch>

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { selectRestaurant } from '~/store/modules/account/actions';
 
+import api from '~/services/api';
 import history from '~/services/history';
 
 import { Container } from './styles';
@@ -11,20 +12,30 @@ import RestaurantCard from '~/components/RestaurantCard';
 
 import { MdAdd } from 'react-icons/md';
 
-export default function Dashboard() {
+export default function Restaurants() {
   const dispatch = useDispatch();
   const restaurantSelected = useSelector((state) => state.account.restaurant);
   const [restaurants, setRestaurants] = useState([]);
 
   useEffect(() => {
-    if(!restaurantSelected) {
-      history.push('/restaurantes');
+    async function loadRestaurants() {
+      const response = await api.get('restaurant');
+
+      setRestaurants(response.data);
+    }
+    loadRestaurants();
+  }, []);
+
+  useEffect(() => {
+    if (restaurantSelected) {
+      history.push('/dashboard');
     }
   }, []);
 
   const handleSelectRestaurant = (restaurantId) => {
     dispatch(selectRestaurant(restaurantId));
-  }
+    history.push('/dashboard');
+  };
   return (
     <Container>
       <header onClick={() => console.log('novo')}>
@@ -32,13 +43,20 @@ export default function Dashboard() {
           <button type="button">
             <MdAdd size={44} color="#fff" />
           </button>
-          <strong>Caueeee</strong>
+          <strong>Novo restaurante</strong>
         </div>
       </header>
 
       <ul>
         {restaurants.map((restaurant) => (
-          <RestaurantCard onClick={() => handleSelectRestaurant(restaurant.id)} key={restaurant.id} status={1} name={restaurant.name} cnpj={restaurant.cnpj} color='red' />
+          <RestaurantCard
+            onClick={() => handleSelectRestaurant(restaurant.id)}
+            key={restaurant.id}
+            status={1}
+            name={restaurant.name}
+            cnpj={restaurant.cnpj}
+            color="red"
+          />
         ))}
       </ul>
       <div className="load-more">

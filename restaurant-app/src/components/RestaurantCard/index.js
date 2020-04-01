@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { Nonconformity } from './styles';
+import { Card } from './styles';
 
-export default function RestaurantCard({ name, status, cnpj, color }) {
+export default function RestaurantCard({ name, status, cnpj, color, onClick }) {
   return (
     <>
-      <Nonconformity onClick={() => console.log('oi')} status={status} color={color}>
+      <Card onClick={onClick} status={status} color={color}>
         <hr />
         <div>
           <div>
@@ -16,7 +16,7 @@ export default function RestaurantCard({ name, status, cnpj, color }) {
             <span>Selecionar</span>
           </div>
         </div>
-      </Nonconformity>
+      </Card>
     </>
   );
 }
