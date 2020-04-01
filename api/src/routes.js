@@ -13,6 +13,7 @@ import CategoryFileController from './app/controllers/CategoryFile/CategoryFileC
 import DishController from './app/controllers/Dish/DishController';
 import DishDetailsController from './app/controllers/Dish/DishDetailsController';
 import OrderController from './app/controllers/Order/OrderController';
+import RestaurantOrderController from './app/controllers/RestaurantOrder/RestaurantOrderController';
 
 import UserAuthMiddleware from './app/middlewares/authUser';
 import ProfessionalAccountAuthMiddleware from './app/middlewares/authProfessionalAccount';
@@ -64,6 +65,8 @@ routes.get('/dish-details/:dish_id', DishDetailsController.index);
 
 routes.post('/order', UserAuthMiddleware, OrderController.store);
 routes.get('/order/', UserAuthMiddleware, OrderController.index);
+
+routes.get('/restaurant-order/', ProfessionalAccountAuthMiddleware, RestaurantOrderController.index);
 
 routes.use(UserAuthMiddleware);
 
