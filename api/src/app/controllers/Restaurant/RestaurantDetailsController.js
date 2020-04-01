@@ -18,9 +18,9 @@ class RestaurantDetailsController {
       return res.status(401).json({ error: 'Restaurant not found' });
     }
 
-    const { name, id } = restaurant;
+    const { name, id, cnpj } = restaurant;
 
-    return res.json({ name, id });
+    return res.json({ name, id, cnpj });
   }
 }
 

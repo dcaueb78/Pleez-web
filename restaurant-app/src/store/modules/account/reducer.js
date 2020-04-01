@@ -11,6 +11,10 @@ export default function account(state = INITIAL_STATE, action) {
       return produce(state, (draft) => {
         draft.profile = action.payload.professionalAccount;
       });
+    case '@account/SELECT_RESTAURANT':
+      return produce(state, (draft) => {
+        draft.restaurant = action.payload.restaurantId
+      })
     default:
       return state;
   }

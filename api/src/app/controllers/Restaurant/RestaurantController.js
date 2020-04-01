@@ -1,6 +1,5 @@
 import * as Yup from 'yup';
 import Restaurant from '../../models/Restaurant';
-import ProfessionalAccount from '../../models/ProfessionalAccount';
 
 import pagarme from 'pagarme';
 import { api_key } from '../../../config/pagarme';
@@ -9,6 +8,7 @@ class RestaurantController {
   async index(req, res) {
     const { page = 1 } = req.query;
 
+    console.log(req.accountId);
     const restaurants = await Restaurant.findAll({
       where: { professional_account_id: req.accountId },
       order: ['createdAt'],
