@@ -33,7 +33,8 @@ class RestaurantController {
       bank_code: Yup.string().required(),
       agency: Yup.string().required(),
       account: Yup.string().required(),
-      account_dv: Yup.string().required()
+      account_dv: Yup.string().required(),
+      cnpj: Yup.number().required()
     });
 
     if (!(await schema.isValid(req.body))) {
@@ -42,7 +43,7 @@ class RestaurantController {
 
     const { social_reason, bank_code, agency, account, account_dv } = req.body;
 
-    const { cnpj } = await ProfessionalAccount.findByPk(req.accountId);
+    const { cnpj } = await Restaurant.findByPk(req.accountId);
 
     let recipient_id = '';
     await pagarme.client
