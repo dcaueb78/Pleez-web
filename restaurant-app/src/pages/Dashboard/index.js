@@ -18,23 +18,25 @@ export default function Dashboard() {
     }
   }, []);
 
-  useEffect(() => {
-    async function loadOrders() {
-      const response = await api.post('/restaurant-order', {
-        restaurantId: 1,
-      });
+  const loadOrders = async () => {
+    const response = await api.post('/restaurant-order', {
+      restaurantId: 1,
+    });
 
-      setOrders(response.data);
-    }
+    setOrders(response.data);
+  };
+
+  useEffect(() => {
     loadOrders();
   }, []);
 
-  const handleSelectOrder = (orderId, status) => {
+  const handleSelectOrder = async (orderId, status) => {
     const newStatus = status + 1 > 2 ? status : status + 1;
-    api.patch('/order', {
+    await api.patch('/order', {
       orderId,
       status: newStatus,
     });
+    loadOrders();
   };
 
   return (
