@@ -4,8 +4,9 @@ import { useSelector } from 'react-redux';
 import api from '~/services/api';
 import history from '~/services/history';
 
-import { Container } from './styles';
+import { statusOrder } from '~/constants';
 
+import { Container } from './styles';
 import OrderCard from '~/components/OrderCard';
 
 export default function Dashboard() {
@@ -41,6 +42,9 @@ export default function Dashboard() {
 
   return (
     <Container>
+      <div className="flex center">
+        <h1>Lista de pedidos</h1>
+      </div>
       <ul>
         {orders.map((order) => (
           <OrderCard

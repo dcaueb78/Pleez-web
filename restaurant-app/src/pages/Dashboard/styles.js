@@ -29,5 +29,13 @@ export const Container = styled.div`
       color: #999;
     }
   }
+
+  .flex{
+    display: flex;
+  }
+
+  .center {
+    justify-content: center;
+  }
 `;
 
