@@ -9,6 +9,7 @@ import Profile from '~/pages/Profile';
 import Dashboard from '~/pages/Dashboard';
 
 import Restaurants from '~/pages/Restaurants';
+import CreateRestaurant from '~/pages/CreateRestaurant';
 
 export default function Routes() {
   return (
@@ -20,6 +21,7 @@ export default function Routes() {
       <Route path="/perfil" exact component={Profile} isPrivate />
 
       <Route path="/restaurantes" exact component={Restaurants} isPrivate />
+      <Route path="/novo-restaurante" exact component={CreateRestaurant} isPrivate />
 
       <Route path="/" component={() => <h1>Erro 404</h1>} />
     </Switch>

@@ -36,9 +36,14 @@ export default function Restaurants() {
     dispatch(selectRestaurant(restaurantId));
     history.push('/dashboard');
   };
+
+  const handleCreateNewRestaurant = () => {
+    history.push('/novo-restaurante');
+  };
+
   return (
     <Container>
-      <header onClick={() => console.log('novo')}>
+      <header onClick={handleCreateNewRestaurant}>
         <div>
           <button type="button">
             <MdAdd size={44} color="#fff" />
