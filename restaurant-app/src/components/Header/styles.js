@@ -72,4 +72,9 @@ export const Profile = styled.div`
     height: 32px;
     border-radius: 50%;
   }
+  button {
+    background: none;
+    border: none;
+    margin-left: 30px;
+  }
 `;

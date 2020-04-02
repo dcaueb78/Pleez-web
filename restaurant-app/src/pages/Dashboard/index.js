@@ -4,8 +4,6 @@ import { useSelector } from 'react-redux';
 import api from '~/services/api';
 import history from '~/services/history';
 
-import { statusOrder } from '~/constants';
-
 import { Container } from './styles';
 import OrderCard from '~/components/OrderCard';
 

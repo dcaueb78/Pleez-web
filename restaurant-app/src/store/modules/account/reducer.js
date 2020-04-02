@@ -6,16 +6,22 @@ const INITIAL_STATE = {
 };
 
 export default function account(state = INITIAL_STATE, action) {
-  switch (action.type) {
-    case '@auth/SIGN_IN_SUCCESS':
-      return produce(state, (draft) => {
+  return produce(state, (draft) => {
+    switch (action.type) {
+      case '@auth/SIGN_IN_SUCCESS': {
         draft.profile = action.payload.professionalAccount;
-      });
-    case '@account/SELECT_RESTAURANT':
-      return produce(state, (draft) => {
-        draft.restaurant = action.payload.restaurantId
-      })
-    default:
-      return state;
-  }
+        break;
+      }
+      case '@account/SELECT_RESTAURANT': {
+        draft.restaurant = action.payload.restaurantId;
+        break;
+      }
+      case '@auth/SIGN_OUT': {
+        draft.profile = null;
+        draft.restaurant = null;
+        break;
+      }
+      default:
+    }
+  });
 }
