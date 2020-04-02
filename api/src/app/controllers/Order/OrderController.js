@@ -25,6 +25,19 @@ class OrderController {
     return res.json(orders);
   }
 
+  async update(req, res) {
+
+    const { orderId, status } = req.body;
+    const order = await Order.findByIdAndUpdate(
+      { _id: orderId },
+      {
+        status
+      }
+    );
+
+    return res.json({status, orderId});
+  }
+
   async store(req, res) {
     const schema = Yup.object().shape({
       dishes: Yup.array().required(),

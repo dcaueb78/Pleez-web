@@ -65,8 +65,9 @@ routes.get('/dish-details/:dish_id', DishDetailsController.index);
 
 routes.post('/order', UserAuthMiddleware, OrderController.store);
 routes.get('/order/', UserAuthMiddleware, OrderController.index);
+routes.patch('/order/', ProfessionalAccountAuthMiddleware, OrderController.update);
 
-routes.get('/restaurant-order/', ProfessionalAccountAuthMiddleware, RestaurantOrderController.index);
+routes.post('/restaurant-order/', ProfessionalAccountAuthMiddleware, RestaurantOrderController.index);
 
 routes.use(UserAuthMiddleware);
 

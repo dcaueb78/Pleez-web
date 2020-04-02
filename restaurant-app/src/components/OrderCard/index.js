@@ -1,16 +1,18 @@
 import React from 'react';
 
+import { formatPrice } from '~/utils/format';
+
 import { Nonconformity } from './styles';
 
-export default function OrderCard({ status, totalPrice, code}) {
+export default function OrderCard({ status, totalPrice, code, onClick}) {
   return (
     <>
-      <Nonconformity onClick={() => console.log('oi')} status={status}>
+      <Nonconformity onClick={onClick} status={status}>
         <hr />
         <div>
           <div>
-            <strong>pedido</strong>
-            <span>#{code}</span>
+            <strong>#{code}</strong>
+            <span>{formatPrice(totalPrice)}</span>
           </div>
           <div>
             <span>Preparar</span>

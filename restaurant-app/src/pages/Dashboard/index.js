@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
-import { selectRestaurant } from '~/store/modules/account/actions';
+import { useSelector } from 'react-redux';
 
 import api from '~/services/api';
 import history from '~/services/history';
@@ -11,7 +9,6 @@ import { Container } from './styles';
 import OrderCard from '~/components/OrderCard';
 
 export default function Dashboard() {
-  const dispatch = useDispatch();
   const restaurantSelected = useSelector((state) => state.account.restaurant);
   const [orders, setOrders] = useState([]);
 
@@ -32,15 +29,21 @@ export default function Dashboard() {
     loadOrders();
   }, []);
 
-  const handleSelectRestaurant = (restaurantId) => {
-    dispatch(selectRestaurant(restaurantId));
+  const handleSelectOrder = (orderId, status) => {
+    const newStatus = status + 1 > 2 ? status : status + 1;
+    api.patch('/order', {
+      orderId,
+      status: newStatus,
+    });
   };
+
   return (
     <Container>
       <ul>
         {orders.map((order) => (
           <OrderCard
-            onClick={() => handleSelectRestaurant(order._id)}
+            onClick={() => handleSelectOrder(order._id, order.status)}
+            totalPrice={order.total_price}
             key={order._id}
             status={order.status}
             code={order.transaction_id}
