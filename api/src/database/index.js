@@ -31,6 +31,7 @@ class Database {
       useFindAndModify: true
     });
   }
+
 }
 
 export default new Database();
