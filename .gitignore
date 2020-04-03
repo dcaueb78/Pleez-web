@@ -2,3 +2,4 @@
 database/mongodb
 database/postgresql
 */.env
+*/dist
