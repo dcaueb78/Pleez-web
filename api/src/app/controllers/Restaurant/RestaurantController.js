@@ -38,11 +38,17 @@ class RestaurantController {
 
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({ error: 'Falha de validação!' });
+    };
+
+    const cnpjAlreadyExists = await Restaurant.findOne({
+      where: { cnpj: req.body.cnpj.toString() },
+    });
+
+    if (cnpjAlreadyExists) {
+      return res.status(409).json({ error: 'CNPJ já cadastrado' });
     }
 
-    const { social_reason, bank_code, agency, account, account_dv } = req.body;
-
-    const { cnpj } = await Restaurant.findByPk(req.accountId);
+    const { social_reason, bank_code, agency, account, account_dv, cnpj } = req.body;
 
     let recipient_id = '';
     await pagarme.client

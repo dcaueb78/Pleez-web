@@ -7,6 +7,10 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
 
+  h1 {
+    font-size: 30px;
+  }
+
   form {
     display: flex;
     flex-direction: column;
@@ -48,10 +52,14 @@ export const Container = styled.div`
     span {
       color: #aaa;
       align-self: flex-start;
-      margin: 0 0 10px;
+      margin: 25px 0;
       font-weight: bold;
       font-size: 20px;
-      margin-top: 5px;
+      color: #00cfb4;
+    }
+
+    span:first-child {
+      margin-top: 0;
     }
 
     button {
@@ -93,5 +101,10 @@ export const Container = styled.div`
   a:last-child {
     color: red;
     font-weight: bold;
+  }
+
+  .center {
+    display: flex;
+    justify-content: center;
   }
 `;

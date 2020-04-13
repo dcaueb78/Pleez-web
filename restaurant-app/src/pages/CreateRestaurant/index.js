@@ -5,6 +5,7 @@ import { Form, Input } from '@rocketseat/unform';
 import * as Yup from 'yup';
 
 import history from '~/services/history';
+import api from '~/services/api';
 
 import { Container } from './styles';
 
@@ -15,10 +16,76 @@ export default function CreateRestaurant() {
     history.push('/restaurants');
   };
 
+  const schema = Yup.object().shape({
+    fullName: Yup.string().required('O nome é obrigatório'),
+    socialReason: Yup.string().required('A Razão Social é obrigatória'),
+    cnpj: Yup.number('Insira um cnpj válido')
+      .typeError('O CNPJ é obrigatório')
+      .required('O CNPJ é obrigatório'),
+    phone: Yup.number('Insira um telefone válido').required(
+      'O telefone é obrigatório'
+    ),
+    cep: Yup.number('Insira um CEP válido').required('O CEP é obrigatório'),
+    state: Yup.string().required('O estado é obrigatorio'),
+    city: Yup.string().required('A cidade é obrigatória'),
+    neighborhood: Yup.string().required('O bairro é obrigatório'),
+    address: Yup.string().required('O endereço é obrigatório'),
+    street_number: Yup.number().required('O número é obrigatório'),
+    agency: Yup.number().required('A agência é obrigatória'),
+    account: Yup.number().required('A conta bancária é obrigatória'),
+    account_dv: Yup.number().required('O digito verificador é obrigatorio'),
+    bank_code: Yup.number().required('O código do banco é obrigatório'),
+  });
+
+  const handleCreateNewRestaurant = async (form) => {
+    console.log(form);
+    if (await schema.isValid(form)) {
+      const {
+        fullName,
+        socialReason,
+        cnpj,
+        phone,
+        cep,
+        state,
+        city,
+        neighborhood,
+        address,
+        street_number,
+        agency,
+        account,
+        account_dv,
+        bank_code,
+      } = form;
+
+      const { id, name, social_reason } = api.post('/restaurant', {
+        name: fullName,
+        social_reason: socialReason,
+        cnpj,
+        telephone: phone,
+        cep,
+        state,
+        city,
+        neighborhood,
+        address,
+        number: street_number,
+        agency,
+        account,
+        account_dv,
+        bank_code,
+      });
+
+      console.log(id);
+    } else {
+      console.log('Oi');
+    }
+  };
+
   return (
     <Container>
-      <h1>Cadastro de restaurante</h1>
-      <Form onSubmit={console.log}>
+      <div className="center">
+        <h1>Cadastro de restaurante</h1>
+      </div>
+      <Form schema={schema} onSubmit={handleCreateNewRestaurant}>
         <span>Endereço</span>
         <div className="grid three-gaps">
           <Input
@@ -48,9 +115,9 @@ export default function CreateRestaurant() {
           />
           <Input
             autocomplete="address-line1"
-            name="addres"
+            name="address"
             type="text"
-            placeholder="Rua"
+            placeholder="Endereço"
           />
           <Input
             autocomplete="address-line2"
@@ -72,9 +139,11 @@ export default function CreateRestaurant() {
         <div>
           <Input name="bank_code" type="text" placeholder="Código do banco" />
         </div>
-        <button type="submit">{loading ? 'Carregando...' : 'Cadastrar'}</button>
-        <button type="button" className="red" onClick={handleGoBack}>
-          <Link className="white">Voltar</Link>
+        <button type="submit">
+          {loading ? 'Carregando...' : 'Cadastrar'}
+        </button>
+        <button onClick={history.goBack} type="button" className="red">
+          <a className="white">Voltar</a>
         </button>
       </Form>
     </Container>
