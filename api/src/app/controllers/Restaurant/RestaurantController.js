@@ -8,7 +8,6 @@ class RestaurantController {
   async index(req, res) {
     const { page = 1 } = req.query;
 
-    console.log(req.accountId);
     const restaurants = await Restaurant.findAll({
       where: { professional_account_id: req.accountId },
       order: ['createdAt'],
@@ -28,7 +27,7 @@ class RestaurantController {
       city: Yup.string().required(),
       state: Yup.string().required(),
       neighborhood: Yup.string().required(),
-      addres: Yup.string().required(),
+      address: Yup.string().required(),
       number: Yup.number(),
       bank_code: Yup.string().required(),
       agency: Yup.string().required(),
