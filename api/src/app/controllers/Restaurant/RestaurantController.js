@@ -10,7 +10,7 @@ class RestaurantController {
 
     const restaurants = await Restaurant.findAll({
       where: { professional_account_id: req.accountId },
-      order: ['createdAt'],
+      order: [['createdAt', 'DESC']],
       limit: 10,
       offset: (page - 1) * 20
     });
