@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { Form, Input } from '@rocketseat/unform';
 import * as Yup from 'yup';
+import { toast } from 'react-toastify';
 
 import history from '~/services/history';
 import api from '~/services/api';
@@ -38,7 +38,6 @@ export default function CreateRestaurant() {
   });
 
   const handleCreateNewRestaurant = async (form) => {
-    console.log(form);
     if (await schema.isValid(form)) {
       const {
         fullName,
@@ -57,26 +56,41 @@ export default function CreateRestaurant() {
         bank_code,
       } = form;
 
-      const { id, name, social_reason } = api.post('/restaurant', {
-        name: fullName,
-        social_reason: socialReason,
-        cnpj,
-        telephone: phone,
-        cep,
-        state,
-        city,
-        neighborhood,
-        address,
-        number: street_number,
-        agency,
-        account,
-        account_dv,
-        bank_code,
-      });
+      try {
+        const { id, name, social_reason } = await api.post('/restaurant', {
+          name: fullName,
+          social_reason: socialReason,
+          cnpj,
+          telephone: phone,
+          cep,
+          state,
+          city,
+          neighborhood,
+          address,
+          number: street_number,
+          agency,
+          account,
+          account_dv,
+          bank_code,
+        });
 
-      console.log(id);
+        toast.success('Cadastrado com sucesso :D');
+        history.push('/dashboard');
+      } catch (err) {
+        toast.error(
+          <div>
+            Houve um problema na criação :(
+            Poderia verificar os seus dados?
+          </div>
+        );
+      }
     } else {
-      console.log('Oi');
+      toast.error(
+        <div>
+          Houve um problema na criação :(
+          Poderia verificar os seus dados?
+        </div>
+      );
     }
   };
 
@@ -114,13 +128,13 @@ export default function CreateRestaurant() {
             placeholder="Bairro"
           />
           <Input
-            autocomplete="address-line1"
+            autoComplete="address-line1"
             name="address"
             type="text"
             placeholder="Endereço"
           />
           <Input
-            autocomplete="address-line2"
+            autoComplete="address-line2"
             name="street_number"
             type="text"
             placeholder="Número"
@@ -139,9 +153,7 @@ export default function CreateRestaurant() {
         <div>
           <Input name="bank_code" type="text" placeholder="Código do banco" />
         </div>
-        <button type="submit">
-          {loading ? 'Carregando...' : 'Cadastrar'}
-        </button>
+        <button type="submit">{loading ? 'Carregando...' : 'Cadastrar'}</button>
         <button onClick={history.goBack} type="button" className="red">
           <a className="white">Voltar</a>
         </button>
