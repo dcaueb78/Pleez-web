@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 export const Card = styled.li`
   &:hover {
     cursor: pointer;
@@ -14,6 +15,8 @@ export const Card = styled.li`
   div {
     display: flex;
     flex-direction: row;
+    align-items: space-around;
+    justify-content: space-around;
     div {
       padding: 5px;
       display: flex;
@@ -44,5 +47,11 @@ export const Card = styled.li`
         text-decoration: underline;
       }
     }
+  }
+
+  .price {
+    color: green;
+    font-weight: bold;
+    margin-top: 5px;
   }
 `;

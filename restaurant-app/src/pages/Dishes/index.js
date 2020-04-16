@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 
 import api from '~/services/api';
@@ -18,17 +18,17 @@ export default function Dishes({ match }) {
     if (!restaurantSelected) {
       history.push('/restaurantes');
     }
-  }, []);
+  }, [restaurantSelected]);
 
-  const loadDishes = async () => {
+  const loadDishes = useCallback(async () => {
     const response = await api.get(`/dish/${category_id}`);
 
     setDishes(response.data);
-  };
+  }, [category_id]);
 
   useEffect(() => {
     loadDishes();
-  }, []);
+  }, [loadDishes]);
 
   const handleCreateNewDish = () => {
     history.push(`/criar-prato/${category_id}`);
@@ -44,6 +44,8 @@ export default function Dishes({ match }) {
         {dishes.map((dish) => (
           <DishCard
             name={dish.name}
+            details={dish.details}
+            price={dish.price}
             key={dish.id}
             deleteFunction={() => console.log('deletei')}
           />
