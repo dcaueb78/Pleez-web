@@ -23,7 +23,7 @@ export default function Header() {
         <nav>
           <img src={logo} alt="Pleez" />
           <Link to="/dashboard">Início</Link>
-          <Link to="/dashboard">Categorias</Link>
+          <Link to="/categorias">Categorias</Link>
           <Link to="/dashboard">Pratos</Link>
         </nav>
 
