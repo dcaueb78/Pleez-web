@@ -79,16 +79,14 @@ export default function CreateRestaurant() {
       } catch (err) {
         toast.error(
           <div>
-            Houve um problema na criação :(
-            Poderia verificar os seus dados?
+            Houve um problema na criação :( Poderia verificar os seus dados?
           </div>
         );
       }
     } else {
       toast.error(
         <div>
-          Houve um problema na criação :(
-          Poderia verificar os seus dados?
+          Houve um problema na criação :( Poderia verificar os seus dados?
         </div>
       );
     }

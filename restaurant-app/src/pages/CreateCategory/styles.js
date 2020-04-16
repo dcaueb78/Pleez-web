@@ -20,19 +20,6 @@ export const Container = styled.div`
       margin-top: 10px;
     }
 
-    div.grid {
-      display: grid;
-      grid-gap: 15px;
-    }
-
-    div.two-gaps {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    div.three-gaps {
-      grid-template-columns: repeat(3, 1fr);
-    }
-
     input {
       background: ${lighten(0.01, '#ee4162')};
       width: 100%;
