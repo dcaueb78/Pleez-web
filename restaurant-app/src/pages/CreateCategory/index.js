@@ -24,7 +24,7 @@ export default function CreateCategory() {
       try {
         const response = await api.post('/category', {
           name: categoryName,
-          restaurant_id: 59,
+          restaurant_id: restaurantSelected,
         });
 
         const { name } = response.data;
@@ -32,7 +32,7 @@ export default function CreateCategory() {
         toast.success(`Categoria ${name} criada!`);
         history.push('/categorias');
 
-        history.push('/dashboard');
+        history.push('/categorias');
       } catch (err) {
         toast.error(
           'Houve um problema na criação :( Poderia verificar os seus dados?'
