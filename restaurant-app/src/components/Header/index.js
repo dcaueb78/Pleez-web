@@ -24,7 +24,6 @@ export default function Header() {
           <img src={logo} alt="Pleez" />
           <Link to="/dashboard">Início</Link>
           <Link to="/categorias">Categorias</Link>
-          <Link to="/dashboard">Pratos</Link>
         </nav>
 
         <aside>
