@@ -52,10 +52,8 @@ export default function CreateDish({ match }) {
 
         const { name } = response.data;
 
-        toast.success(`Categoria ${name} criada!`);
-        history.push('/categorias');
-
-        history.push('/dashboard');
+        toast.success(`Prato ${name} criado!`);
+        history.goBack();
       } catch (err) {
         toast.error(
           'Houve um problema na criação :( Poderia verificar os seus dados?'
@@ -81,7 +79,7 @@ export default function CreateDish({ match }) {
   return (
     <Container>
       <div className="center">
-        <h1>Cadastro de categoria</h1>
+        <h1>Cadastro de pratos</h1>
       </div>
       <Form schema={schema} onSubmit={handleCreateNewDish}>
         <span>Informações do prato</span>

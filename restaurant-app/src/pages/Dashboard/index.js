@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 
 import api from '~/services/api';
@@ -15,19 +15,19 @@ export default function Dashboard() {
     if (!restaurantSelected) {
       history.push('/restaurantes');
     }
-  }, []);
+  }, [restaurantSelected]);
 
-  const loadOrders = async () => {
+  const loadOrders = useCallback(async () => {
     const response = await api.post('/restaurant-order', {
       restaurantId: restaurantSelected,
     });
 
     setOrders(response.data);
-  };
+  }, [restaurantSelected]);
 
   useEffect(() => {
     loadOrders();
-  }, []);
+  }, [loadOrders]);
 
   const handleSelectOrder = async (orderId, status) => {
     const newStatus = status + 1 > 2 ? status : status + 1;
