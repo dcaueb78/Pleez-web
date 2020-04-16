@@ -3,7 +3,6 @@ import React from 'react';
 import { Card } from './styles';
 
 export default function CategoryCard({ name, onClick, deleteFunction }) {
-
   return (
     <>
       <Card onClick={onClick}>

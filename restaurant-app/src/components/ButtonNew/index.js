@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { ButtonHeader } from './styles';
 import { MdAdd } from 'react-icons/md';
+import { ButtonHeader } from './styles';
 
-export default function ButtonNew({handler, text}) {
+export default function ButtonNew({ handler, text }) {
   return (
     <ButtonHeader onClick={handler}>
       <div>

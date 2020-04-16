@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 export const Container = styled.div`
   max-width: 800px;
@@ -29,7 +29,7 @@ export const Container = styled.div`
     }
   }
 
-  .flex{
+  .flex {
     display: flex;
   }
 
@@ -37,4 +37,3 @@ export const Container = styled.div`
     justify-content: center;
   }
 `;
-

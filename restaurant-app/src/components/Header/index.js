@@ -2,12 +2,13 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import { MdPowerSettingsNew } from 'react-icons/md';
+
 import { signOut } from '~/store/modules/auth/actions';
 
 import logo from '~/assets/logo_img.svg';
 
 import { Container, Content, Profile } from './styles';
-import { MdPowerSettingsNew } from 'react-icons/md';
 
 export default function Header() {
   const dispatch = useDispatch();
@@ -36,7 +37,7 @@ export default function Header() {
               src="https://api.adorable.io/avatars/50/caue@adorable.io.png"
               alt="Restaurante"
             />
-            <button>
+            <button type="button">
               <MdPowerSettingsNew
                 onClick={handleLogout}
                 size={32}
