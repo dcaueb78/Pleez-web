@@ -19,7 +19,7 @@ export default function Dashboard() {
 
   const loadOrders = async () => {
     const response = await api.post('/restaurant-order', {
-      restaurantId: 1,
+      restaurantId: restaurantSelected,
     });
 
     setOrders(response.data);
