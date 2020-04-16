@@ -40,7 +40,7 @@ export default function Categories() {
       <ButtonNew text="Nova Categoria" handler={handleCreateNewCategory} />
       <ul>
         {categories.map((category) => (
-          <CategoryCard name={category.name} key={category.id} deleteFunction={() => console.log('deletei')} />
+          <CategoryCard name={category.name} onClick={() => history.push(`pratos/${category.id}`)} key={category.id} deleteFunction={() => console.log('deletei')} />
         ))}
       </ul>
       <div className="load-more">
