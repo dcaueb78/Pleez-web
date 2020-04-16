@@ -9,8 +9,7 @@ import history from '~/services/history';
 import { Container } from './styles';
 
 import RestaurantCard from '~/components/RestaurantCard';
-
-import { MdAdd } from 'react-icons/md';
+import ButtonNew from '~/components/ButtonNew';
 
 export default function Restaurants() {
   const dispatch = useDispatch();
@@ -43,14 +42,7 @@ export default function Restaurants() {
 
   return (
     <Container>
-      <header onClick={handleCreateNewRestaurant}>
-        <div>
-          <button type="button">
-            <MdAdd size={44} color="#fff" />
-          </button>
-          <strong>Novo restaurante</strong>
-        </div>
-      </header>
+      <ButtonNew text="Novo Restaurante" handler={handleCreateNewRestaurant} />
 
       <ul>
         {restaurants.map((restaurant) => (
