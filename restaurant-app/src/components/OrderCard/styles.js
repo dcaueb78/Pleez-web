@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-export const Nonconformity = styled.li`
+export const Card = styled.li`
 &:hover {
   cursor: pointer;
   transform: translateY(-5px);

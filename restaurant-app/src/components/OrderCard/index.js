@@ -3,14 +3,14 @@ import React from 'react';
 import { formatPrice } from '~/utils/format';
 import { getStatusOrder } from '~/constants';
 
-import { Nonconformity } from './styles';
+import { Card } from './styles';
 
 export default function OrderCard({ status, totalPrice, code, onClick }) {
   const { message } = getStatusOrder(status);
 
   return (
     <>
-      <Nonconformity onClick={onClick} status={status}>
+      <Card onClick={onClick} status={status}>
         <hr />
         <div>
           <div>
@@ -21,7 +21,7 @@ export default function OrderCard({ status, totalPrice, code, onClick }) {
             <span>{message}</span>
           </div>
         </div>
-      </Nonconformity>
+      </Card>
     </>
   );
 }
