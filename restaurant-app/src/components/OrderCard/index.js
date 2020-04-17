@@ -5,7 +5,13 @@ import { getStatusOrder } from '~/constants';
 
 import { Card } from './styles';
 
-export default function OrderCard({ status, totalPrice, code, onClick }) {
+export default function OrderCard({
+  status,
+  dishes,
+  totalPrice,
+  code,
+  onClick,
+}) {
   const { message } = getStatusOrder(status);
 
   return (
@@ -14,10 +20,20 @@ export default function OrderCard({ status, totalPrice, code, onClick }) {
         <hr />
         <div>
           <div>
-            <strong>#{code}</strong>
-            <span>{formatPrice(totalPrice)}</span>
+            <strong className="code">#{code}</strong>
+            <div className="dishes-list">
+              {dishes.map((dish) => (
+                <>
+                  <strong>1x {dish.name}</strong>
+                  <div>
+                    <span>{dish.details}</span>
+                  </div>
+                </>
+              ))}
+            </div>
+            <span className="price">{formatPrice(totalPrice)}</span>
           </div>
-          <div>
+          <div className="message-div">
             <span>{message}</span>
           </div>
         </div>

@@ -47,6 +47,7 @@ export default function Dashboard() {
         {orders.map((order) => (
           <OrderCard
             onClick={() => handleSelectOrder(order._id, order.status)}
+            dishes={order.dishes}
             totalPrice={order.total_price}
             key={order._id}
             status={order.status}

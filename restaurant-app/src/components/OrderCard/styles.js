@@ -33,22 +33,35 @@ export const Card = styled.li`
   div {
     display: flex;
     flex-direction: row;
+    .dishes-list {
+      margin-left: 15px;
+    }
     div {
       padding: 5px;
       display: flex;
       flex-direction: column;
+      .code {
+        font-size: 20px;
+      }
       strong {
         display: flex;
         color: #4aa3a1;
-        font-size: 20px;
+        font-size: 16px;
         font-weight: normal;
         margin-bottom: 5px;
       }
       span {
         color: #999;
       }
+      .price {
+        color: green;
+        font-weight: bold;
+        margin-top: 5px;
+        margin-left: 5px;
+        font-size: 20px;
+      }
     }
-    div:last-child {
+    .message-div {
       flex: 1;
       display: flex;
       align-items: flex-end;
