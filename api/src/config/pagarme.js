@@ -1,4 +1,6 @@
-const api_key = 'ak_test_W9wF4YHTEsW44xN7BRj3Rlc3L9ygoc';
-const pleez_recipient_id = 're_ck79ct4vo01oi8f6daueq7lun';
+import 'dotenv/config';
+
+const api_key = process.env.PAGARME_KEY;
+const pleez_recipient_id = process.env.PAGARME_RECIPIENT_ID;
 
 export { api_key, pleez_recipient_id };
