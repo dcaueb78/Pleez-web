@@ -8,6 +8,11 @@ import Dish from '../../models/Dish';
 import User from '../../models/User';
 import Restaurant from '../../models/Restaurant';
 
+async function findDishDetailsById(id) {
+  const dishDetails = await Dish.findByPk(id);
+  return dishDetails;
+}
+
 class OrderController {
   async index(req, res) {
     const { page = 1 } = req.query;
@@ -26,16 +31,15 @@ class OrderController {
   }
 
   async update(req, res) {
-
     const { orderId, status } = req.body;
-    const order = await Order.findByIdAndUpdate(
+    await Order.findByIdAndUpdate(
       { _id: orderId },
       {
         status
       }
     );
 
-    return res.json({status, orderId});
+    return res.json({ status, orderId });
   }
 
   async store(req, res) {
@@ -51,6 +55,15 @@ class OrderController {
     }
 
     const userDetails = await User.findByPk(req.userId);
+    const restaurantDetails = await Restaurant.findByPk(req.body.restaurant_id);
+
+    if (!userDetails) {
+      return res.status(404).json({ error: 'Usuário não encontrado' });
+    }
+
+    if (!restaurantDetails) {
+      return res.status(404).json({ error: 'Restaurante não encontrado' });
+    }
 
     const { dishes } = req.body;
 
@@ -73,83 +86,88 @@ class OrderController {
         cardHash = card_hash;
       });
 
-    const { recipient_id } = await Restaurant.findByPk(req.body.restaurant_id);
-
-    let transaction_id = '';
-    await pagarme.client
-      .connect({ api_key })
-      .then(client =>
-        client.transactions.create({
-          amount: totalPrice.toFixed(2).replace('.', ''),
-          card_hash: cardHash,
-          payment_method: 'credit_card',
-          customer: {
-            external_id: `#${userDetails.id}`,
-            name: userDetails.name,
-            type: 'individual',
-            country: 'br',
-            email: userDetails.email,
-            documents: [
+    try {
+      const transaction = await pagarme.client
+        .connect({ api_key })
+        .then(client =>
+          client.transactions.create({
+            amount: totalPrice.toFixed(2).replace('.', ''),
+            card_hash: cardHash,
+            payment_method: 'credit_card',
+            soft_descriptor: 'pleez.com.br',
+            customer: {
+              external_id: `#${userDetails.id}`,
+              name: userDetails.name,
+              type: 'individual',
+              country: 'br',
+              email: userDetails.email,
+              documents: [
+                {
+                  type: 'cpf',
+                  number: '11624041914'
+                }
+              ],
+              phone_numbers: ['+5547999775283', '+5547997153169']
+            },
+            items: dishes.map(dish => ({
+              id: `${dish.id}`,
+              title: dish.name,
+              unit_price: dish.price.toFixed(2).replace('.', ''),
+              quantity: dish.quantity,
+              tangible: false
+            })),
+            split_rules: [
               {
-                type: 'cpf',
-                number: '30621143049'
+                recipient_id: pleez_recipient_id,
+                percentage: 1,
+                liable: true,
+                charge_processing_fee: true
+              },
+              {
+                recipient_id: restaurantDetails.recipient_id,
+                percentage: 99,
+                liable: false,
+                charge_processing_fee: true
               }
             ],
-            phone_numbers: ['+5511999998888', '+5511888889999']
-          },
-          items: dishes.map(dish => ({
-            id: `${dish.id}`,
-            title: dish.name,
-            unit_price: dish.price.toFixed(2).replace('.', ''),
-            quantity: dish.quantity,
-            tangible: false
-          })),
-          split_rules: [
-            {
-              recipient_id: pleez_recipient_id,
-              percentage: 1,
-              liable: true,
-              charge_processing_fee: true
-            },
-            {
-              recipient_id,
-              percentage: 99,
-              liable: false,
-              charge_processing_fee: true
+            billing: {
+              name: restaurantDetails.name,
+              address: {
+                country: 'br',
+                state: restaurantDetails.state,
+                city: restaurantDetails.city,
+                neighborhood: restaurantDetails.neighborhood,
+                street: restaurantDetails.address,
+                street_number: restaurantDetails.number,
+                zipcode: restaurantDetails.cep
+              }
             }
-          ]
+          })
+        );
+
+      if (transaction.status !== 'paid') {
+        return res.status(402).json({ error: 'Pagamento recusado' });
+      }
+
+      let priceTemp = 0;
+      await Promise.all(
+        req.body.dishes.map(async dish => {
+          const dishDetails = await findDishDetailsById(dish.id);
+          priceTemp += dishDetails.price * dish.quantity;
         })
-      )
-      .then(transaction => {
-        if (transaction.status === 'paid') {
-          transaction_id = transaction.id;
-        } else {
-          return res.status(402).json({ error: 'Pagamento recusado' });
-        }
-        return transaction_id;
+      );
+
+      const { id, status, chair } = await Order.create({
+        ...req.body,
+        user_id: req.userId,
+        total_price: priceTemp,
+        transaction_id: transaction.id
       });
 
-    async function findDishDetailsById(id) {
-      const dishDetails = await Dish.findByPk(id);
-      return dishDetails;
+      return res.status(200).json({ id, status, chair });
+    } catch (err) {
+      return res.json(err);
     }
-
-    let priceTemp = 0;
-    await Promise.all(
-      req.body.dishes.map(async dish => {
-        const dishDetails = await findDishDetailsById(dish.id);
-        priceTemp += dishDetails.price * dish.quantity;
-      })
-    );
-
-    const { id, status, chair } = await Order.create({
-      ...req.body,
-      user_id: req.userId,
-      total_price: priceTemp,
-      transaction_id
-    });
-
-    return res.status(200).json({ id, status, chair });
   }
 }
 
