@@ -166,7 +166,7 @@ class OrderController {
 
       return res.status(200).json({ id, status, chair });
     } catch (err) {
-      return res.json(err);
+      throw new Error('Payment error');
     }
   }
 }
