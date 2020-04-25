@@ -1,5 +1,6 @@
 import * as Yup from 'yup';
 import ProfessionalAccont from '../../models/ProfessionalAccount';
+import Mail from '../../../lib/Mail';
 
 class ProfessionalAccountController {
   async store(req, res) {
@@ -25,6 +26,13 @@ class ProfessionalAccountController {
     }
 
     const { id, name, email } = await ProfessionalAccont.create(req.body);
+
+    await Mail.sendMail({
+      to: `${name} <${email}>`,
+      subject: 'Bem-vindo à Pleez',
+      text: `Faaala ${name}, beleza? Estamos muito felizes de ter você aqui :)`,
+
+    })
 
     return res.json({
       id,
