@@ -30,8 +30,10 @@ class ProfessionalAccountController {
     await Mail.sendMail({
       to: `${name} <${email}>`,
       subject: 'Bem-vindo à Pleez',
-      text: `Faaala ${name}, beleza? Estamos muito felizes de ter você aqui :)`,
-
+      template: 'createProfessionalAccount',
+      context: {
+        user: name,
+      }
     })
 
     return res.json({
