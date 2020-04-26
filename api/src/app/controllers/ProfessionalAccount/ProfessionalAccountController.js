@@ -29,7 +29,7 @@ class ProfessionalAccountController {
 
     await Mail.sendMail({
       to: `${name} <${email}>`,
-      subject: 'Bem-vindo à Pleez',
+      subject: `Faaala ${name}, seja bem-vindo!`,
       template: 'createProfessionalAccount',
       context: {
         user: name,
