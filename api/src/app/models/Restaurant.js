@@ -15,6 +15,7 @@ class Restaurant extends Model {
         number: Sequelize.BIGINT,
         recipient_id: Sequelize.STRING,
         cnpj: Sequelize.STRING,
+        status: Sequelize.INTEGER,
       },
       {
         sequelize
