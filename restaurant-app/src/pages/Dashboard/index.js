@@ -6,6 +6,7 @@ import history from '~/services/history';
 
 import { Container } from './styles';
 import OrderCard from '~/components/OrderCard';
+import UpdateRestaurantStatusButton from '~/components/UpdateRestaurantStatusButton';
 
 export default function Dashboard() {
   const restaurantSelected = useSelector((state) => state.account.restaurant);
@@ -43,6 +44,7 @@ export default function Dashboard() {
       <div className="flex center">
         <h1>Lista de pedidos</h1>
       </div>
+      <UpdateRestaurantStatusButton text="Desativado" />
       <ul>
         {orders.map((order) => (
           <OrderCard
