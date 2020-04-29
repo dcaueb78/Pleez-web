@@ -14,6 +14,7 @@ import DishController from './app/controllers/Dish/DishController';
 import DishDetailsController from './app/controllers/Dish/DishDetailsController';
 import OrderController from './app/controllers/Order/OrderController';
 import RestaurantOrderController from './app/controllers/RestaurantOrder/RestaurantOrderController';
+import RestaurantStatusController from './app/controllers/Restaurant/RestaurantStatusController';
 
 import UserAuthMiddleware from './app/middlewares/authUser';
 import ProfessionalAccountAuthMiddleware from './app/middlewares/authProfessionalAccount';
@@ -68,6 +69,9 @@ routes.get('/order/', UserAuthMiddleware, OrderController.index);
 routes.patch('/order/', ProfessionalAccountAuthMiddleware, OrderController.update);
 
 routes.post('/restaurant-order/', ProfessionalAccountAuthMiddleware, RestaurantOrderController.index);
+
+routes.get('/restaurant-status/:id', RestaurantStatusController.index);
+routes.patch('/restaurant-status/', RestaurantStatusController.update);
 
 routes.use(UserAuthMiddleware);
 
