@@ -38,7 +38,7 @@ class RestaurantController {
 
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({ error: 'Falha de validação!' });
-    };
+    }
 
     const cnpjAlreadyExists = await Restaurant.findOne({
       where: { cnpj: req.body.cnpj.toString() },

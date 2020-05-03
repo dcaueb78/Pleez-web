@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import uploadImage from '../../../helpers/uploadFileBucket';
+import uploadImage from '../../../utils/uploadFileBucket';
 
 import Category from '../../models/Category';
 
