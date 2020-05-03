@@ -61,7 +61,11 @@ class UserController {
         ),
       confirmPassword: Yup.string().when('password', (password, field) =>
         password ? field.required().oneOf([Yup.ref('password')]) : field
-      )
+      ),
+      cpf: Yup.string()
+        .min(11),
+      phone: Yup.string()
+        .min(8),
     });
 
     if (!(await schema.isValid(req.body))) {
@@ -70,7 +74,7 @@ class UserController {
 
     const { email, oldPassword } = req.body;
 
-    const user = await User.findByPk(req.accountId);
+    const user = await User.findByPk(req.userId);
 
     if (email !== user.email) {
       const userExists = await User.findOne({ where: { email } });
@@ -84,12 +88,14 @@ class UserController {
       return res.status(401).json({ error: 'As senhas não correspondem!' });
     }
 
-    const { id, name } = await user.update(req.body);
+    const { id, name, cpf, phone } = await user.update(req.body);
 
     return res.json({
       id,
       name,
-      email
+      email,
+      cpf,
+      phone
     });
   }
 }
