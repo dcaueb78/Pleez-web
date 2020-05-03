@@ -3,6 +3,7 @@ module.exports = {
     return queryInterface.addColumn('users', 'cpf', {
       type: Sequelize.STRING,
       allowNull: false,
+      unique: true,
       defaultValue: '0'
     });
   },
