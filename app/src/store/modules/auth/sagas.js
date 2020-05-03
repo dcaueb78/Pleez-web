@@ -40,12 +40,14 @@ export function* signIn({ payload }) {
 
 export function* signUp({ payload }) {
   try {
-    const { name, email, password } = payload;
+    const { name, email, password, cpf, phone } = payload;
 
     yield call(api.post, users, {
       name,
       email,
-      password
+      password,
+      cpf,
+      phone
     });
 
     toast.success('Cadastrado com sucesso :D');

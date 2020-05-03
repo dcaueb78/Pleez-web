@@ -31,7 +31,7 @@ routes.post(
   ProfessionalAccountSessionController.store
 );
 
-routes.put('/users', UserAuthMiddleware, UserController.update);
+routes.patch('/users', UserAuthMiddleware, UserController.update);
 
 routes.post(
   '/restaurant',
