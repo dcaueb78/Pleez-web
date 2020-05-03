@@ -8,6 +8,13 @@ class UserController {
       email: Yup.string()
         .email()
         .required(),
+      cpf: Yup.string()
+        .required()
+        .min(11)
+        .max(11),
+      phone: Yup.string()
+        .required()
+        .min(8),
       password: Yup.string()
         .required()
         .min(6)
@@ -22,12 +29,23 @@ class UserController {
       return res.status(400).json({ error: 'Email já cadastrado.' });
     }
 
-    const { id, name, email } = await User.create(req.body);
+    const CPFAlreadyExists = await User.findOne({
+      where: {
+        cpf: req.body.cpf
+      }
+    });
+
+    if (CPFAlreadyExists) {
+      return res.status(400).json({ error: 'CPF já utilizado.'});
+    }
+
+    const { id, name, email, cpf } = await User.create(req.body);
 
     return res.json({
       id,
       name,
-      email
+      email,
+      cpf
     });
   }
 
