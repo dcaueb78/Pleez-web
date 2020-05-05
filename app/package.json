@@ -1,6 +1,6 @@
 {
-  "name": "pleez",
-  "version": "0.1.0",
+  "name": "PleezApp",
+  "version": "1.1.1",
   "private": true,
   "dependencies": {
     "@rocketseat/unform": "^1.6.1",
