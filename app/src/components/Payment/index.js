@@ -77,7 +77,7 @@ export default function Payment({ completeBasket, chair }) {
 
   const paymentRequestAlert = () => {
     ReactSwal.fire({
-      title: <p>Aguardando provação do pedido!</p>,
+      title: <p>Aguardando aprovação do pedido!</p>,
       footer: 'Acompanhe o seu pedido :3',
       icon: 'info'
     }).then(() => {
