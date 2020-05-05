@@ -29,7 +29,7 @@ class RestaurantStatusController {
 
     const selectedRestaurant = await Restaurant.findByPk(req.body.id);
     if (!selectedRestaurant) {
-      return res.status(401).json({ error: 'Restaurant not found' });
+      return res.status(400).json({ error: 'Restaurant not found' });
     }
 
     const updatedStatus = getUpdatedRestaurantStatus(selectedRestaurant.status);
