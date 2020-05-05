@@ -32,11 +32,31 @@ export default createGlobalStyle`
     text-decoration: none;
   }
 
+  button {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+  }
+
   ul {
     list-style: none;
   }
 
   button {
     cursor: pointer;
+  }
+
+  .page-selected-title {
+    color: #22d6bc;
+    font-size: 30px;
+    margin-left: 28px;
+  }
+
+  .page-description-title {
+  margin-left: 28px;
   }
 `;

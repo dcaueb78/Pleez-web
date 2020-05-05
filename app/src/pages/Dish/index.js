@@ -62,9 +62,9 @@ export default function Categories({ match }) {
           <MdReorder size={32} color="white" />
         </button>
         <Scroll>
-          {/* <h1>{restaurantName}</h1> */}
-          <img src={unclejoe} alt="Restaurante" />
-          <h2>Nome da categoria</h2>
+          <h1 className="page-selected-title">{restaurantName}</h1>
+          {/* <img src={unclejoe} alt="Restaurante" /> */}
+          <h2 className="page-description-title">Nome da categoria</h2>
           {dishes.length > 0 ? (
             <>
               {dishes.map(dish => (
