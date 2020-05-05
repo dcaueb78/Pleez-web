@@ -18,11 +18,19 @@ export default function SignUp() {
       .required('O e-mail é obrigatório'),
     password: Yup.string()
       .required('A senha é obrigatória')
-      .min(6, 'No mínimo 6 caracteres')
+      .min(6, 'No mínimo 6 caracteres'),
+    cpf: Yup.string()
+      .required('O CPF é obrigatório')
+      .min(11),
+    phone: Yup.string()
+      .required('O celular é obrigatório')
+      .min(8, 'Digite um celular válido'),
   });
 
-  function handleSubmit({ name, email, password }) {
-    dispatch(signUpRequest(name, email, password));
+  function handleSubmit({ name, email, password, cpf, phone }) {
+    const formattedCPF = cpf.split('-').join('').split('.').join('');
+
+    dispatch(signUpRequest({ name, email, password, cpf: formattedCPF, phone }));
   }
 
   return (
@@ -39,10 +47,11 @@ export default function SignUp() {
         </div>
 
         <Form schema={schema} onSubmit={handleSubmit}>
-          <Input name="name" type="text" placeholder="Seu nome" />
+          <Input name="name" type="text" placeholder="Seu nome completo" />
           <Input name="email" type="email" placeholder="Seu e-mail" />
           <Input name="password" type="password" placeholder="Sua senha" />
-
+          <Input name="cpf" type="text" placeholder="Seu CPF (apenas números)" />
+          <Input name="phone" type="text" placeholder="Seu celular com DDD"/>
           <button type="submit">Cadastrar</button>
           <Link to="/"> Já possui uma conta? </Link>
         </Form>

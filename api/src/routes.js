@@ -9,11 +9,13 @@ import ProfessionalAccountController from './app/controllers/ProfessionalAccount
 import RestaurantController from './app/controllers/Restaurant/RestaurantController';
 import RestaurantDetailsController from './app/controllers/Restaurant/RestaurantDetailsController';
 import CategoryController from './app/controllers/Category/CategoryController';
+import CategoryDetailsController from './app/controllers/Category/CategoryDetailsController';
 import CategoryFileController from './app/controllers/CategoryFile/CategoryFileController';
 import DishController from './app/controllers/Dish/DishController';
 import DishDetailsController from './app/controllers/Dish/DishDetailsController';
 import OrderController from './app/controllers/Order/OrderController';
 import RestaurantOrderController from './app/controllers/RestaurantOrder/RestaurantOrderController';
+import RestaurantStatusController from './app/controllers/Restaurant/RestaurantStatusController';
 
 import UserAuthMiddleware from './app/middlewares/authUser';
 import ProfessionalAccountAuthMiddleware from './app/middlewares/authProfessionalAccount';
@@ -30,7 +32,7 @@ routes.post(
   ProfessionalAccountSessionController.store
 );
 
-routes.put('/users', UserAuthMiddleware, UserController.update);
+routes.patch('/users', UserAuthMiddleware, UserController.update);
 
 routes.post(
   '/restaurant',
@@ -50,6 +52,7 @@ routes.post(
   ProfessionalAccountAuthMiddleware,
   CategoryController.store
 );
+routes.get('/category/details/:category_id', CategoryDetailsController.index);
 
 routes.post(
   '/category/image',
@@ -68,6 +71,9 @@ routes.get('/order/', UserAuthMiddleware, OrderController.index);
 routes.patch('/order/', ProfessionalAccountAuthMiddleware, OrderController.update);
 
 routes.post('/restaurant-order/', ProfessionalAccountAuthMiddleware, RestaurantOrderController.index);
+
+routes.get('/restaurant-status/:id', RestaurantStatusController.index);
+routes.patch('/restaurant-status/', RestaurantStatusController.update);
 
 routes.use(UserAuthMiddleware);
 

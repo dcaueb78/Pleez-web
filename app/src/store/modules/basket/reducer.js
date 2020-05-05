@@ -27,6 +27,14 @@ export default function basket(state = INITIAL_STATE, action) {
       return produce(state, draft => {
         draft.restaurant = action.payload.restaurant;
       });
+    case '@auth/SIGN_OUT': {
+      return(state, draft => {
+        draft.basket = [];
+        draft.chair = null;
+        draft.restaurant = null;
+        draft.quantity = 0;
+      })
+    }
     default:
       return state;
   }

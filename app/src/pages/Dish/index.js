@@ -25,6 +25,16 @@ export default function Categories({ match }) {
 
   const [restaurantName, setRestaurantName] = useState('');
   const [dishes, setdishes] = useState([]);
+  const [categoryDetails, setCategoryDetails] = useState();
+
+  useEffect(() => {
+    const loadCategoryDetails = async () => {
+      const response = await api.get(`/category/details/${category}`);
+      setCategoryDetails(response.data);
+    };
+
+    loadCategoryDetails();
+  }, [category]);
 
   useEffect(() => {
     async function findAllDishesFromSelectedCategory(category_id) {
@@ -62,9 +72,10 @@ export default function Categories({ match }) {
           <MdReorder size={32} color="white" />
         </button>
         <Scroll>
-          {/* <h1>{restaurantName}</h1> */}
-          <img src={unclejoe} alt="Restaurante" />
-          <h2>Nome da categoria</h2>
+          <h1 className="page-restaurant-selected-title">{restaurantName}</h1>
+          {/* <img src={unclejoe} alt="Restaurante" /> */}
+          <h2 className="page-description">{categoryDetails?.name ? categoryDetails.name : 'Carregando...'}</h2>
+          <h2 className="page-description-title">Pratos:</h2>
           {dishes.length > 0 ? (
             <>
               {dishes.map(dish => (

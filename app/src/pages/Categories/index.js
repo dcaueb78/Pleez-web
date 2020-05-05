@@ -6,8 +6,9 @@ import { toast } from 'react-toastify';
 import { MdReorder } from 'react-icons/md';
 
 import { Wrapper, Content, Scroll } from './styles';
-import FoodCard from '~/components/FoodCard';
 import CartFooter from '~/components/CartFooter';
+import CategoriesCards from './components/CategoriesCards';
+import OfflineRestaurant from './components/OfflineRestaurant';
 
 import { useChairNumber, useRestaurantId } from '~/store/hooks/basket';
 import { addChair, addRestaurant } from '~/store/modules/basket/actions';
@@ -16,10 +17,7 @@ import history from '~/services/history';
 
 import { base, orderHistoryRoute } from '~/services/api/pages';
 
-import {
-  restaurantDetails,
-  categoriesFromRestaurantId
-} from '~/services/api/endPoints';
+import { restaurantDetails } from '~/services/api/endPoints';
 
 import logo from '~/assets/logo.png';
 import unclejoe from '~/assets/unclejoe.png';
@@ -28,8 +26,20 @@ export default function Categories({ match }) {
   const { restaurant, chair } = match.params;
   const chairNumberExists = useChairNumber();
   const restaurantIdExists = useRestaurantId();
+  const [restaurantStatus, SetRestaurantStatus] = useState();
+  const [restaurantName, setRestaurantName] = useState('');
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    async function loadRestaurantStatus() {
+      const response = await api.get(`/restaurant-status/${restaurant}`);
+      const apiRestaurantStatus = response.data;
+      SetRestaurantStatus(apiRestaurantStatus);
+    }
+
+    loadRestaurantStatus();
+  }, []);
 
   useEffect(() => {
     function validateChairExists() {
@@ -47,18 +57,6 @@ export default function Categories({ match }) {
     validateChairExists();
     validateRestaurantExists();
   }, [chair, chairNumberExists, dispatch, restaurant, restaurantIdExists]);
-
-  const [restaurantName, setRestaurantName] = useState('');
-  const [categories, setCategories] = useState([]);
-
-  useEffect(() => {
-    async function findAllCategoriesFromSelectedRestaurant(restaurant_id) {
-      const response = await api.get(categoriesFromRestaurantId(restaurant_id));
-      setCategories(response.data);
-    }
-
-    findAllCategoriesFromSelectedRestaurant(restaurant);
-  }, [restaurant]);
 
   useEffect(() => {
     async function shouldRestaurantExists(restaurant_id) {
@@ -84,23 +82,13 @@ export default function Categories({ match }) {
           <MdReorder size={32} color="white" />
         </button>
         <Scroll>
-          {/* <h1>{restaurantName}</h1> */}
-          <img src={unclejoe} alt="Restaurante" />
-          <h2>Categorias</h2>
-          {categories.length > 0 ? (
-            <>
-              {categories.map(category => (
-                <FoodCard
-                  key={category.id}
-                  name={category.name}
-                  alt={category.name}
-                  redirect={`/pratos/${restaurant}/${category.id}`}
-                  backgroundImageUrl={category.image_url}
-                />
-              ))}
-            </>
+          <h1 className="page-restaurant-selected-title">{restaurantName}</h1>
+          {/* <img src={unclejoe} alt="Restaurante" /> */}
+          <h2 className="page-description-title">Categorias:</h2>
+          {restaurantStatus === 0 ? (
+            <OfflineRestaurant />
           ) : (
-            <div />
+            <CategoriesCards restaurant={restaurant} />
           )}
         </Scroll>
       </Content>

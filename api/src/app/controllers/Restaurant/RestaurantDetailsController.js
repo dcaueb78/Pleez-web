@@ -15,7 +15,7 @@ class RestaurantDetailsController {
     const restaurant = await Restaurant.findByPk(req.params.restaurant_id);
 
     if(!restaurant) {
-      return res.status(401).json({ error: 'Restaurant not found' });
+      return res.status(400).json({ error: 'Restaurant not found' });
     }
 
     const { name, id, cnpj } = restaurant;
