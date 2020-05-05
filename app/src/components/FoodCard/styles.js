@@ -11,7 +11,7 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   color: white;
-  background: red;
+  background: #ee4162;
   background-image: url(${props => props.backgroundImageUrl});
   background-repeat: no-repeat;
   background-size: 100% 100%;

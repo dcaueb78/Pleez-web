@@ -50,13 +50,21 @@ export default createGlobalStyle`
     cursor: pointer;
   }
 
-  .page-selected-title {
+  .page-restaurant-selected-title {
     color: #22d6bc;
-    font-size: 30px;
+    font-size: 35px;
+    margin-left: 35px;
+  }
+
+  .page-description {
     margin-left: 28px;
+    color: #ee4162;
+    font-size: 20px;
   }
 
   .page-description-title {
-  margin-left: 28px;
+    margin-left: 28px;
+    margin-top: 10px;
   }
+
 `;
