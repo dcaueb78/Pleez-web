@@ -104,10 +104,10 @@ class OrderController {
               documents: [
                 {
                   type: 'cpf',
-                  number: '11624041914'
+                  number: userDetails.cpf
                 }
               ],
-              phone_numbers: ['+5547999775283', '+5547997153169']
+              phone_numbers: [userDetails.phone]
             },
             items: dishes.map(dish => ({
               id: `${dish.id}`,

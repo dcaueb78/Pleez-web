@@ -9,11 +9,14 @@ const api = axios.create({
 });
 
 api.interceptors.response.use(
-  (response) => response,
-  (error) => {
+  response => response,
+  error => {
+    if (401 === error?.response?.status) {
     toast.error('Sua sessão expirou! Poderia logar novamente? :(');
     store.dispatch(actions.signOut());
+    } else {
     return error;
+  }
   }
 );
 
