@@ -14,7 +14,7 @@ class DishDetailsController {
     const dishDetails = await Dish.findByPk(req.params.dish_id);
 
     if (!dishDetails) {
-      return res.status(401).json({ error: 'Dish not found' });
+      return res.status(400).json({ error: 'Dish not found' });
     }
 
     return res.json(dishDetails);

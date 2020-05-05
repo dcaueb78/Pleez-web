@@ -38,7 +38,7 @@ export const Card = styled.li`
       align-items: flex-end;
       justify-content: center;
       span {
-        color: red;
+        color: #ee4162;
         font-size: 15px;
         font-weight: bold;
       }

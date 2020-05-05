@@ -32,6 +32,16 @@ export default createGlobalStyle`
     text-decoration: none;
   }
 
+  button {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+  }
+
   ul {
     list-style: none;
   }
@@ -39,4 +49,22 @@ export default createGlobalStyle`
   button {
     cursor: pointer;
   }
+
+  .page-restaurant-selected-title {
+    color: #22d6bc;
+    font-size: 35px;
+    margin-left: 35px;
+  }
+
+  .page-description {
+    margin-left: 28px;
+    color: #ee4162;
+    font-size: 20px;
+  }
+
+  .page-description-title {
+    margin-left: 28px;
+    margin-top: 10px;
+  }
+
 `;

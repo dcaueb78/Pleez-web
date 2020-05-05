@@ -9,6 +9,7 @@ import ProfessionalAccountController from './app/controllers/ProfessionalAccount
 import RestaurantController from './app/controllers/Restaurant/RestaurantController';
 import RestaurantDetailsController from './app/controllers/Restaurant/RestaurantDetailsController';
 import CategoryController from './app/controllers/Category/CategoryController';
+import CategoryDetailsController from './app/controllers/Category/CategoryDetailsController';
 import CategoryFileController from './app/controllers/CategoryFile/CategoryFileController';
 import DishController from './app/controllers/Dish/DishController';
 import DishDetailsController from './app/controllers/Dish/DishDetailsController';
@@ -51,6 +52,7 @@ routes.post(
   ProfessionalAccountAuthMiddleware,
   CategoryController.store
 );
+routes.get('/category/details/:category_id', CategoryDetailsController.index);
 
 routes.post(
   '/category/image',
