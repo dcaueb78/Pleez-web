@@ -14,6 +14,11 @@ export default function basket(state = INITIAL_STATE, action) {
         draft.basket = [...draft.basket, action.payload.dish];
         draft.quantity++;
       });
+    case '@basket/UPDATE_BASKET':
+      return produce(state, draft => {
+        draft.basket = [];
+        draft.quantity = action.payload.basket.length;
+      });
     case '@basket/CLEAR_BASKET':
       return produce(state, draft => {
         draft.basket = INITIAL_STATE.basket;
@@ -28,12 +33,15 @@ export default function basket(state = INITIAL_STATE, action) {
         draft.restaurant = action.payload.restaurant;
       });
     case '@auth/SIGN_OUT': {
-      return(state, draft => {
-        draft.basket = [];
-        draft.chair = null;
-        draft.restaurant = null;
-        draft.quantity = 0;
-      })
+      return (
+        state,
+        draft => {
+          draft.basket = [];
+          draft.chair = null;
+          draft.restaurant = null;
+          draft.quantity = 0;
+        }
+      );
     }
     default:
       return state;

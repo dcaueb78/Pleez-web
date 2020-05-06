@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-
+import { useSelector, useDispatch } from 'react-redux';
 import { MdArrowBack, MdKeyboardArrowDown } from 'react-icons/md';
+
+import { updateBasket } from '~/store/modules/basket/actions';
 
 import { useChairNumber } from '~/store/hooks/basket';
 import api from '~/config/api';
@@ -22,6 +23,7 @@ import logo from '~/assets/logo.png';
 import cartIcon from '~/assets/icons/CartIcon.png';
 
 export default function Basket() {
+  const dispatch = useDispatch();
   const basket = useSelector(state => state.basket.basket);
   const chair = useChairNumber();
   const [completeBasket, setCompleteBasket] = useState([]);
@@ -47,9 +49,17 @@ export default function Basket() {
     validateChairExists();
   }, [chair]);
 
+  const removeBasketItem = async basketIndex => {
+    const newBasket = basket.filter((value, index) => index !== basketIndex);
+    dispatch(updateBasket(newBasket));
+  };
+
   useEffect(() => {
     async function loadBasketDishInfo() {
-      if (basket.length <= 0) return;
+      if (basket.length <= 0) {
+        setCompleteBasket([]);
+        return;
+      }
 
       const idList = await basket.map(dish => dish.dishId);
 
@@ -66,6 +76,7 @@ export default function Basket() {
       );
       setCompleteBasket(getCompleteBasketDishDetailsWithQuantity);
     }
+
     loadBasketDishInfo();
   }, [basket]);
 
@@ -88,11 +99,17 @@ export default function Basket() {
           </div>
         </header>
         <Scroll>
-          {completeBasket.map(dish => (
+          {completeBasket.map((dish, basketIndex) => (
             <div key={`${dish.id}-${dish.quantity}`}>
               <div>
                 <h2>{dish.quantity}x</h2>
                 <p>{dish.name}</p>
+                <button
+                  type="button"
+                  onClick={() => removeBasketItem(basketIndex)}
+                >
+                  X
+                </button>
               </div>
               <p>
                 <b>Observação: </b>
