@@ -24,9 +24,7 @@ import cartIcon from '~/assets/icons/CartIcon.png';
 
 export default function Basket() {
   const dispatch = useDispatch();
-  const [basket, setBasket] = useState(
-    useSelector(state => state.basket.basket)
-  );
+  const basket = useSelector(state => state.basket.basket);
   const chair = useChairNumber();
   const [completeBasket, setCompleteBasket] = useState([]);
 
@@ -53,13 +51,11 @@ export default function Basket() {
 
   const removeBasketItem = async basketIndex => {
     const newBasket = basket.filter((value, index) => index !== basketIndex);
-    setBasket([]);
     dispatch(updateBasket(newBasket));
   };
 
   useEffect(() => {
     async function loadBasketDishInfo() {
-      console.log(basket);
       if (basket.length <= 0) {
         setCompleteBasket([]);
         return;
