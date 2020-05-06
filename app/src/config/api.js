@@ -1,4 +1,3 @@
-import React from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { store } from '~/store';
@@ -11,7 +10,7 @@ const api = axios.create({
 api.interceptors.response.use(
   response => response,
   error => {
-    if (401 === error?.response?.status) {
+    if (error?.response?.status === 401) {
     toast.error('Sua sessão expirou! Poderia logar novamente? :(');
     store.dispatch(actions.signOut());
     } else {

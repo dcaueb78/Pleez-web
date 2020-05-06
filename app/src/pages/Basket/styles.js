@@ -75,7 +75,7 @@ export const Scroll = styled(PerfectScrollbar)`
       display: flex;
       flex-direction: row;
       width: 100%;
-      justify-content: flex-start;
+      justify-content: space-between;
       h2 {
         font-size: 35px;
         font-weight: 600;
@@ -84,6 +84,9 @@ export const Scroll = styled(PerfectScrollbar)`
       > p {
         margin-left: 10px;
         font-size: 24px;
+      }
+      button {
+        margin-left: 10px;
       }
     }
     p {

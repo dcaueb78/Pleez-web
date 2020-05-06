@@ -5,11 +5,17 @@ export function addToBasket(dish) {
   };
 }
 
+export function updateBasket(basket) {
+  return {
+    type: '@basket/UPDATE_BASKET',
+    payload: { basket }
+  };
+}
 
 export function clearBasket() {
   return {
     type: '@basket/CLEAR_BASKET'
-  }
+  };
 }
 
 export function addChair(chair) {
@@ -18,7 +24,6 @@ export function addChair(chair) {
     payload: { chair }
   };
 }
-
 
 export function addRestaurant(restaurant) {
   return {
