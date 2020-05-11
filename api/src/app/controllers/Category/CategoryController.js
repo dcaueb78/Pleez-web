@@ -16,8 +16,8 @@ class CategoryController {
     const categories = await Category.findAll({
       where: { restaurant_id: req.params.restaurant_id },
       order: ['createdAt'],
-      limit: 10,
-      offset: (page - 1) * 20
+      // limit: 10,
+      // offset: (page - 1) * 20
     });
 
     return res.json(categories);
