@@ -24,8 +24,8 @@ class OrderController {
       .sort({
         createdAt: 'desc'
       })
-      .limit(pageLimit)
-      .skip((page - 1) * 10);
+      // .limit(pageLimit)
+      // .skip((page - 1) * 10);
 
     return res.json(orders);
   }

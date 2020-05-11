@@ -18,8 +18,8 @@ class DishController {
         category_id: req.params.category_id
       },
       order: ['createdAt'],
-      limit: 10,
-      offset: (page - 1) * 20
+      // limit: 10,
+      // offset: (page - 1) * 20
     });
 
     return res.json(dishes);
