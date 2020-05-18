@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 import ProfessionalAccont from '../../models/ProfessionalAccount';
-import Mail from '../../../lib/Mail';
+import { SendProfessionalAccountWelcomeMail } from '../../../lib/Mail/Commands/ProfessionalAccount';
 
 class ProfessionalAccountController {
   async store(req, res) {
@@ -11,7 +11,7 @@ class ProfessionalAccountController {
         .required(),
       password: Yup.string()
         .required()
-        .min(6),
+        .min(6)
     });
 
     if (!(await schema.isValid(req.body))) {
@@ -27,14 +27,7 @@ class ProfessionalAccountController {
 
     const { id, name, email } = await ProfessionalAccont.create(req.body);
 
-    await Mail.sendMail({
-      to: `${name} <${email}>`,
-      subject: `Faaala ${name}, seja bem-vindo!`,
-      template: 'createProfessionalAccount',
-      context: {
-        user: name,
-      }
-    })
+    SendProfessionalAccountWelcomeMail({ name, email });
 
     return res.json({
       id,

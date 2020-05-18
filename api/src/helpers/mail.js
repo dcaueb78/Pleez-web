@@ -1,4 +1,4 @@
-sendMail() {
+function sendMail() {
   await Queue.add(CreateProfessionalAccountMail.key, {
     name,
     email
