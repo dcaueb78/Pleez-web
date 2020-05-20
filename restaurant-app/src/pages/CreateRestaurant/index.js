@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { Form, Input } from '@rocketseat/unform';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
+import validateCnpj from '~/utils/validateCnpj';
 
 import history from '~/services/history';
 import api from '~/services/api';
@@ -19,12 +20,11 @@ export default function CreateRestaurant() {
   const schema = Yup.object().shape({
     fullName: Yup.string().required('O nome é obrigatório'),
     socialReason: Yup.string().required('A Razão Social é obrigatória'),
-    cnpj: Yup.number('Insira um cnpj válido')
-      .typeError('O CNPJ é obrigatório')
-      .required('O CNPJ é obrigatório'),
     phone: Yup.number('Insira um telefone válido').required(
       'O telefone é obrigatório'
     ),
+    cnpj: Yup.string().required('O cnpj é obrigatório')
+    .min(6),
     cep: Yup.number('Insira um CEP válido').required('O CEP é obrigatório'),
     state: Yup.string().required('O estado é obrigatorio'),
     city: Yup.string().required('A cidade é obrigatória'),
@@ -39,6 +39,7 @@ export default function CreateRestaurant() {
 
   const handleCreateNewRestaurant = async (form) => {
     if (await schema.isValid(form)) {
+      console.log('EAEE', form);
       const {
         fullName,
         socialReason,
@@ -57,10 +58,16 @@ export default function CreateRestaurant() {
       } = form;
 
       try {
+        const validCnpj = validateCnpj(cnpj);
+        if(!validCnpj) {
+          toast.error('CNPJ inválido');
+          return new Error('Cnpj Inválido');
+        }
+
         const { id, name, social_reason } = await api.post('/restaurant', {
           name: fullName,
           social_reason: socialReason,
-          cnpj,
+          cnpj: validCnpj,
           telephone: phone,
           cep,
           state,
@@ -152,7 +159,7 @@ export default function CreateRestaurant() {
           <Input name="bank_code" type="text" placeholder="Código do banco" />
         </div>
         <button type="submit">{loading ? 'Carregando...' : 'Cadastrar'}</button>
-        <button onClick={history.goBack} type="button" className="red">
+        <button onClick={handleGoBack} type="button" className="red">
           <a className="white">Voltar</a>
         </button>
       </Form>
