@@ -33,7 +33,7 @@ class RestaurantController {
       agency: Yup.string().required(),
       account: Yup.string().required(),
       account_dv: Yup.string().required(),
-      cnpj: Yup.number().required()
+      cnpj: Yup.string().required()
     });
 
     if (!(await schema.isValid(req.body))) {
@@ -51,7 +51,8 @@ class RestaurantController {
     const { social_reason, bank_code, agency, account, account_dv, cnpj } = req.body;
 
     let recipient_id = '';
-    await pagarme.client
+    try {
+      await pagarme.client
       .connect({ api_key })
       .then(client =>
         client.recipients.create({
@@ -74,6 +75,9 @@ class RestaurantController {
       .then(recipient => {
         recipient_id = recipient.id;
       });
+    } catch (err) {
+      return res.status(400).json(err);
+    }
 
     const { id, name } = await Restaurant.create({
       ...req.body,
