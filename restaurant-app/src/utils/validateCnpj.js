@@ -28,7 +28,7 @@ const checkValidCnpjNumbers = (cnpj) => {
 
   let numbersResult = numbersCalc % 11 < 2 ? 0 : 11 - numbersCalc % 11;
 
-  if (numbersResult != verificationDigit.charAt(0)) {
+  if (numbersResult !== verificationDigit.charAt(0)) {
     return false;
   }
 
@@ -44,7 +44,7 @@ const checkValidCnpjNumbers = (cnpj) => {
   }
 
   numbersResult = numbersCalc % 11 < 2 ? 0 : 11 - numbersCalc % 11;
-  if (numbersResult != verificationDigit.charAt(1)) {
+  if (numbersResult !== verificationDigit.charAt(1)) {
     return false;
   }
 
@@ -54,7 +54,7 @@ const checkValidCnpjNumbers = (cnpj) => {
 const checkInvalidCnpjLength = (cnpj) => {
   const validCnpj = false;
   const invalidCnpj = true;
-  return cnpj.length != 14 ? invalidCnpj : validCnpj;
+  return cnpj.length !== 14 ? invalidCnpj : validCnpj;
 }
 
 const checkCommonCnpj = (cnpj) => {
