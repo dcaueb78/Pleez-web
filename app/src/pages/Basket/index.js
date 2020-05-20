@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { MdArrowBack, MdKeyboardArrowDown } from 'react-icons/md';
+import { MdArrowBack, MdKeyboardArrowDown, MdCancel } from 'react-icons/md';
 
 import { updateBasket } from '~/store/modules/basket/actions';
+import { clearBasket } from '~/store/modules/basket/actions';
 
 import { useChairNumber } from '~/store/hooks/basket';
 import api from '~/config/api';
@@ -54,6 +55,11 @@ export default function Basket() {
     dispatch(updateBasket(newBasket));
   };
 
+  const handleClearBasket = () => {
+    dispatch(clearBasket());
+    history.goBack();
+  }
+
   useEffect(() => {
     async function loadBasketDishInfo() {
       if (basket.length <= 0) {
@@ -99,17 +105,28 @@ export default function Basket() {
           </div>
         </header>
         <Scroll>
+          {completeBasket?.length > 0 ? (
+            <>
+            <button onClick={handleClearBasket}>
+              <MdCancel size={32} color="white" />
+              <span>Remover todos</span>
+              </button>
+              <p/>
+              </>
+          ) : (
+            ''
+          )}
           {completeBasket.map((dish, basketIndex) => (
             <div key={`${dish.id}-${dish.quantity}`}>
               <div>
                 <h2>{dish.quantity}x</h2>
                 <p>{dish.name}</p>
-                <button
+                {/* <button
                   type="button"
                   onClick={() => removeBasketItem(basketIndex)}
                 >
                   X
-                </button>
+                </button> */}
               </div>
               <p>
                 <b>Observação: </b>

@@ -20,7 +20,7 @@ export default function CategoriesCards({ restaurant }) {
 
   return (
     <>
-      {categories.length > 0 ? (
+      {categories?.length > 0 ? (
         <>
           {categories.map(category => (
             <FoodCard
