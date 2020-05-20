@@ -69,13 +69,38 @@ export const Scroll = styled(PerfectScrollbar)`
     margin: 10px;
   }
 
+  > button:first-child {
+    width: 100%;
+    height: 100px;
+    border-radius: 12px;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+    font-weight: 300;
+    font-size: 24px;
+    margin-bottom: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+  }
+  > p:first-child {
+    border-bottom: 2px solid #eee;
+    margin-bottom: 10px;
+  }
+
   > div {
     border-bottom: 2px solid #eee;
     > div:first-child {
       display: flex;
       flex-direction: row;
       width: 100%;
-      justify-content: space-between;
+      justify-content: left;
+      align-items: center;
       h2 {
         font-size: 35px;
         font-weight: 600;
