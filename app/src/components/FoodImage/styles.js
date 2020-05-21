@@ -9,7 +9,7 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   color: white;
-  background-image: url('https://img.elo7.com.br/product/zoom/22565B3/adesivo-parede-prato-comida-frango-salada-restaurante-lindo-adesivo-parede.jpg');
+  background-image: url('https://i.imgur.com/I9v1sRT.jpg');
 
   box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.2);
   background-repeat: no-repeat;
