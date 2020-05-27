@@ -58,16 +58,16 @@ export default function CreateRestaurant() {
       } = form;
 
       try {
-        const validCnpj = validateCnpj(cnpj);
-        if(!validCnpj) {
-          toast.error('CNPJ inválido');
-          return new Error('Cnpj Inválido');
-        }
+        // const validCnpj = validateCnpj(cnpj);
+        // if(!validCnpj) {
+        //   toast.error('CNPJ inválido');
+        //   return new Error('Cnpj Inválido');
+        // }
 
         const { id, name, social_reason } = await api.post('/restaurant', {
           name: fullName,
           social_reason: socialReason,
-          cnpj: validCnpj,
+          cnpj,
           telephone: phone,
           cep,
           state,
